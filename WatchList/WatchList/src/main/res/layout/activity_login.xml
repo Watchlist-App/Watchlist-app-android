@@ -12,7 +12,7 @@
     <RelativeLayout
         android:background="@drawable/registration_form_background"
         android:layout_width="500dp"
-        android:layout_height="600dp"
+        android:layout_height="500dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
         <LinearLayout
@@ -38,12 +38,12 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/registration_title_layout">
             <EditText
+                android:id="@+id/activity_login_email_edit_text"
                 android:hint="@string/fragment_registration_email_start_text"
                 android:textColorHint="@color/registration_email_start_text_color"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:minWidth="400dp"
-                android:clickable="true"
                 android:textColor="@color/registration_email_text_color"
                 android:textSize="35sp"
                 android:textStyle="bold"
@@ -57,12 +57,12 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/registration_email_layout">
             <EditText
+                android:id="@+id/activity_login_nickname_edit_text"
                 android:hint="@string/fragment_registration_nickname_start_text"
                 android:textColorHint="@color/registration_email_start_text_color"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:minWidth="400dp"
-                android:clickable="true"
                 android:textColor="@color/registration_email_text_color"
                 android:textSize="35sp"
                 android:textStyle="bold"
@@ -76,29 +76,47 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/registration_nickname_layout">
             <EditText
+                android:id="@+id/activity_login_password_edit_text"
                 android:hint="@string/fragment_registration_password_start_text"
                 android:textColorHint="@color/registration_email_start_text_color"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:minWidth="400dp"
-                android:clickable="true"
                 android:textColor="@color/registration_email_text_color"
                 android:textSize="35sp"
                 android:textStyle="bold"
                 android:inputType="textEmailAddress"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/login_activity_login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/registration_password_layout">
             <Button
+                android:id="@+id/activity_login_login_button"
                 android:background="@drawable/registration_login_button_selector"
                 android:minWidth="400dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Log in"
+                android:textSize="35sp"
+                android:textColor="@color/registration_app_title"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/login_activity_sign_up_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/login_activity_login_button">
+            <Button
+                android:background="@drawable/registration_login_button_selector"
+                android:minWidth="400dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_login_sign_up_button_text"
                 android:textSize="35sp"
                 android:textColor="@color/registration_app_title"/>
         </LinearLayout>
