@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-import com.watchlist.login.LoginActivity;
+import com.watchlist.authorization.LoginActivity;
 
 public class MainActivity extends ActionBarActivity {
 

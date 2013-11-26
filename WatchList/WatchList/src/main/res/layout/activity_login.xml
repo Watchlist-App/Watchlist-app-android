@@ -12,7 +12,7 @@
     <RelativeLayout
         android:background="@drawable/registration_form_background"
         android:layout_width="500dp"
-        android:layout_height="500dp"
+        android:layout_height="420dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
         <LinearLayout
@@ -104,21 +104,21 @@
                 android:textSize="35sp"
                 android:textColor="@color/registration_app_title"/>
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/login_activity_sign_up_button"
+    </RelativeLayout>
+    <LinearLayout
+        android:background="@drawable/signup_module"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/login_activity_login_button">
-            <Button
-                android:background="@drawable/registration_login_button_selector"
-                android:minWidth="400dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/activity_login_sign_up_button_text"
-                android:textSize="35sp"
-                android:textColor="@color/registration_app_title"/>
+            android:text="Sign Up for WatchList"
+            android:textColor="@color/registration_login_button_not_pressed_border_color"
+            android:textSize="20sp"
+            android:textStyle="italic"/>
         </LinearLayout>
-    </RelativeLayout>
+
 </RelativeLayout>
