@@ -133,7 +133,7 @@ public class WatchListActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main_registration, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_no_recent, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             return rootView;
         }
