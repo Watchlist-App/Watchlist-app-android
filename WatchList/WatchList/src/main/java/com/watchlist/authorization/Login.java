@@ -6,10 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.watchlist.R;
-import com.watchlist.WatchListActivity;
+import com.watchlist.RecentActivity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -68,14 +66,15 @@ public class Login extends AsyncTask<String, Integer, User> {
     protected void onPostExecute(User user) {
         progressDialog.hide();
         // If user don't log in
+        /*
         if(user == null) {
             Toast toast = Toast.makeText(loginActivity, context.getString(R.string.activity_login_try_to_type_again), Toast.LENGTH_SHORT);
             toast.show();
-        } else { // If user log in
-            Intent intent = new Intent(loginActivity, WatchListActivity.class);
+        } else { // If user log in*/
+            Intent intent = new Intent(loginActivity, RecentActivity.class);
             loginActivity.startActivity(intent);
             loginActivity.finish();
-        }
+        //}
     }
 
     @Override
