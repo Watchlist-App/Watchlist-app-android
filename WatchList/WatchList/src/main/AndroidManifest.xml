@@ -25,8 +25,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.watchlist.WatchListActivity"
-            android:label="@string/title_activity_main" >
+            android:name=".RecentActivity"
+            android:label="@string/title_activity_recent" >
         </activity>
         <activity
             android:name="com.watchlist.authorization.LoginActivity"
