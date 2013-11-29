@@ -5,7 +5,7 @@ package com.watchlist.authorization;
  */
 public class LogedInUser extends User {
     private String date; // contains the date when the user logged in
-
+    private Integer tableId; // containes the primary table key
     public LogedInUser() {
         super();
     }
@@ -28,5 +28,21 @@ public class LogedInUser extends User {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public Integer getTableId() {
+        return tableId;
+    }
+
+    public void setTableId(Integer tableId) {
+        this.tableId = tableId;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\n" + "LogedInUser{" +
+                "date='" + date + '\'' +
+                ", tableId=" + tableId +
+                '}';
     }
 }

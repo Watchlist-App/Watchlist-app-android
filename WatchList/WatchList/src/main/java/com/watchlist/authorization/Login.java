@@ -6,8 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.watchlist.R;
 import com.watchlist.RecentActivity;
+import com.watchlist.database.WatchListSQLiteOpenHelper;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,6 +25,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by VEINHORN on 25/11/13.
@@ -66,15 +71,23 @@ public class Login extends AsyncTask<String, Integer, User> {
     protected void onPostExecute(User user) {
         progressDialog.hide();
         // If user don't log in
-        /*
         if(user == null) {
             Toast toast = Toast.makeText(loginActivity, context.getString(R.string.activity_login_try_to_type_again), Toast.LENGTH_SHORT);
             toast.show();
-        } else { // If user log in*/
+        } else { // If user log in
+            // Gets current date
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ");
+            String currentDate = simpleDateFormat.format(new Date());
+
+            // Check if the database contains such user
+            LogedInUser logedInUser = new LogedInUser(user, currentDate);
+            WatchListSQLiteOpenHelper watchListSQLiteOpenHelper = new WatchListSQLiteOpenHelper(context);
+            // Rewrite information about user to database
+            watchListSQLiteOpenHelper.updateUser(logedInUser);
             Intent intent = new Intent(loginActivity, RecentActivity.class);
             loginActivity.startActivity(intent);
             loginActivity.finish();
-        //}
+        }
     }
 
     @Override
@@ -82,6 +95,7 @@ public class Login extends AsyncTask<String, Integer, User> {
         String url = BASE_URL;
         jsonArray = getJSONArray(url);
         userContainer = parseJSONArray(jsonArray);
+        // Checks that such user are in container that we get from web server
         isSuchUser = userContainer.isSuchUser(enteredUser);
 
         if(isSuchUser) {
