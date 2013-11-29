@@ -1,15 +1,16 @@
 package com.watchlist;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.watchlist.authorization.LogedInUserContainer;
+import com.watchlist.database.WatchListSQLiteOpenHelper;
 import com.watchlist.navigationdrawer.NavigationDrawerAdapter;
 import com.watchlist.navigationdrawer.PlaylistItem;
 
@@ -30,11 +31,57 @@ public class RecentActivity extends ActionBarActivity {
     private ArrayList<PlaylistItem> playlistItemArrayList;
     private NavigationDrawerAdapter navigationDrawerAdapter;
 
+    private Button button;
+    private Button button2;
+    private TextView textView;
+    private TextView textView2;
+    private Button searchButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_watchlist);
+        setContentView(R.layout.activity_recent);
 
+        button = (Button)findViewById(R.id.showsusersbutton);
+        textView = (TextView)findViewById(R.id.showsuserstextview);
+        button2 = (Button)findViewById(R.id.deleteusers);
+        textView2 = (TextView)findViewById(R.id.searchfield);
+        searchButton = (Button)findViewById(R.id.searchbutton);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WatchListSQLiteOpenHelper watchListSQLiteOpenHelper = new WatchListSQLiteOpenHelper(RecentActivity.this);
+                LogedInUserContainer logedInUserContainer = watchListSQLiteOpenHelper.getAllUsers();
+                String str = "";
+                for(int i = 0; i < logedInUserContainer.getLogedInUserArrayList().size(); i++) {
+                    str += logedInUserContainer.getLogedInUserArrayList().get(i).toString();
+                }
+                textView.setText(str);
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WatchListSQLiteOpenHelper watchListSQLiteOpenHelper = new WatchListSQLiteOpenHelper(RecentActivity.this);
+                String email = "a@b.ru";
+                if(watchListSQLiteOpenHelper.searchUser(email) == null) {
+                    textView2.setText("No such user");
+                } else {
+                    textView2.setText(watchListSQLiteOpenHelper.searchUser(email).toString());
+                }
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WatchListSQLiteOpenHelper watchListSQLiteOpenHelper = new WatchListSQLiteOpenHelper(RecentActivity.this);
+                watchListSQLiteOpenHelper.deleteAllUsers();
+            }
+        });
+        /*
         // Sets the action bar color as a drawable
         ActionBar actionBar = getSupportActionBar();
         String actionBarColor = getString(R.color.actionbar_color);
@@ -70,8 +117,6 @@ public class RecentActivity extends ActionBarActivity {
         };
 
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
-        /*
         if(savedInstanceState == null) {
             displayView(0);
         }

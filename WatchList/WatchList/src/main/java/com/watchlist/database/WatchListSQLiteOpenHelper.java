@@ -1,15 +1,18 @@
 package com.watchlist.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.watchlist.authorization.LogedInUser;
+import com.watchlist.authorization.LogedInUserContainer;
 
 /**
  * Created by VEINHORN on 28/11/13.
  */
+
 public class WatchListSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public final static String DATABASE_NAME = "WatchlistDB";
@@ -17,6 +20,7 @@ public class WatchListSQLiteOpenHelper extends SQLiteOpenHelper {
 
     // Commands that uses very often
     public final static String DATABASE_DROP_TABLE = "DROP TABLE IF EXISTS ";
+    public final static String DATABASE_SELECT_ALL_FROM = "SELECT * FROM ";
 
     // Constants for USER table
     public final static String TABLE_USER = "users"; // the name of the table
@@ -53,15 +57,93 @@ public class WatchListSQLiteOpenHelper extends SQLiteOpenHelper {
         this.onCreate(database);
     }
 
-    public LogedInUser searchUser(String name, String email, String password) {
+    // Searches single user by email
+    // This method returns object if it exists in database and null if not
+    public LogedInUser searchUser(String mail) {
         LogedInUser logedInUser = null;
+        LogedInUserContainer logedInUserContainer = getAllUsers();
 
-        SQLiteDatabase database = this.getReadableDatabase();
+        if(logedInUserContainer.getLogedInUserArrayList().isEmpty()) {
+            return null;
+        } else {
+            logedInUser = logedInUserContainer.getLogedInUserArrayList().get(0);
+        }
 
-        Cursor cursor = database.query(TABLE_USER, new String [] { TABLE_USER_ID_FOR_TABLE, }, );
+        return logedInUser;
+    }
 
+    // This method updates existing user in table
+    // Must be  id primary key
+    public int updateUser(LogedInUser logedInUser) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TABLE_USER_ID_FOR_TABLE, logedInUser.getTableId());
+        contentValues.put(TABLE_USER_NAME, logedInUser.getName());
+        contentValues.put(TABLE_USER_EMAIL, logedInUser.getEmail());
+        contentValues.put(TABLE_USER_PASSWORD, logedInUser.getPassword());
+        contentValues.put(TABLE_USER_DATE, logedInUser.getDate());
+
+        // Updating row
+        int informationMessage = database.update(TABLE_USER,
+                contentValues,
+                TABLE_USER_ID_FOR_TABLE + " = ?",
+                new String[] {String.valueOf(logedInUser.getTableId())});
 
         database.close();
-        return logedInUser;
+        return informationMessage;
+    }
+
+    public void addUser(LogedInUser logedInUser) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TABLE_USER_ID_FOR_TABLE, logedInUser.getTableId());
+        contentValues.put(TABLE_USER_NAME, logedInUser.getName());
+        contentValues.put(TABLE_USER_EMAIL, logedInUser.getEmail());
+        contentValues.put(TABLE_USER_PASSWORD, logedInUser.getPassword());
+        contentValues.put(TABLE_USER_DATE, logedInUser.getDate());
+
+        // Updating row
+        database.insert(TABLE_USER,
+                null,
+                contentValues);
+        database.close();
+    }
+
+    // This method for testing
+    public LogedInUserContainer getAllUsers() {
+        LogedInUserContainer logedInUserContainer = new LogedInUserContainer();
+        // Build the query
+        String query = DATABASE_SELECT_ALL_FROM + TABLE_USER;
+
+        // Get reference to writable database
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(query, null);
+
+        // Go over each row, build user item and it to UserContainer
+        LogedInUser logedInUser = null;
+        if(cursor.moveToFirst()) {
+            do {
+                logedInUser = new LogedInUser();
+                logedInUser.setTableId(Integer.parseInt(cursor.getString(0)));
+                logedInUser.setName(cursor.getString(1));
+                logedInUser.setEmail(cursor.getString(2));
+                logedInUser.setPassword(cursor.getString(3));
+                logedInUser.setDate(cursor.getString(4));
+
+                logedInUserContainer.getLogedInUserArrayList().add(logedInUser);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        database.close();
+        return logedInUserContainer;
+    }
+
+    // This method for testing
+    public void deleteAllUsers() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.delete(TABLE_USER, null, null);
+
+        database.close();
     }
 }
