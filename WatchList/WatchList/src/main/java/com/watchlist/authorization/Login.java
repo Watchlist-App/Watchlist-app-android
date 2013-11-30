@@ -83,7 +83,11 @@ public class Login extends AsyncTask<String, Integer, User> {
             LogedInUser logedInUser = new LogedInUser(user, currentDate);
             WatchListSQLiteOpenHelper watchListSQLiteOpenHelper = new WatchListSQLiteOpenHelper(context);
             // Rewrite information about user to database
-            watchListSQLiteOpenHelper.updateUser(logedInUser);
+            if(watchListSQLiteOpenHelper.isUserTableIsEmpty()) {
+                watchListSQLiteOpenHelper.addUser(logedInUser);
+            } else {
+                watchListSQLiteOpenHelper.updateUser(logedInUser);
+            }
             Intent intent = new Intent(loginActivity, RecentActivity.class);
             loginActivity.startActivity(intent);
             loginActivity.finish();

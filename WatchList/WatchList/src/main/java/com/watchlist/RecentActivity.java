@@ -36,6 +36,7 @@ public class RecentActivity extends ActionBarActivity {
     private TextView textView;
     private TextView textView2;
     private Button searchButton;
+    private Button clearButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class RecentActivity extends ActionBarActivity {
         button2 = (Button)findViewById(R.id.deleteusers);
         textView2 = (TextView)findViewById(R.id.searchfield);
         searchButton = (Button)findViewById(R.id.searchbutton);
+        clearButton = (Button)findViewById(R.id.clearButton);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +81,14 @@ public class RecentActivity extends ActionBarActivity {
             public void onClick(View v) {
                 WatchListSQLiteOpenHelper watchListSQLiteOpenHelper = new WatchListSQLiteOpenHelper(RecentActivity.this);
                 watchListSQLiteOpenHelper.deleteAllUsers();
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WatchListSQLiteOpenHelper watchListSQLiteOpenHelper = new WatchListSQLiteOpenHelper(RecentActivity.this);
+                watchListSQLiteOpenHelper.clearAndUpdateDatabase();
             }
         });
         /*

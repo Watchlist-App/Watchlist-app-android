@@ -18,6 +18,10 @@
         android:layout_height="wrap_content"
         android:text="Search"
         android:id="@+id/searchbutton"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/clearButton"/>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="100dp"

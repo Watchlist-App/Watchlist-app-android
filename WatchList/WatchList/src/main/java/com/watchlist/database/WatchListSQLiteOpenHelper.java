@@ -78,7 +78,6 @@ public class WatchListSQLiteOpenHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TABLE_USER_ID_FOR_TABLE, logedInUser.getTableId());
         contentValues.put(TABLE_USER_NAME, logedInUser.getName());
         contentValues.put(TABLE_USER_EMAIL, logedInUser.getEmail());
         contentValues.put(TABLE_USER_PASSWORD, logedInUser.getPassword());
@@ -87,8 +86,8 @@ public class WatchListSQLiteOpenHelper extends SQLiteOpenHelper {
         // Updating row
         int informationMessage = database.update(TABLE_USER,
                 contentValues,
-                TABLE_USER_ID_FOR_TABLE + " = ?",
-                new String[] {String.valueOf(logedInUser.getTableId())});
+                TABLE_USER_EMAIL + " = ?",
+                new String[] {logedInUser.getEmail()});
 
         database.close();
         return informationMessage;
@@ -139,11 +138,35 @@ public class WatchListSQLiteOpenHelper extends SQLiteOpenHelper {
         return logedInUserContainer;
     }
 
-    // This method for testing
+    // This is the method for testing
     public void deleteAllUsers() {
         SQLiteDatabase database = this.getWritableDatabase();
         database.delete(TABLE_USER, null, null);
 
         database.close();
+    }
+
+    // This is the method for testing
+    public void clearAndUpdateDatabase() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        deleteAllUsers();
+        // Drop older table if exists
+        database.execSQL(DATABASE_DROP_TABLE + TABLE_USER);
+        // Creates fresh database
+        this.onCreate(database);
+    }
+
+    public boolean isUserTableIsEmpty() {
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM " + TABLE_USER, null);
+
+        if(cursor.getCount() > 0) {
+            cursor.close();
+            database.close();
+            return false;
+        }
+        cursor.close();
+        database.close();
+        return true;
     }
 }
