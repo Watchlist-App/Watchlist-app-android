@@ -34,7 +34,7 @@
         </activity>
 
         <activity
-            android:name="com.watchlist.SearchResultsActivity"
+            android:name=".searchresults.SearchResultsActivity"
             android:label="@string/title_activity_search_results">
         </activity>
     </application>

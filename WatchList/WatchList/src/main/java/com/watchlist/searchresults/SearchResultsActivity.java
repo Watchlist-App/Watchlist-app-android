@@ -1,9 +1,11 @@
-package com.watchlist;
+package com.watchlist.searchresults;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.watchlist.R;
 import com.watchlist.themoviedb.SearchMovies;
 
 /**
@@ -13,7 +15,8 @@ public class SearchResultsActivity extends Activity {
 
     private TextView testTextView;
     private String queryString;
-
+    private ListView searchResultsListView;
+    private
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,5 +29,8 @@ public class SearchResultsActivity extends Activity {
         SearchMovies searchMovies = new SearchMovies(SearchResultsActivity.this, testTextView, queryString);
         searchMovies.execute();
         testTextView.setText(searchMovies.getJsonString());
+
+        searchResultsListView = (ListView)findViewById(R.id.search_results_listview);
+
     }
 }

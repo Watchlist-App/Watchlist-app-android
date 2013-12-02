@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.watchlist.authorization.LogedInUserContainer;
 import com.watchlist.database.WatchListSQLiteOpenHelper;
+import com.watchlist.searchresults.SearchResultsActivity;
 
 public class RecentActivity extends ActionBarActivity {
 
