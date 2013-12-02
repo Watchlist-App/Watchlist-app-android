@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="main_fragment_title_text_color">#E6E6E6</color>
-    <color name="actionbar_color">#777777</color>
+    <color name="actionbar_color">#E6E6E6</color>
     <color name="registration_form_color">#95222222</color>
     <color name="registration_app_title">#777777</color>
     <color name="registration_email_start_text_color">#80444444</color>

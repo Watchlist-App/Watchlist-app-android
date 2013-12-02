@@ -27,10 +27,6 @@
         <activity
             android:name=".RecentActivity"
             android:label="@string/title_activity_recent" >
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
         </activity>
         <activity
             android:name="com.watchlist.authorization.LoginActivity"
@@ -38,11 +34,8 @@
         </activity>
 
         <activity
-            android:name="SearchResultsActivity"
+            android:name="com.watchlist.SearchResultsActivity"
             android:label="@string/title_activity_search_results">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
-            </intent-filter>
         </activity>
     </application>
 

@@ -1,6 +1,9 @@
 package com.watchlist.authorization;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +26,11 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_login);
+
+        // Sets the action bar color as a drawable
+        ActionBar actionBar = getSupportActionBar();
+        String actionBarColor = getString(R.color.actionbar_color);
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(actionBarColor)));
 
         email = (EditText)findViewById(R.id.activity_login_email_edit_text);
         nickname = (EditText)findViewById(R.id.activity_login_nickname_edit_text);

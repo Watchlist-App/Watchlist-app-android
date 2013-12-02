@@ -29,7 +29,7 @@
     <!-- Recent Activity -->
     <string name="title_activity_recent">Recent</string>
     <string name="search_activity_recent">Search</string>
-    <string name="hint_search_activity_recent">Type movie title for searching...</string>
+    <string name="hint_search_activity_recent">Search the movie...</string>
     <!-- End -->
 
     <!-- Search Results Activity -->
