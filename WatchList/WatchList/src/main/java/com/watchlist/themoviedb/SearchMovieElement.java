@@ -110,4 +110,20 @@ public class SearchMovieElement {
     public void setVote_count(String vote_count) {
         this.vote_count = vote_count;
     }
+
+    @Override
+    public String toString() {
+        return "SearchMovieElement{" +
+                "adult='" + adult + '\'' +
+                ", backdrop_path='" + backdrop_path + '\'' +
+                ", id='" + id + '\'' +
+                ", original_title='" + original_title + '\'' +
+                ", release_date='" + release_date + '\'' +
+                ", poster_path='" + poster_path + '\'' +
+                ", popularity='" + popularity + '\'' +
+                ", title='" + title + '\'' +
+                ", vote_average='" + vote_average + '\'' +
+                ", vote_count='" + vote_count + '\'' +
+                '}';
+    }
 }

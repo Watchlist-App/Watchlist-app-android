@@ -51,15 +51,15 @@ public class Login extends AsyncTask<String, Integer, User> {
     private boolean isSuchUser;
     private User enteredUser;
     private Context context;
-    ProgressDialog progressDialog;
-    Activity loginActivity;
+    private ProgressDialog progressDialog;
+    private Activity loginActivity;
 
 
     public Login(User enteredUser, Context context, Activity activity) {
         this.enteredUser = enteredUser;
         this.context = context;
-        loginActivity = activity;
-        progressDialog = ProgressDialog.show(context, "Log in", "Loading. Please wait...", true);
+        this.loginActivity = activity;
+        this.progressDialog = ProgressDialog.show(context, "Log in", "Loading. Please wait...", true);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class LoginActivity extends ActionBarActivity {
 
         // Sets the action bar color as a drawable
         ActionBar actionBar = getSupportActionBar();
-        String actionBarColor = getString(R.color.actionbar_color);
+        String actionBarColor = getString(R.color.login_activity_actionbar_color);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(actionBarColor)));
 
         email = (EditText)findViewById(R.id.activity_login_email_edit_text);
