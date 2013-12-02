@@ -1,15 +1,17 @@
 package com.watchlist.searchresults;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by VEINHORN on 02/12/13.
  */
 public class SearchResultsItem {
-    private String poster;
     private String title;
     private String releaseDate;
     private String rating;
+    private Bitmap poster;
 
-    public SearchResultsItem(String poster, String releaseDate, String title, String rating) {
+    public SearchResultsItem(Bitmap poster, String releaseDate, String title, String rating) {
         this.poster = poster;
         this.releaseDate = releaseDate;
         this.title = title;
@@ -20,11 +22,11 @@ public class SearchResultsItem {
 
     }
 
-    public String getPoster() {
+    public Bitmap getPoster() {
         return poster;
     }
 
-    public void setPoster(String poster) {
+    public void setPoster(Bitmap poster) {
         this.poster = poster;
     }
 

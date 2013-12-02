@@ -33,6 +33,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
     public SearchResultsItemAdapter(Context context, SearchResultsContainer searchMovieContainer) {
         this.context = context;
         this.searchResultsContainer = searchMovieContainer;
+        layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -57,7 +58,20 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         if(convertView == null) {
             convertView = layoutInflater.inflate(R.layout.search_results_item, null);
             viewHolder = new ViewHolder();
-            //viewHolder.
+            viewHolder.poster = (ImageView)convertView.findViewById(R.id.search_results_poster);
+            viewHolder.title = (TextView)convertView.findViewById(R.id.search_results_title);
+            viewHolder.rating = (TextView)convertView.findViewById(R.id.search_results_rating);
+            viewHolder.releaseDate = (TextView)convertView.findViewById(R.id.search_results_release_date);
+
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder)convertView.getTag();
         }
+
+        viewHolder.title.setText(searchResultsContainer.getSearchResultsItemArrayList().get(position).getTitle());
+        viewHolder.rating.setText(searchResultsContainer.getSearchResultsItemArrayList().get(position).getRating());
+        viewHolder.releaseDate.setText(searchResultsContainer.getSearchResultsItemArrayList().get(position).getReleaseDate());
+        viewHolder.poster.setImageBitmap(searchResultsContainer.getSearchResultsItemArrayList().get(position).getPoster());
+        return convertView;
     }
 }
