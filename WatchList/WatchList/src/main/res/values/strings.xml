@@ -28,5 +28,11 @@
 
     <!-- Recent Activity -->
     <string name="title_activity_recent">Recent</string>
+    <string name="search_activity_recent">Search</string>
+    <string name="hint_search_activity_recent">Search the movie...</string>
+    <!-- End -->
+
+    <!-- Search Results Activity -->
+    <string name="title_activity_search_results">Search Results</string>
     <!-- End -->
 </resources>

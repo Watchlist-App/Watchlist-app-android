@@ -1,35 +1,27 @@
 package com.watchlist;
 
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.widget.DrawerLayout;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.watchlist.authorization.LogedInUserContainer;
 import com.watchlist.database.WatchListSQLiteOpenHelper;
-import com.watchlist.navigationdrawer.NavigationDrawerAdapter;
-import com.watchlist.navigationdrawer.PlaylistItem;
-
-import java.util.ArrayList;
+import com.watchlist.searchresults.SearchResultsActivity;
 
 public class RecentActivity extends ActionBarActivity {
-
-    private DrawerLayout drawerLayout;
-    private ListView listView;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
-
-    // nav drawer title
-    private CharSequence drawerTitle;
-
-    // used to store app title
-    private CharSequence appTitle;
-
-    private ArrayList<PlaylistItem> playlistItemArrayList;
-    private NavigationDrawerAdapter navigationDrawerAdapter;
 
     private Button button;
     private Button button2;
@@ -38,10 +30,17 @@ public class RecentActivity extends ActionBarActivity {
     private Button searchButton;
     private Button clearButton;
 
+    private SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recent);
+
+        // Sets the action bar color as a drawable
+        ActionBar actionBar = getSupportActionBar();
+        String actionBarColor = getString(R.color.actionbar_color);
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(actionBarColor)));
 
         button = (Button)findViewById(R.id.showsusersbutton);
         textView = (TextView)findViewById(R.id.showsuserstextview);
@@ -91,45 +90,36 @@ public class RecentActivity extends ActionBarActivity {
                 watchListSQLiteOpenHelper.clearAndUpdateDatabase();
             }
         });
-        /*
-        // Sets the action bar color as a drawable
-        ActionBar actionBar = getSupportActionBar();
-        String actionBarColor = getString(R.color.actionbar_color);
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(actionBarColor)));
+    }
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        listView = (ListView)findViewById(R.id.slider_menu);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.activity_recent_menu, menu);
 
-        playlistItemArrayList = new ArrayList<PlaylistItem>();
-        playlistItemArrayList.add(new PlaylistItem("Drama", 20, R.drawable.playlist));
+        MenuItem searchItem = menu.findItem(R.id.activity_recent_search);
+        searchView = (SearchView)MenuItemCompat.getActionView(searchItem);
+        //searchView.setOnQueryTextListener(this);
+        searchView.setQueryHint(getString(R.string.hint_search_activity_recent));
+        SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
-        // Setting the nav drawer adapter
-        navigationDrawerAdapter = new NavigationDrawerAdapter(getApplicationContext(), playlistItemArrayList);
-        listView.setAdapter(navigationDrawerAdapter);
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
-
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
-                R.drawable.ic_drawer,
-                R.string.app_name,
-                R.string.app_name) {
-
-            public void onDrawerClosed(View view) {
-                getActionBar().setTitle(appTitle);
-                invalidateOptionsMenu();
+        // Handle the query that user types in action bar search field
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(RecentActivity.this, SearchResultsActivity.class);
+                intent.putExtra("query", query);
+                startActivity(intent);
+                return false;
             }
 
-            public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle(drawerTitle);
-                invalidateOptionsMenu();
+            @Override
+            public boolean onQueryTextChange(String query) {
+                return false;
             }
-        };
+        });
 
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-        if(savedInstanceState == null) {
-            displayView(0);
-        }
-        */
+        return super.onCreateOptionsMenu(menu);
     }
 }

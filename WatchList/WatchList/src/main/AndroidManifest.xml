@@ -32,6 +32,11 @@
             android:name="com.watchlist.authorization.LoginActivity"
             android:label="@string/title_activity_login">
         </activity>
+
+        <activity
+            android:name=".searchresults.SearchResultsActivity"
+            android:label="@string/title_activity_search_results">
+        </activity>
     </application>
 
 </manifest>

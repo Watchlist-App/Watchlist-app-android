@@ -6,11 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.watchlist.R;
 import com.watchlist.RecentActivity;
-import com.watchlist.database.WatchListSQLiteOpenHelper;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -25,8 +22,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by VEINHORN on 25/11/13.
@@ -56,20 +51,22 @@ public class Login extends AsyncTask<String, Integer, User> {
     private boolean isSuchUser;
     private User enteredUser;
     private Context context;
-    ProgressDialog progressDialog;
-    Activity loginActivity;
+    private ProgressDialog progressDialog;
+    private Activity loginActivity;
 
 
     public Login(User enteredUser, Context context, Activity activity) {
         this.enteredUser = enteredUser;
         this.context = context;
-        loginActivity = activity;
-        progressDialog = ProgressDialog.show(context, "Log in", "Loading. Please wait...", true);
+        this.loginActivity = activity;
+        this.progressDialog = ProgressDialog.show(context, "Log in", "Loading. Please wait...", true);
     }
 
     @Override
     protected void onPostExecute(User user) {
         progressDialog.hide();
+        // Such for test, while i make recent activity
+        /*
         // If user don't log in
         if(user == null) {
             Toast toast = Toast.makeText(loginActivity, context.getString(R.string.activity_login_try_to_type_again), Toast.LENGTH_SHORT);
@@ -92,6 +89,10 @@ public class Login extends AsyncTask<String, Integer, User> {
             loginActivity.startActivity(intent);
             loginActivity.finish();
         }
+        */
+        Intent intent = new Intent(loginActivity, RecentActivity.class);
+        loginActivity.startActivity(intent);
+        loginActivity.finish();
     }
 
     @Override
