@@ -16,21 +16,23 @@ public class SearchResultsActivity extends Activity {
     private TextView testTextView;
     private String queryString;
     private ListView searchResultsListView;
-    private
+    private SearchResultsItemAdapter searchResultsItemAdapter;
+    private SearchResultsContainer searchResultsContainer;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results_activity);
-        testTextView = (TextView)findViewById(R.id.serchresultstesttextview);
         queryString = getIntent().getStringExtra("query");
-        testTextView.setText(queryString);
-
-        // Get the query that we sent from RecentActivity
-        SearchMovies searchMovies = new SearchMovies(SearchResultsActivity.this, testTextView, queryString);
-        searchMovies.execute();
-        testTextView.setText(searchMovies.getJsonString());
+        //testTextView.setText(queryString);
 
         searchResultsListView = (ListView)findViewById(R.id.search_results_listview);
+        SearchResultsContainer searchResultsContainer = new SearchResultsContainer();
+        // Get the query that we sent from RecentActivity
+        searchResultsItemAdapter = new SearchResultsItemAdapter(SearchResultsActivity.this, searchResultsContainer);
+        searchResultsListView.setAdapter(searchResultsItemAdapter);
 
+        SearchMovies searchMovies = new SearchMovies(SearchResultsActivity.this, queryString, searchResultsItemAdapter, searchResultsContainer);
+        searchMovies.execute();
     }
 }

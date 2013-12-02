@@ -2,8 +2,13 @@ package com.watchlist.themoviedb;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.widget.TextView;
+
+import com.watchlist.searchresults.SearchResultsContainer;
+import com.watchlist.searchresults.SearchResultsItem;
+import com.watchlist.searchresults.SearchResultsItemAdapter;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -18,6 +23,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by VEINHORN on 02/12/13.
@@ -48,8 +56,6 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
     private final static String API_RESULTS_VOTE_AVERAGE_TITLE = "vote_average";
     private final static String API_RESULTS_VOTE_COUNT_TITLE = "vote_count";
 
-
-    private TextView testTextView;
     private Context context;
     private String searchQueryString; // string that stores info that user searches
 
@@ -60,8 +66,14 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
     private InputStream inputStream;
     private SearchMovieContainer searchMovieContainer;
 
-    public SearchMovies(Context context, TextView testTextView, String searchQueryString) {
-        this.testTextView = testTextView;
+    private SearchResultsItemAdapter searchResultsItemAdapter;
+    private SearchResultsContainer searchResultsContainer;
+
+    private ArrayList<Bitmap> images;
+
+    public SearchMovies(Context context, String searchQueryString, SearchResultsItemAdapter searchResultsItemAdapter, SearchResultsContainer searchResultsContainer) {
+        this.searchResultsItemAdapter = searchResultsItemAdapter;
+        this.searchResultsContainer = searchResultsContainer;
         this.context = context;
         this.searchQueryString = searchQueryString;
         this.progressDialog = ProgressDialog.show(context, "Search", "Searching. Please wait...");
@@ -69,8 +81,16 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
 
     @Override
     protected void onPostExecute(SearchMovieContainer searchMovieContainer) {
+        for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
+            SearchResultsItem searchResultsItem = new SearchResultsItem();
+            searchResultsItem.setTitle(searchMovieContainer.getSearchMovieElementArrayList().get(i).getTitle());
+            searchResultsItem.setReleaseDate(searchMovieContainer.getSearchMovieElementArrayList().get(i).getRelease_date());
+            searchResultsItem.setRating(searchMovieContainer.getSearchMovieElementArrayList().get(i).getPopularity());
+            searchResultsItem.setPoster(images.get(i));
+            searchResultsContainer.getSearchResultsItemArrayList().add(searchResultsItem);
+            searchResultsItemAdapter.notifyDataSetChanged();
+        }
         progressDialog.hide();
-        testTextView.setText(searchMovieContainer.getSearchMovieElementArrayList().get(0).toString());
     }
 
     @Override
@@ -80,6 +100,7 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
         url = url.replaceAll(" ", "%20");
         jsonObject = getJSONObject(url);
         searchMovieContainer = parseJSONObject(jsonObject);
+        loadImages();
         return searchMovieContainer;
     }
 
@@ -185,5 +206,22 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
 
     public void setSearchMovieContainer(SearchMovieContainer searchMovieContainer) {
         this.searchMovieContainer = searchMovieContainer;
+    }
+
+    public void loadImages() {
+        images = new ArrayList<Bitmap>();
+        URL url = null;
+        Bitmap bmp = null;
+        for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
+            try {
+                url = new URL("http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185" + searchMovieContainer.getSearchMovieElementArrayList().get(i).getPoster_path());
+                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch(MalformedURLException exception) {
+                exception.printStackTrace();
+            } catch(IOException exception) {
+                exception.printStackTrace();
+            }
+            images.add(bmp);
+        }
     }
 }

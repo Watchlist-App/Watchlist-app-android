@@ -3,18 +3,18 @@
     <color name="main_fragment_title_text_color">#E6E6E6</color>
     <color name="actionbar_color">#E6E6E6</color>
     <color name="login_activity_actionbar_color">#777777</color>
-    <color name="registration_form_color">#95222222</color>
-    <color name="registration_app_title">#777777</color>
-    <color name="registration_email_start_text_color">#80444444</color>
+    <color name="registration_form_color">#99000000</color>
+    <color name="registration_app_title">#888888</color>
+    <color name="registration_email_start_text_color">#666666</color>
     <color name="registration_email_text_color">#6699FF</color>
 
     <color name="registration_loginbutton_not_pressed_state_color">#111111</color>
     <color name="registration_login_button_not_pressed_border_color">#8A4B08</color>
-    <color name="signupmodulecolor">#75222222</color>
+    <color name="signupmodulecolor">#65222222</color>
 
 
     <!-- Search Results Activity -->
-    <color name="search_results_background_color_not_pressed">#85D8D8D8</color>
+    <color name="search_results_background_color_not_pressed">#75D8D8D8</color>
 
     <!-- End -->
 </resources>
