@@ -6,6 +6,8 @@
     android:orientation="vertical"
     android:background="@drawable/search_results_item_selector">
     <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:background="@drawable/search_results_info_module"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <RelativeLayout
@@ -16,6 +18,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/relativeLayout">
             <ImageView
+                android:layout_margin="3dp"
                 android:background="@drawable/empty_movie"
                 android:id="@+id/search_results_poster"
                 android:layout_width="wrap_content"
@@ -73,16 +76,30 @@
         </RelativeLayout>
     </RelativeLayout>
     <LinearLayout
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_width="wrap_content"
+        android:background="@drawable/search_results_button_panel"
+        android:layout_marginBottom="10dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageButton
-            android:background="#00FFFFFF"
+            android:layout_margin="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/watchlist"/>
+        <ImageButton
+            android:layout_margin="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/favourite"/>
+        <ImageButton
+            android:layout_margin="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/amazon"/>
+        <ImageButton
+            android:layout_margin="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/itunes"/>
     </LinearLayout>
 </LinearLayout>

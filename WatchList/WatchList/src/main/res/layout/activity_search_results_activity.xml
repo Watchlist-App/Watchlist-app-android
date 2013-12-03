@@ -11,5 +11,5 @@
         android:id="@+id/search_results_listview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:dividerHeight="10dp"/>
+        android:dividerHeight="20dp"/>
 </LinearLayout>

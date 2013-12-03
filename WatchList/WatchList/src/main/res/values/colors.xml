@@ -14,7 +14,8 @@
 
 
     <!-- Search Results Activity -->
-    <color name="search_results_background_color_not_pressed">#95D8D8D8</color>
-
+    <color name="search_results_background_color_not_pressed">#99D8D8D8</color>
+    <color name="search_results_button_panel_background">#99404040</color>
+    <color name="search_results_buttons_background">#95898686</color>
     <!-- End -->
 </resources>
