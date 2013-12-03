@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/relativeLayout">
         <ImageView
+            android:background="@drawable/empty_movie"
             android:id="@+id/search_results_poster"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +31,7 @@
         android:layout_alignBottom="@+id/relativeLayout">
         <TextView
             android:id="@+id/search_results_title"
-            android:textSize="35sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

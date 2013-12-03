@@ -1,9 +1,7 @@
 package com.watchlist.themoviedb;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 import com.watchlist.searchresults.SearchResultsContainer;
@@ -23,8 +21,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -61,7 +57,7 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
 
     //
     private JSONObject jsonObject;
-    private ProgressDialog progressDialog;
+    //private ProgressDialog progressDialog;
     private String jsonString;
     private InputStream inputStream;
     private SearchMovieContainer searchMovieContainer;
@@ -76,7 +72,8 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
         this.searchResultsContainer = searchResultsContainer;
         this.context = context;
         this.searchQueryString = searchQueryString;
-        this.progressDialog = ProgressDialog.show(context, "Search", "Searching. Please wait...");
+        //this.progressDialog = ProgressDialog.show(context, "Search", "Searching. Please wait...");
+        images = new ArrayList<Bitmap>();
     }
 
     @Override
@@ -85,12 +82,15 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
             SearchResultsItem searchResultsItem = new SearchResultsItem();
             searchResultsItem.setTitle(searchMovieContainer.getSearchMovieElementArrayList().get(i).getTitle());
             searchResultsItem.setReleaseDate(searchMovieContainer.getSearchMovieElementArrayList().get(i).getRelease_date());
-            searchResultsItem.setRating(searchMovieContainer.getSearchMovieElementArrayList().get(i).getPopularity());
-            searchResultsItem.setPoster(images.get(i));
+            searchResultsItem.setRating(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_average());
+            searchResultsItem.setPosterLink(searchMovieContainer.getSearchMovieElementArrayList().get(i).getPoster_path());
             searchResultsContainer.getSearchResultsItemArrayList().add(searchResultsItem);
-            searchResultsItemAdapter.notifyDataSetChanged();
         }
-        progressDialog.hide();
+        searchResultsItemAdapter.notifyDataSetChanged();
+        PosterLoader posterLoader = new PosterLoader(searchMovieContainer, images, searchResultsItemAdapter, searchResultsContainer);
+        posterLoader.execute();
+        //loadImages();
+        //progressDialog.hide();
     }
 
     @Override
@@ -100,7 +100,8 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
         url = url.replaceAll(" ", "%20");
         jsonObject = getJSONObject(url);
         searchMovieContainer = parseJSONObject(jsonObject);
-        loadImages();
+        //loadImages();
+
         return searchMovieContainer;
     }
 
@@ -206,22 +207,5 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
 
     public void setSearchMovieContainer(SearchMovieContainer searchMovieContainer) {
         this.searchMovieContainer = searchMovieContainer;
-    }
-
-    public void loadImages() {
-        images = new ArrayList<Bitmap>();
-        URL url = null;
-        Bitmap bmp = null;
-        for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
-            try {
-                url = new URL("http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185" + searchMovieContainer.getSearchMovieElementArrayList().get(i).getPoster_path());
-                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            } catch(MalformedURLException exception) {
-                exception.printStackTrace();
-            } catch(IOException exception) {
-                exception.printStackTrace();
-            }
-            images.add(bmp);
-        }
     }
 }
