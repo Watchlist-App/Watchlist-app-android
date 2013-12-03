@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import com.watchlist.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by VEINHORN on 02/12/13.
  */
@@ -68,10 +72,35 @@ public class SearchResultsItemAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        viewHolder.title.setText(searchResultsContainer.getSearchResultsItemArrayList().get(position).getTitle());
-        viewHolder.rating.setText(searchResultsContainer.getSearchResultsItemArrayList().get(position).getRating());
-        viewHolder.releaseDate.setText(searchResultsContainer.getSearchResultsItemArrayList().get(position).getReleaseDate());
+        String title = searchResultsContainer.getSearchResultsItemArrayList().get(position).getTitle();
+        String rating = "Rating: " + searchResultsContainer.getSearchResultsItemArrayList().get(position).getRating();
+        String releaseDate = searchResultsContainer.getSearchResultsItemArrayList().get(position).getReleaseDate();
+        // Sometimes on themoviedb date may be empty
+        if(releaseDate.equals("")) {
+            releaseDate = "Release date: Unknown";
+        } else {
+            releaseDate = "Release date: " + convertDate(releaseDate);
+        }
+        // Convert from one time format to another
+
+
+        viewHolder.title.setText(title);
+        viewHolder.rating.setText(rating);
+        viewHolder.releaseDate.setText(releaseDate);
         viewHolder.poster.setImageBitmap(searchResultsContainer.getSearchResultsItemArrayList().get(position).getPoster());
         return convertView;
+    }
+
+    private String convertDate(String inputString) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(inputString);
+        } catch(ParseException exception) {
+            exception.printStackTrace();
+        }
+        SimpleDateFormat postFormater = new SimpleDateFormat("MMMM dd, yyyy");
+        String postDate = postFormater.format(date);
+        return postDate;
     }
 }
