@@ -1,60 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
     android:background="@drawable/search_results_item_selector">
     <RelativeLayout
-        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout">
+            <ImageView
+                android:background="@drawable/empty_movie"
+                android:id="@+id/search_results_poster"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="150dp"
+                android:minWidth="100dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/relativeLayout"
+            android:layout_alignBottom="@+id/relativeLayout"
+            android:id="@+id/relativeLayout2"
+            android:layout_alignParentRight="true">
+            <TextView
+                android:id="@+id/search_results_title"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Iron Man"/>
+
+            <TextView
+                android:id="@+id/search_results_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="November 23 2012"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_below="@+id/search_results_title"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+                android:id="@+id/search_results_votes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="35 Votes"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_below="@+id/search_results_rating"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+                android:id="@+id/search_results_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start rating"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_below="@+id/search_results_release_date"
+                android:layout_alignParentLeft="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <LinearLayout
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout">
-        <ImageView
-            android:background="@drawable/empty_movie"
-            android:id="@+id/search_results_poster"
+        android:orientation="horizontal">
+        <ImageButton
+            android:background="#00FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="150dp"
-            android:minWidth="100dp"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/relativeLayout"
-        android:layout_alignBottom="@+id/relativeLayout">
-        <TextView
-            android:id="@+id/search_results_title"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Iron Man"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true" />
-        <TextView
-            android:id="@+id/search_results_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start rating"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_below="@+id/search_results_title"
-            android:layout_alignParentLeft="true" />
-        <TextView
-            android:id="@+id/search_results_release_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="November 23 2012"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_below="@+id/search_results_rating"
-            android:layout_alignParentLeft="true" />
-    </RelativeLayout>
-</RelativeLayout>
+            android:src="@drawable/amazon"/>
+    </LinearLayout>
+</LinearLayout>
