@@ -24,7 +24,6 @@ public class SearchResultsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results_activity);
         queryString = getIntent().getStringExtra("query");
-        //testTextView.setText(queryString);
 
         searchResultsListView = (ListView)findViewById(R.id.search_results_listview);
         SearchResultsContainer searchResultsContainer = new SearchResultsContainer();

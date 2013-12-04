@@ -100,6 +100,9 @@ public class Login extends AsyncTask<String, Integer, User> {
         String url = BASE_URL;
         jsonArray = getJSONArray(url);
         userContainer = parseJSONArray(jsonArray);
+        // If no users on server
+        if(userContainer == null)
+            return null;
         // Checks that such user are in container that we get from web server
         isSuchUser = userContainer.isSuchUser(enteredUser);
 
@@ -154,6 +157,9 @@ public class Login extends AsyncTask<String, Integer, User> {
     // Parse json into UserContainer
     public UserContainer parseJSONArray(JSONArray jsonArray) {
         userContainer = new UserContainer();
+        // If no users on server
+        if(jsonArray == null)
+            return null;
 
         for(int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = null;

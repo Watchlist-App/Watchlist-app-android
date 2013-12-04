@@ -10,16 +10,18 @@ public class SearchResultsItem {
     private String releaseDate;
     private String rating;
     private Bitmap poster;
-
-    public SearchResultsItem(Bitmap poster, String releaseDate, String title, String rating) {
-        this.poster = poster;
-        this.releaseDate = releaseDate;
-        this.title = title;
-        this.rating = rating;
-    }
+    private String posterLink;
 
     public SearchResultsItem() {
 
+    }
+
+    public SearchResultsItem(String title, String releaseDate, String rating, Bitmap poster, String posterLink) {
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.rating = rating;
+        this.poster = poster;
+        this.posterLink = posterLink;
     }
 
     public Bitmap getPoster() {
@@ -54,13 +56,22 @@ public class SearchResultsItem {
         this.rating = rating;
     }
 
+    public String getPosterLink() {
+        return posterLink;
+    }
+
+    public void setPosterLink(String posterLink) {
+        this.posterLink = posterLink;
+    }
+
     @Override
     public String toString() {
         return "SearchResultsItem{" +
-                "poster='" + poster + '\'' +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
                 ", rating='" + rating + '\'' +
+                ", poster=" + poster +
+                ", posterLink='" + posterLink + '\'' +
                 '}';
     }
 }
