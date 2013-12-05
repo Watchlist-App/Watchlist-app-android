@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.watchlist.R;
+import com.watchlist.ratingbar.ColoredRatingBar;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         public TextView releaseDate;
         public TextView rating;
         public TextView votes;
+        public ColoredRatingBar votesRatingBar;
     }
 
     private SearchResultsContainer searchResultsContainer;
@@ -68,6 +70,8 @@ public class SearchResultsItemAdapter extends BaseAdapter {
             viewHolder.rating = (TextView)convertView.findViewById(R.id.search_results_rating);
             viewHolder.releaseDate = (TextView)convertView.findViewById(R.id.search_results_release_date);
             viewHolder.votes = (TextView)convertView.findViewById(R.id.search_results_votes);
+            viewHolder.votesRatingBar = (ColoredRatingBar)convertView.findViewById(R.id.search_results_rating_bar);
+
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder)convertView.getTag();
@@ -76,6 +80,8 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         String title = searchResultsContainer.getSearchResultsItemArrayList().get(position).getTitle();
         String rating = searchResultsContainer.getSearchResultsItemArrayList().get(position).getRating() + "/" + "10";
         String votes = searchResultsContainer.getSearchResultsItemArrayList().get(position).getVotes() + " votes";
+        // themoviedb has 10digits rating so here we convert it to 5digits
+        Float ratingBarVote = Float.valueOf(searchResultsContainer.getSearchResultsItemArrayList().get(position).getRating()) / (float)2;
         String releaseDate = searchResultsContainer.getSearchResultsItemArrayList().get(position).getReleaseDate();
         // Sometimes on themoviedb date may be empty
         if(releaseDate.equals("")) {
@@ -90,6 +96,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         viewHolder.rating.setText(rating);
         viewHolder.releaseDate.setText(releaseDate);
         viewHolder.votes.setText(votes);
+        viewHolder.votesRatingBar.setRating(ratingBarVote);
         viewHolder.poster.setImageBitmap(searchResultsContainer.getSearchResultsItemArrayList().get(position).getPoster());
         return convertView;
     }

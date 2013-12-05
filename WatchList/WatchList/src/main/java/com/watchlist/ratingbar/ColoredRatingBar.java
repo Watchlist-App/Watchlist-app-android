@@ -145,6 +145,15 @@ public class ColoredRatingBar extends View {
     }
 
     private Bitmap getRatedStar() {
+        /* Original version of code
+        if(mRating <=1.6f){
+            return drawables[0];
+        }else if(mRating <=3.2f){
+            return drawables[1];
+        }else {
+            return drawables[2];
+        }
+        */
         if(mRating <=1.6f){
             return drawables[1];
         }else if(mRating <=3.2f){
@@ -199,6 +208,7 @@ public class ColoredRatingBar extends View {
         }
     }
 
+    // Original version of code
     // This method handle touches, that we don't need
     /*
     @Override
