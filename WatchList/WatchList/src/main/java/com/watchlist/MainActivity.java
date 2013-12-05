@@ -14,6 +14,7 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+
         //setContentView(R.layout.activity_recent);
         /*
         // There we check when user start app last time
