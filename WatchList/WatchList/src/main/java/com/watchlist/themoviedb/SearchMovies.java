@@ -84,6 +84,7 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
             searchResultsItem.setReleaseDate(searchMovieContainer.getSearchMovieElementArrayList().get(i).getRelease_date());
             searchResultsItem.setRating(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_average());
             searchResultsItem.setPosterLink(searchMovieContainer.getSearchMovieElementArrayList().get(i).getPoster_path());
+            searchResultsItem.setVotes(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_count());
             searchResultsContainer.getSearchResultsItemArrayList().add(searchResultsItem);
         }
         searchResultsItemAdapter.notifyDataSetChanged();

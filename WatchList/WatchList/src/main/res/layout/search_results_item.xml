@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:orientation="vertical"
@@ -54,25 +55,58 @@
                 android:layout_below="@+id/search_results_title"
                 android:layout_alignParentLeft="true" />
 
-            <TextView
-                android:id="@+id/search_results_votes"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="35 Votes"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:layout_below="@+id/search_results_rating"
-                android:layout_alignParentLeft="true" />
-
-            <TextView
-                android:id="@+id/search_results_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Start rating"
-                android:textStyle="bold"
-                android:textSize="20sp"
                 android:layout_below="@+id/search_results_release_date"
-                android:layout_alignParentLeft="true" />
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <com.watchlist.ratingbar.ColoredRatingBar
+                        android:id="@+id/search_results_rating_bar"
+                        style="@style/coloredRatingBarStyle"
+                        app:rating="3"
+                        app:indicator="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/search_results_votes_and_rating_background"
+                    android:layout_marginLeft="5dp">
+                    <TextView
+                        android:layout_margin="3dp"
+                        android:textColor="@color/search_results_votes_and_rating_text_color"
+                        android:id="@+id/search_results_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start rating"
+                        android:textStyle="bold"
+                        android:textSize="20sp"/>
+                </LinearLayout>
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/search_results_votes_and_rating_background">
+                <TextView
+                    android:layout_margin="3dp"
+                    android:textColor="@color/search_results_votes_and_rating_text_color"
+                    android:id="@+id/search_results_votes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="35 Votes"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+            </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
     <LinearLayout

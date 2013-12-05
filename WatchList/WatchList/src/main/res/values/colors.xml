@@ -17,5 +17,7 @@
     <color name="search_results_background_color_not_pressed">#99D8D8D8</color>
     <color name="search_results_button_panel_background">#99404040</color>
     <color name="search_results_buttons_background">#95898686</color>
+    <color name="search_results_votes_and_rating_module_background">#95252525</color>
+    <color name="search_results_votes_and_rating_text_color">#B6B4B4</color>
     <!-- End -->
 </resources>
