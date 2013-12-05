@@ -24,6 +24,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         public TextView title;
         public TextView releaseDate;
         public TextView rating;
+        public TextView votes;
     }
 
     private SearchResultsContainer searchResultsContainer;
@@ -66,14 +67,15 @@ public class SearchResultsItemAdapter extends BaseAdapter {
             viewHolder.title = (TextView)convertView.findViewById(R.id.search_results_title);
             viewHolder.rating = (TextView)convertView.findViewById(R.id.search_results_rating);
             viewHolder.releaseDate = (TextView)convertView.findViewById(R.id.search_results_release_date);
-
+            viewHolder.votes = (TextView)convertView.findViewById(R.id.search_results_votes);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
         String title = searchResultsContainer.getSearchResultsItemArrayList().get(position).getTitle();
-        String rating = "Rating: " + searchResultsContainer.getSearchResultsItemArrayList().get(position).getRating();
+        String rating = searchResultsContainer.getSearchResultsItemArrayList().get(position).getRating() + "/" + "10";
+        String votes = searchResultsContainer.getSearchResultsItemArrayList().get(position).getVotes() + " votes";
         String releaseDate = searchResultsContainer.getSearchResultsItemArrayList().get(position).getReleaseDate();
         // Sometimes on themoviedb date may be empty
         if(releaseDate.equals("")) {
@@ -87,6 +89,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         viewHolder.title.setText(title);
         viewHolder.rating.setText(rating);
         viewHolder.releaseDate.setText(releaseDate);
+        viewHolder.votes.setText(votes);
         viewHolder.poster.setImageBitmap(searchResultsContainer.getSearchResultsItemArrayList().get(position).getPoster());
         return convertView;
     }
