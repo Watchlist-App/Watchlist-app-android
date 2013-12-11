@@ -1,18 +1,26 @@
 package com.watchlist;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.watchlist.comingsoon.ComingSoonActivity;
 import com.watchlist.navigationdrawer.NavigationDrawerFragment;
+import com.watchlist.searchresults.SearchResultsActivity;
 
 /**
  * Created by VEINHORN on 10/12/13.
@@ -24,6 +32,8 @@ public class PopularActivity extends ActionBarActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private SearchView searchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +48,45 @@ public class PopularActivity extends ActionBarActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.activity_popular_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.activity_popular_search);
+        searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setQueryHint(getString(R.string.hint_search_activity_recent));
+        SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        // Handle the query that user types in action bar search field
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(PopularActivity.this, SearchResultsActivity.class);
+                intent.putExtra("query", query);
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceHolderFragment.newInstance(position + 1))
                 .commit();
+
     }
 
     public void onSectionAttached(int number) {
