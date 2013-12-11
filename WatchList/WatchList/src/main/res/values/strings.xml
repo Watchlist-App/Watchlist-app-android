@@ -39,4 +39,8 @@
     <!-- Popular Activity -->
     <string name="popular_activity_label">Popular movies</string>
     <!-- End -->
+
+    <!-- Coming Soon Activity -->
+    <string name="coming_soon_activity_label">Coming Soon</string>
+    <!-- End -->
 </resources>

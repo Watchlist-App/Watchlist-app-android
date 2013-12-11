@@ -10,7 +10,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import com.watchlist.comingsoon.ComingSoonActivity;
+import com.watchlist.navigationdrawer.NavigationDrawerFragment;
 
 /**
  * Created by VEINHORN on 10/12/13.
@@ -47,18 +49,18 @@ public class PopularActivity extends ActionBarActivity
     public void onSectionAttached(int number) {
         switch(number) {
             case 1: {
-                Intent intent = new Intent(PopularActivity.this, RecentActivity.class);
+                Intent intent = new Intent(PopularActivity.this, ComingSoonActivity.class);
                 startActivity(intent);
                 break;
             }
             case 2: {
-                Toast toast = Toast.makeText(PopularActivity.this, "Test 2", Toast.LENGTH_SHORT);
-                toast.show();
+                //Toast toast = Toast.makeText(PopularActivity.this, "Test 2", Toast.LENGTH_SHORT);
+                //toast.show();
                 break;
             }
             case 3: {
-                Toast toast = Toast.makeText(PopularActivity.this, "Test 3", Toast.LENGTH_SHORT);
-                toast.show();
+                //Toast toast = Toast.makeText(PopularActivity.this, "Test 3", Toast.LENGTH_SHORT);
+                //toast.show();
                 break;
             }
         }

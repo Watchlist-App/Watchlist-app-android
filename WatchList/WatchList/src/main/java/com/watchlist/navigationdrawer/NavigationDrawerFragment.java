@@ -1,4 +1,4 @@
-package com.watchlist;
+package com.watchlist.navigationdrawer;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.watchlist.R;
 
 ;
 
@@ -65,6 +67,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     private NavigationDrawerItemAdapter navigationDrawerItemAdapter;
     private NavigationDrawerItemContainer navigationDrawerItemContainer;
+    //private LinearLayout navigationDrawerHeader;
 
     public NavigationDrawerFragment() {
     }
@@ -115,6 +118,10 @@ public class NavigationDrawerFragment extends Fragment {
         navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("My lists", R.drawable.mylists));
         navigationDrawerItemAdapter = new NavigationDrawerItemAdapter(getActivity(), navigationDrawerItemContainer);
         mDrawerListView.setAdapter(navigationDrawerItemAdapter);
+
+        // Set header
+        //navigationDrawerHeader = (LinearLayout)getActivity().findViewById(R.id.navigation_drawer_header_my);
+        //mDrawerListView.addHeaderView(navigationDrawerHeader);
         /*
 new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),

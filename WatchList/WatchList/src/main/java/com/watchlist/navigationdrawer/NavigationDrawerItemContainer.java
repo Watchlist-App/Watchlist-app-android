@@ -1,4 +1,4 @@
-package com.watchlist;
+package com.watchlist.navigationdrawer;
 
 import java.util.ArrayList;
 

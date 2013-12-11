@@ -1,4 +1,4 @@
-package com.watchlist;
+package com.watchlist.navigationdrawer;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.watchlist.R;
 
 /**
  * Created by VEINHORN on 11/12/13.

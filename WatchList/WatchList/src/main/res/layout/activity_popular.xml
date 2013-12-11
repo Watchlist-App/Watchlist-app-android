@@ -18,5 +18,5 @@
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:name="com.watchlist.NavigationDrawerFragment"/>
+        android:name="com.watchlist.navigationdrawer.NavigationDrawerFragment"/>
 </android.support.v4.widget.DrawerLayout>

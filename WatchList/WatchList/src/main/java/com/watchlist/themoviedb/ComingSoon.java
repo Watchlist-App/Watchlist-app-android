@@ -1,12 +1,13 @@
 package com.watchlist.themoviedb;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
-import com.watchlist.searchresults.SearchResultsContainer;
-import com.watchlist.searchresults.SearchResultsItem;
-import com.watchlist.searchresults.SearchResultsItemAdapter;
+import com.watchlist.comingsoon.ComingSoonContainer;
+import com.watchlist.comingsoon.ComingSoonItem;
+import com.watchlist.comingsoon.ComingSoonItemAdapter;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,21 +25,17 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- * Created by VEINHORN on 02/12/13.
+ * Created by VEINHORN on 11/12/13.
  */
-public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContainer> {
-    private final static String BASE_URL = "http://api.themoviedb.org/3/search/movie";
+
+public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer> {
+
+    private final static String BASE_URL = "http://api.themoviedb.org/3/movie/upcoming";
     private final static String API_KEY = "2b7854ef68a3c274a0f804c031285c46";
-    // Required Parameters
-    private final static String API_QUERY_TITLE = "query";
-    private final static String API_KEY_TITLE = "api_key";
-    // Optional Parameters
     private final static String API_PAGE_TITLE = "page";
-    private final static String API_LANGUAGE_TITLE = "language";
-    private final static String API_INCLUDE_ADULT_TITLE = "include_adult";
-    private final static String API_YEAR_TITLE = "year";
-    private final static String API_PRIMARY_RELEASE_YEAR_TITLE = "primary_release_year";
-    private final static String API_SEARCH_TYPE_TITLE = "search_type";
+    private final static String API_KEY_TITLE = "api_key";
+    private final static String API_TOTAL_PAGES_TITLE = "total_pages";
+
     private final static String API_RESULTS_TITLE = "results";
 
     private final static String API_RESULTS_ADULT_TITLE = "adult";
@@ -52,61 +49,53 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
     private final static String API_RESULTS_VOTE_AVERAGE_TITLE = "vote_average";
     private final static String API_RESULTS_VOTE_COUNT_TITLE = "vote_count";
 
+    private ComingSoonContainer comingSoonContainer;
     private Context context;
-    private String searchQueryString; // string that stores info that user searches
-
-    //
-    private JSONObject jsonObject;
-    //private ProgressDialog progressDialog;
-    private String jsonString;
+    private ComingSoonItemAdapter comingSoonItemAdapter;
     private InputStream inputStream;
+    private String jsonString;
+    private JSONObject jsonObject;
+
     private SearchMovieContainer searchMovieContainer;
 
-    private SearchResultsItemAdapter searchResultsItemAdapter;
-    private SearchResultsContainer searchResultsContainer;
-
+    private ProgressDialog progressDialog;
     private ArrayList<Bitmap> images;
 
-    public SearchMovies(Context context, String searchQueryString, SearchResultsItemAdapter searchResultsItemAdapter, SearchResultsContainer searchResultsContainer) {
-        this.searchResultsItemAdapter = searchResultsItemAdapter;
-        this.searchResultsContainer = searchResultsContainer;
+    public ComingSoon(Context context, ComingSoonItemAdapter comingSoonItemAdapter, ComingSoonContainer comingSoonContainer) {
+        this.progressDialog = ProgressDialog.show(context, "Loading", "Loading. Please wait...");
         this.context = context;
-        this.searchQueryString = searchQueryString;
-        //this.progressDialog = ProgressDialog.show(context, "Search", "Searching. Please wait...");
+        this.comingSoonContainer = comingSoonContainer;
+        this.comingSoonItemAdapter = comingSoonItemAdapter;
         images = new ArrayList<Bitmap>();
     }
 
     @Override
     protected void onPostExecute(SearchMovieContainer searchMovieContainer) {
         for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
-            SearchResultsItem searchResultsItem = new SearchResultsItem();
-            searchResultsItem.setTitle(searchMovieContainer.getSearchMovieElementArrayList().get(i).getTitle());
-            searchResultsItem.setReleaseDate(searchMovieContainer.getSearchMovieElementArrayList().get(i).getRelease_date());
-            searchResultsItem.setRating(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_average());
-            searchResultsItem.setPosterLink(searchMovieContainer.getSearchMovieElementArrayList().get(i).getPoster_path());
-            searchResultsItem.setVotes(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_count());
-            searchResultsContainer.getSearchResultsItemArrayList().add(searchResultsItem);
+            ComingSoonItem comingSoonItem = new ComingSoonItem();
+            comingSoonItem.setTitle(searchMovieContainer.getSearchMovieElementArrayList().get(i).getTitle());
+            comingSoonItem.setReleaseDate(searchMovieContainer.getSearchMovieElementArrayList().get(i).getRelease_date());
+            comingSoonItem.setRating(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_average());
+            comingSoonItem.setPosterLink(searchMovieContainer.getSearchMovieElementArrayList().get(i).getPoster_path());
+            comingSoonItem.setVotes(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_count());
+
+            comingSoonContainer.getSearchResultsItemArrayList().add(comingSoonItem);
         }
-        searchResultsItemAdapter.notifyDataSetChanged();
+        this.progressDialog.hide();
+        comingSoonItemAdapter.notifyDataSetChanged();
 
         for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
-            PosterLoader posterLoader = new PosterLoader(searchMovieContainer, images, searchResultsItemAdapter, searchResultsContainer, i);
+            PosterLoader posterLoader = new PosterLoader(searchMovieContainer, images, comingSoonItemAdapter, comingSoonContainer, i);
             posterLoader.execute();
         }
-
-        //loadImages();
-        //progressDialog.hide();
     }
 
     @Override
     protected SearchMovieContainer doInBackground(String... params) {
         SearchMovieContainer searchMovieContainer = null;
-        String url = BASE_URL + "?" + API_KEY_TITLE + "=" + API_KEY + "&" + API_QUERY_TITLE + "=" + searchQueryString;
-        url = url.replaceAll(" ", "%20");
+        String url = BASE_URL + "?" + API_KEY_TITLE + "=" + API_KEY;
         jsonObject = getJSONObject(url);
         searchMovieContainer = parseJSONObject(jsonObject);
-        //loadImages();
-
         return searchMovieContainer;
     }
 
@@ -150,18 +139,39 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
         return jsonObject;
     }
 
-    // Parse json into SearchMovieContainer
+    // Parse json into ComingSoonContainer
     public SearchMovieContainer parseJSONObject(JSONObject jsonObject) {
         searchMovieContainer = new SearchMovieContainer();
 
         try {
+            int pages = jsonObject.getInt(API_TOTAL_PAGES_TITLE);
+
+            for(int i = 1; i <= pages; i++) {
+                String url = BASE_URL + "?" + API_KEY_TITLE + "=" + API_KEY + "&" + API_PAGE_TITLE + "=" + Integer.toString(i);
+                jsonObject = getJSONObject(url);
+                parseJSONObject(searchMovieContainer, jsonObject);
+            }
+
+
+        } catch(JSONException exception) {
+            exception.printStackTrace();
+        }
+        return searchMovieContainer;
+    }
+
+    // Parse json into ComingSoonContainer
+    public void parseJSONObject(SearchMovieContainer searchMovieContainer, JSONObject jsonObject) {
+        // Try to parse
+        try {
             // Get the json array from json object
             JSONArray jsonArray = jsonObject.getJSONArray(API_RESULTS_TITLE);
             JSONObject myJSONObject = null;
+
             for(int i = 0; i < jsonArray.length(); i++) {
                 SearchMovieElement searchMovieElement = new SearchMovieElement();
                 myJSONObject = jsonArray.getJSONObject(i);
                 // Set json fields to SearchMovieElement object
+
                 searchMovieElement.setAdult(myJSONObject.getString(API_RESULTS_ADULT_TITLE));
                 searchMovieElement.setBackdrop_path(myJSONObject.getString(API_RESULTS_BACKDROP_PATH_TITLE));
                 searchMovieElement.setId(myJSONObject.getString(API_RESULTS_ID_TITLE));
@@ -178,39 +188,5 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
         } catch(JSONException exception) {
             exception.printStackTrace();
         }
-
-        return searchMovieContainer;
-    }
-
-    public JSONObject getJsonObject() {
-        return jsonObject;
-    }
-
-    public void setJsonObject(JSONObject jsonObject) {
-        this.jsonObject = jsonObject;
-    }
-
-    public String getSearchQueryString() {
-        return searchQueryString;
-    }
-
-    public void setSearchQueryString(String searchQueryString) {
-        this.searchQueryString = searchQueryString;
-    }
-
-    public String getJsonString() {
-        return jsonString;
-    }
-
-    public void setJsonString(String jsonString) {
-        this.jsonString = jsonString;
-    }
-
-    public SearchMovieContainer getSearchMovieContainer() {
-        return searchMovieContainer;
-    }
-
-    public void setSearchMovieContainer(SearchMovieContainer searchMovieContainer) {
-        this.searchMovieContainer = searchMovieContainer;
     }
 }

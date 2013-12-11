@@ -22,7 +22,7 @@ public class SearchResultsActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_results_activity);
+        setContentView(R.layout.activity_search_results);
         queryString = getIntent().getStringExtra("query");
 
         searchResultsListView = (ListView)findViewById(R.id.search_results_listview);

@@ -41,6 +41,9 @@
         <activity
             android:name=".PopularActivity"
             android:label="@string/popular_activity_label"/>
+        <activity
+            android:name=".comingsoon.ComingSoonActivity"
+            android:label="@string/coming_soon_activity_label"/>
     </application>
 
 </manifest>

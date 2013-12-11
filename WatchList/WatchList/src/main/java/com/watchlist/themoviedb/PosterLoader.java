@@ -22,37 +22,42 @@ public class PosterLoader extends AsyncTask<String, Integer, ArrayList<Bitmap>> 
     SearchMovieContainer searchMovieContainer;
     SearchResultsItemAdapter searchResultsItemAdapter;
     SearchResultsContainer searchResultsContainer;
+    int position;
 
-    public PosterLoader(SearchMovieContainer searchMovieContainer, ArrayList<Bitmap> images, SearchResultsItemAdapter searchResultsItemAdapter, SearchResultsContainer searchResultsContainer) {
+    public PosterLoader(SearchMovieContainer searchMovieContainer, ArrayList<Bitmap> images, SearchResultsItemAdapter searchResultsItemAdapter, SearchResultsContainer searchResultsContainer, int position) {
         this.searchMovieContainer = searchMovieContainer;
         this.images = images;
         this.searchResultsItemAdapter = searchResultsItemAdapter;
         this.searchResultsContainer = searchResultsContainer;
+        this.position = position;
     }
+
 
     @Override
     protected void onPostExecute(ArrayList<Bitmap> images) {
+        /*
         for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
             searchResultsContainer.getSearchResultsItemArrayList().get(i).setPoster(images.get(i));
             searchResultsItemAdapter.notifyDataSetChanged();
-        }
+        }*/
+        searchResultsItemAdapter.notifyDataSetChanged();
     }
+
 
     @Override
     protected ArrayList<Bitmap> doInBackground(String... params) {
         URL url = null;
         Bitmap bmp = null;
-        for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
             try {
-                url = new URL("http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185" + searchMovieContainer.getSearchMovieElementArrayList().get(i).getPoster_path());
+                url = new URL("http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185" + searchMovieContainer.getSearchMovieElementArrayList().get(position).getPoster_path());
                 bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                searchResultsContainer.getSearchResultsItemArrayList().get(position).setPoster(bmp);
             } catch(MalformedURLException exception) {
                 exception.printStackTrace();
             } catch(IOException exception) {
                 exception.printStackTrace();
             }
             images.add(bmp);
-        }
         return images;
     }
 }

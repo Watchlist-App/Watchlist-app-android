@@ -1,4 +1,4 @@
-package com.watchlist;
+package com.watchlist.navigationdrawer;
 
 /**
  * Created by VEINHORN on 11/12/13.
