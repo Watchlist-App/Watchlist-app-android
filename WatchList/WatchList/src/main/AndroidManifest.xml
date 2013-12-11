@@ -4,6 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="19" />
@@ -37,6 +38,9 @@
             android:name=".searchresults.SearchResultsActivity"
             android:label="@string/title_activity_search_results">
         </activity>
+        <activity
+            android:name=".PopularActivity"
+            android:label="@string/popular_activity_label"/>
     </application>
 
 </manifest>
