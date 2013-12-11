@@ -18,9 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 ;
 
@@ -60,9 +58,13 @@ public class NavigationDrawerFragment extends Fragment {
     private ListView mDrawerListView;
     private View mFragmentContainerView;
 
-    private int mCurrentSelectedPosition = 0;
+    // This variable for default position
+    //private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+
+    private NavigationDrawerItemAdapter navigationDrawerItemAdapter;
+    private NavigationDrawerItemContainer navigationDrawerItemContainer;
 
     public NavigationDrawerFragment() {
     }
@@ -76,13 +78,14 @@ public class NavigationDrawerFragment extends Fragment {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
-        if (savedInstanceState != null) {
+
+        /*if (savedInstanceState != null) {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
-        }
+        }*/
 
         // Select either the default item (0) or the last selected item.
-        selectItem(mCurrentSelectedPosition);
+        //selectItem(mCurrentSelectedPosition);
     }
 
     @Override
@@ -103,7 +106,17 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+
+        navigationDrawerItemContainer = new NavigationDrawerItemContainer();
+        navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Coming soon", R.drawable.comingsoon));
+        navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Popular movies", R.drawable.popularmovies));
+        navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Watch List", R.drawable.watchlistmenu));
+        navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Favourite", R.drawable.favourite));
+        navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("My lists", R.drawable.mylists));
+        navigationDrawerItemAdapter = new NavigationDrawerItemAdapter(getActivity(), navigationDrawerItemContainer);
+        mDrawerListView.setAdapter(navigationDrawerItemAdapter);
+        /*
+new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
@@ -111,8 +124,9 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
-                }));
-        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+                })
+         */
+        //mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
 
@@ -195,7 +209,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
-        mCurrentSelectedPosition = position;
+        //mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
         }
@@ -226,7 +240,7 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
+        //outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
     }
 
     @Override
@@ -252,12 +266,12 @@ public class NavigationDrawerFragment extends Fragment {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
+        /*
         if (item.getItemId() == R.id.action_example) {
             Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
             return true;
         }
-
+        */
         return super.onOptionsItemSelected(item);
     }
 

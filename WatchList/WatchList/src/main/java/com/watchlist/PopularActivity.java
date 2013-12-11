@@ -1,6 +1,7 @@
 package com.watchlist;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -30,6 +31,8 @@ public class PopularActivity extends ActionBarActivity
         mNavigationDrawerFragment = (NavigationDrawerFragment)getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         // Set up the drawer
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout)findViewById(R.id.drawer_layout));
+
+
     }
 
     @Override
@@ -44,8 +47,8 @@ public class PopularActivity extends ActionBarActivity
     public void onSectionAttached(int number) {
         switch(number) {
             case 1: {
-                Toast toast = Toast.makeText(PopularActivity.this, "Test 1", Toast.LENGTH_SHORT);
-                toast.show();
+                Intent intent = new Intent(PopularActivity.this, RecentActivity.class);
+                startActivity(intent);
                 break;
             }
             case 2: {
