@@ -43,4 +43,8 @@
     <!-- Coming Soon Activity -->
     <string name="coming_soon_activity_label">Coming Soon</string>
     <!-- End -->
+
+    <!-- Amazon Activity -->
+    <string name="amazon_activity_label">Amazon List</string>
+    <!-- End -->
 </resources>
