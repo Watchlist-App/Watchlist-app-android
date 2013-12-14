@@ -45,7 +45,7 @@
             android:name=".comingsoon.ComingSoonActivity"
             android:label="@string/coming_soon_activity_label"/>
         <activity
-            android:name=".amazon.AmazonActivity"
+            android:name=".amazon.AmazonListActivity"
             android:label="@string/amazon_activity_label"/>
     </application>
 
