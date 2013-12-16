@@ -11,7 +11,9 @@ import com.watchlist.R;
  */
 public class AmazonListActivity extends ActionBarActivity {
 
-    ListView amazonListView;
+    private ListView amazonListView;
+    private AmazonItemAdapter amazonItemAdapter;
+    private AmazonContainer amazonContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,5 +21,11 @@ public class AmazonListActivity extends ActionBarActivity {
         setContentView(R.layout.activity_amazon_list);
 
         amazonListView = (ListView)findViewById(R.id.activity_amazonlist_listview);
+        amazonContainer = new AmazonContainer();
+        amazonItemAdapter = new AmazonItemAdapter(AmazonListActivity.this, amazonContainer);
+        amazonListView.setAdapter(amazonItemAdapter);
+
+        Amazon amazon = new Amazon(AmazonListActivity.this, amazonItemAdapter, amazonContainer);
+        amazon.execute();
     }
 }

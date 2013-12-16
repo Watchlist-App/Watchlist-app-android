@@ -1,5 +1,6 @@
 package com.watchlist.amazon;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import org.apache.http.HttpEntity;
@@ -30,16 +31,40 @@ public class Amazon extends AsyncTask<String, Integer, AmazonContainer> {
     private String jsonString;
     private JSONArray jsonArray;
     private String movieTitle;
+
+    private Context context;
+    private AmazonItemAdapter amazonItemAdapter;
     private AmazonContainer amazonContainer;
 
+    public Amazon() {
+
+    }
+
+    public Amazon(Context context, AmazonItemAdapter amazonItemAdapter, AmazonContainer amazonContainer) {
+        this.context = context;
+        this.amazonItemAdapter = amazonItemAdapter;
+        this.amazonContainer = amazonContainer;
+    }
+
+    @Override
+    protected void onPostExecute(AmazonContainer amazonContainer) {
+        amazonItemAdapter.notifyDataSetChanged();
+    }
 
     @Override
     protected AmazonContainer doInBackground(String... params) {
-        AmazonContainer amazonContainer = null;
+        movieTitle = "Iron man";
         String url = BASE_URL + movieTitle;
         url = url.replaceAll(" ", "%20");
         jsonArray = getJSONArray(url);
-
+        amazonContainer = parseJSONArray(jsonArray);
+        /*
+        for(int i = 0; i < 10; i++) {
+            AmazonElement amazonElement = new AmazonElement();
+            amazonElement.setDetailPageUrl("boris korogvich");
+            amazonContainer.getAmazonElementArrayList().add(amazonElement);
+        }
+        */
         return amazonContainer;
     }
 
@@ -86,8 +111,7 @@ public class Amazon extends AsyncTask<String, Integer, AmazonContainer> {
 
     // Parse json to AmazonContainer
     public AmazonContainer parseJSONArray(JSONArray jsonArray) {
-        amazonContainer = new AmazonContainer();
-
+        AmazonContainer amazonContainer = new AmazonContainer();
         // If no users on server
         if(jsonArray == null) {
             return null;
@@ -100,7 +124,9 @@ public class Amazon extends AsyncTask<String, Integer, AmazonContainer> {
                 jsonObject = jsonArray.getJSONObject(i);
 
                 AmazonElement amazonElement = new AmazonElement();
-                amazonElement.setDetailPageUrl(jsonObject.getString(API_DETAIL_PAGE_URL_TITLE));
+                amazonElement.setDetailPageUrl("2pac"); /*jsonObject.getString(API_DETAIL_PAGE_URL_TITLE)*/
+
+                amazonContainer.getAmazonElementArrayList().add(amazonElement);
             } catch(JSONException exception) {
                 exception.printStackTrace();
             }

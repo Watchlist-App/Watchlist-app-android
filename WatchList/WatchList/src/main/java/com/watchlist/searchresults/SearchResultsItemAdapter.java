@@ -1,14 +1,17 @@
 package com.watchlist.searchresults;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.watchlist.R;
+import com.watchlist.amazon.AmazonListActivity;
 import com.watchlist.ratingbar.ColoredRatingBar;
 
 import java.text.ParseException;
@@ -27,6 +30,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         public TextView rating;
         public TextView votes;
         public ColoredRatingBar votesRatingBar;
+        public ImageButton amazonButton;
     }
 
     private SearchResultsContainer searchResultsContainer;
@@ -72,6 +76,8 @@ public class SearchResultsItemAdapter extends BaseAdapter {
             viewHolder.votes = (TextView)convertView.findViewById(R.id.search_results_votes);
             viewHolder.votesRatingBar = (ColoredRatingBar)convertView.findViewById(R.id.search_results_rating_bar);
 
+            viewHolder.amazonButton = (ImageButton)convertView.findViewById(R.id.search_results_activity_amazon_button);
+            viewHolder.amazonButton.setOnClickListener(amazonButtonListener);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder)convertView.getTag();
@@ -113,4 +119,15 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         String postDate = postFormater.format(date);
         return postDate;
     }
+
+    // Amazon button action listener
+    private View.OnClickListener amazonButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(final View view) {
+            Intent intent = new Intent(context, AmazonListActivity.class);
+            //final int position =
+            //intent.putExtra("movietitle", );
+            context.startActivity(intent);
+        }
+    };
 }

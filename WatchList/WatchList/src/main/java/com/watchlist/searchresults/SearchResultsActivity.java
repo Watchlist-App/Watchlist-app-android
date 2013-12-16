@@ -26,7 +26,7 @@ public class SearchResultsActivity extends Activity {
         queryString = getIntent().getStringExtra("query");
 
         searchResultsListView = (ListView)findViewById(R.id.search_results_listview);
-        SearchResultsContainer searchResultsContainer = new SearchResultsContainer();
+        searchResultsContainer = new SearchResultsContainer();
         // Get the query that we sent from RecentActivity
         searchResultsItemAdapter = new SearchResultsItemAdapter(SearchResultsActivity.this, searchResultsContainer);
         searchResultsListView.setAdapter(searchResultsItemAdapter);
