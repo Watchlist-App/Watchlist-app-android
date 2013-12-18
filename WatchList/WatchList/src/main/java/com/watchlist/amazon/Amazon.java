@@ -10,7 +10,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,17 +53,17 @@ public class Amazon extends AsyncTask<String, Integer, AmazonContainer> {
     @Override
     protected AmazonContainer doInBackground(String... params) {
         movieTitle = "Iron man";
-        String url = BASE_URL + movieTitle;
+        String url = BASE_URL + "=" + movieTitle;
         url = url.replaceAll(" ", "%20");
         jsonArray = getJSONArray(url);
-        amazonContainer = parseJSONArray(jsonArray);
-        /*
+        //amazonContainer = parseJSONArray(jsonArray);
+
         for(int i = 0; i < 10; i++) {
             AmazonElement amazonElement = new AmazonElement();
-            amazonElement.setDetailPageUrl("boris korogvich");
+            amazonElement.setDetailPageUrl(jsonArray.toString());
             amazonContainer.getAmazonElementArrayList().add(amazonElement);
         }
-        */
+
         return amazonContainer;
     }
 
@@ -115,21 +114,6 @@ public class Amazon extends AsyncTask<String, Integer, AmazonContainer> {
         // If no users on server
         if(jsonArray == null) {
             return null;
-        }
-
-        for(int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jsonObject = null;
-            // Check here after if no elements or no references in json app can crashes
-            try {
-                jsonObject = jsonArray.getJSONObject(i);
-
-                AmazonElement amazonElement = new AmazonElement();
-                amazonElement.setDetailPageUrl("2pac"); /*jsonObject.getString(API_DETAIL_PAGE_URL_TITLE)*/
-
-                amazonContainer.getAmazonElementArrayList().add(amazonElement);
-            } catch(JSONException exception) {
-                exception.printStackTrace();
-            }
         }
 
         return amazonContainer;

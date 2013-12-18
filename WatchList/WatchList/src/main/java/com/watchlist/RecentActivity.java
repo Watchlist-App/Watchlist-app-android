@@ -59,6 +59,7 @@ public class RecentActivity extends ActionBarActivity {
                     str += logedInUserContainer.getLogedInUserArrayList().get(i).toString();
                 }
                 textView.setText(str);
+                textView.setTextColor(Color.BLACK);
             }
         });
 

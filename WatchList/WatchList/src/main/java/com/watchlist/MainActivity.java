@@ -1,6 +1,5 @@
 package com.watchlist;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
@@ -9,20 +8,21 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(MainActivity.this, PopularActivity.class/*LoginActivity.class*/);
-        startActivity(intent);
-        finish();
+        //Intent intent = new Intent(MainActivity.this, LoginActivity.class); /*PopularActivity.class*/
+        //startActivity(intent);
+        //finish();
 
         //setContentView(R.layout.activity_recent);
-        /*
+
         // There we check when user start app last time
+        /*
         WatchListSQLiteOpenHelper watchListSQLiteOpenHelper = new WatchListSQLiteOpenHelper(MainActivity.this);
         watchListSQLiteOpenHelper.deleteAllUsers();//test
         LogedInUserContainer logedInUserContainer = watchListSQLiteOpenHelper.getAllUsers();
         // If no users in database
         if(logedInUserContainer.getLogedInUserArrayList().size() == 0) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
             finish();
         } else {
             // If there are users
@@ -45,12 +45,12 @@ public class MainActivity extends ActionBarActivity {
             //toast.show();
             // if difference more that our
             if(diff > 3600000) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent1);
                 finish();
             } else {
-                Intent intent = new Intent(MainActivity.this, RecentActivity.class);
-                startActivity(intent);
+                Intent intent2 = new Intent(MainActivity.this, RecentActivity.class);
+                startActivity(intent2);
                 finish();
             }
         }
