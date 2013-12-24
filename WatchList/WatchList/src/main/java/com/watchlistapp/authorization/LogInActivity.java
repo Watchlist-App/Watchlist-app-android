@@ -1,7 +1,7 @@
 package com.watchlistapp.authorization;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +12,7 @@ import com.watchlistapp.R;
 /**
  * Created by VEINHORN on 26/11/13.
  */
-public class LogInActivity extends Activity {
+public class LogInActivity extends ActionBarActivity {
     private EditText email;
     private EditText nickname;
     private EditText password;
@@ -24,7 +24,7 @@ public class LogInActivity extends Activity {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_login);
 
-
+        getSupportActionBar().hide();
         /*
         // Sets the action bar color as a drawable
         ActionBar actionBar = getSupportActionBar();

@@ -21,6 +21,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.watchlistapp.R;
+import com.watchlistapp.authorization.LoggedInUser;
+import com.watchlistapp.database.WatchListDatabaseHandler;
 
 ;
 
@@ -111,7 +113,16 @@ public class NavigationDrawerFragment extends Fragment {
         });
 
         navigationDrawerItemContainer = new NavigationDrawerItemContainer();
-        navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Coming soon", 0));
+
+        // This code is for get last logged in user name
+        WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(getActivity());
+        LoggedInUser loggedInUser = watchListDatabaseHandler.getAllUsers().searchLastLoggedInUser();
+
+        if(loggedInUser == null) {
+            navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("User", 0));
+        } else {
+            navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem(loggedInUser.getName(), 0));
+        }
         navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Coming soon", R.drawable.comingsoon));
         navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Popular movies", R.drawable.popularmovies));
         navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Watch List", R.drawable.watchlistmenu));
