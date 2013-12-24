@@ -20,11 +20,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_login">Log in</string>
 
-
     <!-- Login Activity -->
     <string name="activity_login_sign_up_button_text">Sign up</string>
     <string name="activity_login_try_to_type_again">Try to enter your personal data again...</string>
     <!-- End -->
+
 
     <!-- Recent Activity -->
     <string name="title_activity_recent">Recent</string>
@@ -32,19 +32,25 @@
     <string name="hint_search_activity_recent">Search the movie...</string>
     <!-- End -->
 
+
     <!-- Search Results Activity -->
     <string name="title_activity_search_results">Search Results</string>
     <!-- End -->
+
 
     <!-- Popular Activity -->
     <string name="popular_activity_label">Popular movies</string>
     <!-- End -->
 
+
     <!-- Coming Soon Activity -->
     <string name="coming_soon_activity_label">Coming Soon</string>
     <!-- End -->
 
+
     <!-- Amazon Activity -->
     <string name="amazon_activity_label">Amazon List</string>
     <!-- End -->
+    <string name="title_activity_home">HomeActivity</string>
+
 </resources>

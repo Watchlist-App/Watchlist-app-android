@@ -64,7 +64,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-                    <com.watchlist.ratingbar.ColoredRatingBar
+                    <com.watchlistapp.ratingbar.ColoredRatingBar
                         android:id="@+id/search_results_rating_bar"
                         style="@style/coloredRatingBarStyle"
                         app:rating="3"
