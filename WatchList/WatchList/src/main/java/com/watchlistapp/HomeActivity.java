@@ -96,8 +96,8 @@ public class HomeActivity extends ActionBarActivity
                 break;
             }
             case 3: {
-                //Toast toast = Toast.makeText(PopularActivity.this, "Test 3", Toast.LENGTH_SHORT);
-                //toast.show();
+                Intent intent = new Intent(HomeActivity.this, PopularActivity.class);
+                startActivity(intent);
                 break;
             }
         }
@@ -129,7 +129,7 @@ public class HomeActivity extends ActionBarActivity
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            ((PopularActivity)activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
+            ((HomeActivity)activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
 }
