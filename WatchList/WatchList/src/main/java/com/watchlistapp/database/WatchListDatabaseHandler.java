@@ -8,15 +8,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.watchlistapp.authorization.LoggedInUser;
 import com.watchlistapp.authorization.LoggedInUserContainer;
+import com.watchlistapp.watchlistserver.Movie;
+import com.watchlistapp.watchlistserver.MovieContainer;
 import com.watchlistapp.watchlistserver.MovieList;
 import com.watchlistapp.watchlistserver.MovieListContainer;
+
+import java.util.ArrayList;
 
 /**
  * Created by VEINHORN on 20/12/13.
  */
 public class WatchListDatabaseHandler extends SQLiteOpenHelper {
 
-    public final static String DATABASE_NAME = "watchdb2";
+    public final static String DATABASE_NAME = "watchdb6";
     public final static int DATABASE_VERSION = 1;
 
     // Commands that uses very often
@@ -39,6 +43,16 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
     public final static String TABLE_USER_PLAYLISTS_REFERENCES = "userplaylistsref";
     public final static String TABLE_USER_PLAYLISTS_REFERENCES_ID = "reference_id";
     public final static String TABLE_USER_PLAYLISTS_REFERENCES_EMAIL = "reference_email";
+
+    // "Movies" table
+    public final static String TABLE_MOVIES = "movies";
+    public final static String TABLE_MOVIES_ID = "movies_id";
+    public final static String TABLE_MOVIES_THEMOVIEDB_ID = "themoviedb_id";
+
+    // "MovieListRef" table
+    public final static String TABLE_MOVIE_LIST_REFERENCES = "movielistref";
+    public final static String TABLE_MOVIE_LIST_REFERENCES_ID = "movie_list_ref_id";
+    public final static String TABLE_MOVIE_LIST_REFERENCES_TITLE = "movie_list_ref_title";
 
     private Context context;
 
@@ -66,38 +80,101 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
         String CREATE_USER_PLAYLISTS_REFERENCES_TABLE = "CREATE TABLE " + TABLE_USER_PLAYLISTS_REFERENCES + " ( " +
                 TABLE_USER_PLAYLISTS_REFERENCES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 TABLE_USER_PLAYLISTS_REFERENCES_EMAIL + " TEXT)";
+
+        // The "movies" id table creation
+        String CREATE_MOVIES_TABLE = "CREATE TABLE " + TABLE_MOVIES + " ( " +
+                TABLE_MOVIES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                TABLE_MOVIES_THEMOVIEDB_ID + " INTEGER)";
+
+        // The "Movie list ref" table creation
+        String CREATE_MOVIE_LIST_REFERENCES_TABLE = "CREATE TABLE " + TABLE_MOVIE_LIST_REFERENCES + " ( " +
+                TABLE_MOVIE_LIST_REFERENCES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                TABLE_MOVIE_LIST_REFERENCES_TITLE + " TEXT)";
+
         database.execSQL(CREATE_USER_TABLE);
         database.execSQL(CREATE_PLAYLISTS_TABLE);
         database.execSQL(CREATE_USER_PLAYLISTS_REFERENCES_TABLE);
+        database.execSQL(CREATE_MOVIES_TABLE);
+        database.execSQL(CREATE_MOVIE_LIST_REFERENCES_TABLE);
     }
 
     // This method delete user from database including all data that he has
-    public void deleteUserContent(LoggedInUser loggedInUser) {
+    public ArrayList<String> deleteUserContent(LoggedInUser loggedInUser) {
         SQLiteDatabase database = this.getWritableDatabase();
 
-        // Select all rows with such email that this user has
+        //Select all ids by email for TABLE_LISTS
+        Cursor listIdsCursor = database.query(TABLE_USER_PLAYLISTS_REFERENCES, new String[] { TABLE_USER_PLAYLISTS_REFERENCES_ID },
+                TABLE_USER_PLAYLISTS_REFERENCES_EMAIL + "=?", new String[] { loggedInUser.getEmail() }, null, null, null, null);
 
-        Cursor cursor = database.query(TABLE_USER_PLAYLISTS_REFERENCES, new String[] { TABLE_USER_PLAYLISTS_REFERENCES_ID },
-                TABLE_USER_PLAYLISTS_REFERENCES_EMAIL + "=?",
-                new String[] { loggedInUser.getEmail() }, null, null, null, null);
-
-        // Delete all playlists of this user from PLAYLISTS table
-        if(cursor.moveToFirst()) {
+        // Get playlists titles
+        ArrayList<String> playlistsIds = new ArrayList<String>();
+        if(listIdsCursor.moveToFirst()) {
             do {
-                database.delete(TABLE_USER_PLAYLISTS, TABLE_USER_PLAYLISTS_ID + "=?",
-                        new String[] { cursor.getString(0) });
-            }while(cursor.moveToNext());
+                playlistsIds.add(listIdsCursor.getString(0));
+            }while(listIdsCursor.moveToNext());
         }
 
-        // Delete all references for this user
-        database.delete(TABLE_USER_PLAYLISTS_REFERENCES, TABLE_USER_PLAYLISTS_REFERENCES_EMAIL + "=?",
-                new String[] { loggedInUser.getEmail() });
+        ArrayList<String> playlistsTitles = new ArrayList<String>();
+        for(String id : playlistsIds) {
+            Cursor plalistTitlesCursor = database.query(TABLE_USER_PLAYLISTS, new String[] { TABLE_USER_PLAYLISTS_TITLE },
+                    TABLE_USER_PLAYLISTS_ID + "=?", new String[] { id }, null, null, null, null);
+            plalistTitlesCursor.moveToFirst();
+            playlistsTitles.add(plalistTitlesCursor.getString(0));
+        }
 
-        // Delete from user table
-        database.delete(TABLE_USERS, TABLE_USERS_EMAIL + "=?",
-                new String[] { loggedInUser.getEmail() });
+        ArrayList<String> moviesIdsForDeleting = new ArrayList<String>();
+        for(String id : playlistsTitles) {
+            Cursor idsForDeletingCursor = database.query(TABLE_MOVIE_LIST_REFERENCES, new String[] { TABLE_MOVIE_LIST_REFERENCES_ID },
+                    TABLE_MOVIE_LIST_REFERENCES_TITLE + "=?", new String[] { id }, null, null, null, null);
+            if(idsForDeletingCursor.moveToFirst()) {
+                do {
+                    moviesIdsForDeleting.add(idsForDeletingCursor.getString(0));
+                }while(idsForDeletingCursor.moveToNext());
+            }
+        }
+
+        for(String id : moviesIdsForDeleting) {
+            database.delete(TABLE_MOVIES, TABLE_MOVIES_ID + "=?", new String[] { id });
+            database.delete(TABLE_MOVIE_LIST_REFERENCES, TABLE_MOVIE_LIST_REFERENCES_ID + "=?", new String[] { id });
+        }
+
+        database.delete(TABLE_USER_PLAYLISTS_REFERENCES, TABLE_USER_PLAYLISTS_REFERENCES_ID + "=?", new String[] { loggedInUser.getEmail() });
+        database.delete(TABLE_USERS, TABLE_USERS_EMAIL + "=?", new String[] { loggedInUser.getEmail() });
 
         database.close();
+
+        return playlistsTitles;
+        /*
+        if(listIdsCursor.moveToFirst()) {
+            do {
+                Cursor playlistTitleCursor = database.query(TABLE_USER_PLAYLISTS, new String[] { TABLE_USER_PLAYLISTS_TITLE },
+                        TABLE_USER_PLAYLISTS_ID + "=?", new String[] { listIdsCursor.getString(0) }, null, null, null, null);
+
+                if(playlistTitleCursor.moveToFirst()) {
+                    do {
+                        Cursor movieListsRefIds = database.query(TABLE_MOVIE_LIST_REFERENCES, new String[] { TABLE_MOVIE_LIST_REFERENCES_ID },
+                                TABLE_MOVIE_LIST_REFERENCES_TITLE + "=?", new String[] { playlistTitleCursor.getString(0) }, null, null, null, null);
+
+                        if(movieListsRefIds.moveToFirst()) {
+                            do {
+                                database.delete(TABLE_MOVIE_LIST_REFERENCES, TABLE_MOVIE_LIST_REFERENCES_ID + "=?", new String[] { movieListsRefIds.getString(0) });
+                                database.delete(TABLE_MOVIES, TABLE_MOVIES_ID + "=?", new String[] { movieListsRefIds.getString(0) });
+                            }while(movieListsRefIds.moveToNext());
+                        }
+                        // delete lists from playlists table
+                        database.delete(TABLE_USER_PLAYLISTS, TABLE_USER_PLAYLISTS_ID + "=?", new String[] { listIdsCursor.getString(0) });
+
+                    }while(playlistTitleCursor.moveToNext());
+                }
+            }while(listIdsCursor.moveToNext());
+        }*/
+
+        // Important not delete
+        //database.delete(TABLE_USER_PLAYLISTS_REFERENCES, TABLE_USER_PLAYLISTS_REFERENCES_ID + "=?", new String[] { loggedInUser.getEmail() });
+        //database.delete(TABLE_USERS, TABLE_USERS_EMAIL + "=?", new String[] { loggedInUser.getEmail() });
+
+        //database.close();
+
     }
 
     // This method delete all users from database
@@ -106,6 +183,8 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
         database.delete(TABLE_USERS, null, null);
         database.delete(TABLE_USER_PLAYLISTS, null, null);
         database.delete(TABLE_USER_PLAYLISTS_REFERENCES, null, null);
+        database.delete(TABLE_MOVIES, null, null);
+        database.delete(TABLE_MOVIE_LIST_REFERENCES, null, null);
         database.close();
     }
 
@@ -114,6 +193,9 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
         // Drop older table if exists
         database.execSQL(DATABASE_DROP_TABLE + TABLE_USERS);
         database.execSQL(DATABASE_DROP_TABLE + TABLE_USER_PLAYLISTS);
+        database.execSQL(DATABASE_DROP_TABLE + TABLE_USER_PLAYLISTS_REFERENCES);
+        database.execSQL(DATABASE_DROP_TABLE + TABLE_MOVIES);
+        database.execSQL(DATABASE_DROP_TABLE + TABLE_MOVIE_LIST_REFERENCES);
         // Creates fresh database
         this.onCreate(database);
     }
@@ -202,15 +284,18 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
 
     // This method updates user content (simple realization) -- all content rewrites
     public void updateUserContent(LoggedInUser loggedInUser) {
-        deleteUserContent(loggedInUser);
+        deleteAllUsers();
         addUserContent(loggedInUser);
     }
 
     // This method add user content
     public void addUserContent(LoggedInUser loggedInUser) {
+        deleteAllUsers();
         addUser(loggedInUser);
         addPlaylists(loggedInUser);
         addReferencesBetweenUsersAndPlaylists(loggedInUser);
+        addMovies(loggedInUser);
+        addReferencesBetweenPlaylistsAndMovies(loggedInUser);
     }
 
     // This method adds list to the table
@@ -275,4 +360,112 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = database.rawQuery(numberQuery, null);
         return cursor.getCount();
     }
+
+    // This method returns all lists that user has
+    public MovieListContainer getPlaylistsByEmail(LoggedInUser loggedInUser) {
+        SQLiteDatabase database = this.getReadableDatabase();
+        MovieListContainer movieListContainer = new MovieListContainer();
+
+        Cursor cursor = database.query(TABLE_USER_PLAYLISTS_REFERENCES, new String[] { TABLE_USER_PLAYLISTS_REFERENCES_ID },
+                TABLE_USER_PLAYLISTS_REFERENCES_EMAIL + "=?", new String[] { loggedInUser.getEmail() }, null, null, null, null);
+
+        Cursor playlistsCursor = null;
+
+        if(cursor.moveToFirst()) {
+            do {
+                playlistsCursor = database.query(TABLE_USER_PLAYLISTS, new String[] { TABLE_USER_PLAYLISTS_TITLE },
+                        TABLE_USER_PLAYLISTS_ID + "=?", new String[] { cursor.getString(0) }, null, null, null, null);
+                if(playlistsCursor.moveToFirst()) {
+                    do {
+                        MovieList movieList = new MovieList();
+                        movieList.setTitle(playlistsCursor.getString(0));
+                        movieListContainer.getMovieListArrayList().add(movieList);
+                    }while(playlistsCursor.moveToNext());
+                }
+            }while(cursor.moveToNext());
+        }
+
+        database.close();
+        return movieListContainer;
+    }
+
+    // This method adds movies to table
+    public void addMovies(LoggedInUser loggedInUser) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        for(MovieList movieList : loggedInUser.getMovieListContainer().getMovieListArrayList()) {
+            MovieContainer movieContainer = movieList.getMovieContainer();
+            for(Movie movie : movieContainer.getMovieArrayList()) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(TABLE_MOVIES_THEMOVIEDB_ID, movie.getId());
+                database.insert(TABLE_MOVIES, null, contentValues);
+            }
+        }
+        database.close();
+    }
+
+    // This method adds references between playlists and movies tables
+    public void addReferencesBetweenPlaylistsAndMovies(LoggedInUser loggedInUser) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        for(MovieList movieList : loggedInUser.getMovieListContainer().getMovieListArrayList()) {
+            MovieContainer movieContainer = movieList.getMovieContainer();
+            for(Movie movie : movieContainer.getMovieArrayList()) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(TABLE_MOVIE_LIST_REFERENCES_TITLE, movieList.getTitle());
+                database.insert(TABLE_MOVIE_LIST_REFERENCES, null, contentValues);
+            }
+        }
+        database.close();
+    }
+
+    // This method returns all movies from database
+    public MovieContainer getAllMovies() {
+        SQLiteDatabase database = this.getReadableDatabase();
+        MovieContainer movieContainer = new MovieContainer();
+        String selectAllQuery = "SELECT * FROM " + TABLE_MOVIES;
+        Cursor cursor = database.rawQuery(selectAllQuery, null);
+
+        if(cursor.moveToFirst()) {
+            do {
+                movieContainer.getMovieArrayList().add(new Movie(cursor.getString(1)));
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        database.close();
+        return movieContainer;
+    }
+
+    // This method returns the number of all references between lists and movies
+    public int getReferencesNumberBetweenPlaylistsAndMovies() {
+        String numberQuery = "SELECT * FROM " + TABLE_MOVIE_LIST_REFERENCES;
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery(numberQuery, null);
+        return cursor.getCount();
+    }
+
+    // This method returns the total number of movies in table
+    public int getMoviesNumber() {
+        String numberQuery = "SELECT * FROM " + TABLE_MOVIES;
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery(numberQuery, null);
+        return cursor.getCount();
+    }
+
+    // Just for test references between playlists and movies
+    public ArrayList<String> getAllListNamesFromReferencesTable() {
+        ArrayList<String> names = new ArrayList<String>();
+        SQLiteDatabase database = this.getReadableDatabase();
+        String selectAllQuery = "SELECT * FROM " + TABLE_MOVIE_LIST_REFERENCES;
+        Cursor cursor = database.rawQuery(selectAllQuery, null);
+        if(cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(1);
+                names.add(name);
+            }while(cursor.moveToNext());
+        }
+        database.close();
+        return names;
+    }
+
 }

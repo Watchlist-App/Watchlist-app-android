@@ -23,6 +23,8 @@ import android.widget.ListView;
 import com.watchlistapp.R;
 import com.watchlistapp.authorization.LoggedInUser;
 import com.watchlistapp.database.WatchListDatabaseHandler;
+import com.watchlistapp.watchlistserver.MovieList;
+import com.watchlistapp.watchlistserver.MovieListContainer;
 
 ;
 
@@ -126,8 +128,14 @@ public class NavigationDrawerFragment extends Fragment {
         navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Coming soon", R.drawable.comingsoon));
         navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Popular movies", R.drawable.popularmovies));
         navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Watch List", R.drawable.watchlistmenu));
+        navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Watched", R.drawable.watched));
         navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Favourite", R.drawable.favourite));
-        navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("My lists", R.drawable.mylists));
+
+        // Add lists that user has
+        MovieListContainer movieListContainer = watchListDatabaseHandler.getAllPlaylists();
+        for(MovieList movieList : movieListContainer.getMovieListArrayList()) {
+            navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem(movieList.getTitle(), R.drawable.mylists));
+        }
         navigationDrawerItemAdapter = new NavigationDrawerItemAdapter(getActivity(), navigationDrawerItemContainer);
         mDrawerListView.setAdapter(navigationDrawerItemAdapter);
 
