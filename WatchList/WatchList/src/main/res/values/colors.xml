@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="text">#1E1E1E</color>
     <color name="main_fragment_title_text_color">#E6E6E6</color>
     <color name="actionbar_color">#E6E6E6</color>
     <color name="login_activity_actionbar_color">#777777</color>
