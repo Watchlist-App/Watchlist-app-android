@@ -19,8 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.watchlistapp.comingsoon.ComingSoonActivity;
+import com.watchlistapp.database.WatchListDatabaseHandler;
+import com.watchlistapp.movielist.MovieListActivity;
 import com.watchlistapp.navigationdrawer.NavigationDrawerFragment;
 import com.watchlistapp.searchresults.SearchResultsActivity;
+import com.watchlistapp.watchlistserver.MovieListContainer;
 
 public class HomeActivity extends ActionBarActivity
     implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -100,6 +103,22 @@ public class HomeActivity extends ActionBarActivity
                 startActivity(intent);
                 break;
             }
+        }
+
+        if(number > 6) {
+            int currentPosition = number - 7;
+            WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(HomeActivity.this);
+            MovieListContainer movieListContainer = watchListDatabaseHandler.getAllPlaylists();
+
+            String listTitle = movieListContainer.getMovieListArrayList().get(currentPosition).getTitle();
+            String moviesNumber = Integer.toString(watchListDatabaseHandler.getMovieIdsByListTitle(listTitle).getMovieArrayList().size());
+
+            Intent intent = new Intent(HomeActivity.this, MovieListActivity.class);
+            intent.putExtra("listtitle", listTitle);
+            intent.putExtra("moviesnumber", moviesNumber);
+
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
     }
 

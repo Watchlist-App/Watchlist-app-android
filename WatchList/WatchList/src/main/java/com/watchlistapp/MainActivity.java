@@ -26,7 +26,6 @@ public class MainActivity extends Activity {
         finish();
         */
 
-
         WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(MainActivity.this);
         LoggedInUser loggedInUser = watchListDatabaseHandler.getAllUsers().searchLastLoggedInUser();
 
@@ -45,7 +44,7 @@ public class MainActivity extends Activity {
             }
 
             long difference = currentDate.getTime() - lastLoggedInUserDate.getTime();
-            if(difference < 3600000) {
+            if(difference < 3600) {
                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(intent);
             } else {
