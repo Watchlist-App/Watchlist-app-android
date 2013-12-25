@@ -126,6 +126,8 @@ public class Login extends AsyncTask<String, Integer, User> {
                 } else { // else we add new user to database
                     watchListDatabaseHandler.addUserContent(loggedInUser);
                     Intent intent = new Intent(context, HomeActivity.class);
+                    // Adds animation
+
                     activity.startActivity(intent);
                     activity.finish();
                 }

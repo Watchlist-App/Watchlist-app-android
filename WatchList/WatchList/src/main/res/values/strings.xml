@@ -52,5 +52,6 @@
     <string name="amazon_activity_label">Amazon List</string>
     <!-- End -->
     <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_movie_list">MovieListActivity</string>
 
 </resources>
