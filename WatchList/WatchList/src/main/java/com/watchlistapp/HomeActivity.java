@@ -17,10 +17,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.watchlistapp.comingsoon.ComingSoonActivity;
+import com.watchlistapp.database.WatchListDatabaseHandler;
 import com.watchlistapp.navigationdrawer.NavigationDrawerFragment;
 import com.watchlistapp.searchresults.SearchResultsActivity;
+import com.watchlistapp.watchlistserver.Movie;
+import com.watchlistapp.watchlistserver.MovieContainer;
+import com.watchlistapp.watchlistserver.MovieListContainer;
 
 public class HomeActivity extends ActionBarActivity
     implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -100,6 +105,20 @@ public class HomeActivity extends ActionBarActivity
                 startActivity(intent);
                 break;
             }
+        }
+
+        if(number > 6) {
+            int currentPosition = number - 7;
+            WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(HomeActivity.this);
+            MovieListContainer movieListContainer = watchListDatabaseHandler.getAllPlaylists();
+            MovieContainer movieContainer = watchListDatabaseHandler.getMovieIdsByListTitle(movieListContainer.getMovieListArrayList().get(currentPosition).getTitle());
+            String str = "";
+
+            for(Movie movie : movieContainer.getMovieArrayList()) {
+                str += movie.getId() + " ";
+            }
+            Toast toast = Toast.makeText(HomeActivity.this, str, Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 

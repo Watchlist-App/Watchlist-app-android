@@ -468,4 +468,23 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
         return names;
     }
 
+    // This method returns movies id for list title
+    public MovieContainer getMovieIdsByListTitle(String listTitle) {
+        SQLiteDatabase database = this.getReadableDatabase();
+        MovieContainer movieContainer = new MovieContainer();
+
+        Cursor cursor = database.query(TABLE_MOVIE_LIST_REFERENCES, new String[] { TABLE_MOVIE_LIST_REFERENCES_ID },
+                TABLE_MOVIE_LIST_REFERENCES_TITLE + "=?", new String[] { listTitle }, null, null, null, null);
+
+        if(cursor.moveToFirst()) {
+            do {
+                Cursor idCursor = database.query(TABLE_MOVIES, new String[] { TABLE_MOVIES_THEMOVIEDB_ID },
+                        TABLE_MOVIES_ID + "=?", new String[] { cursor.getString(0) }, null, null, null, null);
+                idCursor.moveToFirst();
+                movieContainer.getMovieArrayList().add(new Movie(idCursor.getString(0)));
+            }while(cursor.moveToNext());
+        }
+        database.close();
+        return movieContainer;
+    }
 }
