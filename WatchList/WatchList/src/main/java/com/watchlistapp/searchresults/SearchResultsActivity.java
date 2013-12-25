@@ -2,8 +2,11 @@ package com.watchlistapp.searchresults;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.watchlistapp.R;
 import com.watchlistapp.themoviedb.SearchMovies;
@@ -26,6 +29,15 @@ public class SearchResultsActivity extends Activity {
         queryString = getIntent().getStringExtra("query");
 
         searchResultsListView = (ListView)findViewById(R.id.search_results_listview);
+
+        searchResultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast toast = Toast.makeText(SearchResultsActivity.this, searchResultsContainer.getSearchResultsItemArrayList().get(position).getMovieId(), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
         searchResultsContainer = new SearchResultsContainer();
         // Get the query that we sent from RecentActivity
         searchResultsItemAdapter = new SearchResultsItemAdapter(SearchResultsActivity.this, searchResultsContainer);

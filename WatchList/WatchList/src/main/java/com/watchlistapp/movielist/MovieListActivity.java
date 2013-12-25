@@ -3,7 +3,10 @@ package com.watchlistapp.movielist;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.watchlistapp.R;
 import com.watchlistapp.searchresults.SearchResultsContainer;
@@ -27,6 +30,15 @@ public class MovieListActivity extends ActionBarActivity {
         actionBar.setTitle(actionBarTitle);
 
         searchResultsListView = (ListView)findViewById(R.id.movie_list_listview);
+
+        searchResultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast toast = Toast.makeText(MovieListActivity.this, searchResultsContainer.getSearchResultsItemArrayList().get(position).getMovieId(), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
         searchResultsContainer = new SearchResultsContainer();
         searchResultsItemAdapter = new SearchResultsItemAdapter(MovieListActivity.this, searchResultsContainer);
         searchResultsListView.setAdapter(searchResultsItemAdapter);

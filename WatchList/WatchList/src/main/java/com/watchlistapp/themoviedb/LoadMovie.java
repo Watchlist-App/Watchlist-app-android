@@ -61,6 +61,7 @@ public class LoadMovie extends AsyncTask<String, Integer, SearchMovieContainer> 
             searchResultsItem.setRating(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_average());
             searchResultsItem.setPosterLink(searchMovieContainer.getSearchMovieElementArrayList().get(i).getPoster_path());
             searchResultsItem.setVotes(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_count());
+            searchResultsItem.setMovieId(searchMovieContainer.getSearchMovieElementArrayList().get(i).getId());
             searchResultsContainer.getSearchResultsItemArrayList().add(searchResultsItem);
         }
         searchResultsItemAdapter.notifyDataSetChanged();
@@ -89,6 +90,7 @@ public class LoadMovie extends AsyncTask<String, Integer, SearchMovieContainer> 
             searchMovieElement.setPoster_path(movie.getPosterPath());
             searchMovieElement.setVote_count(movie.getVoteCount());
             searchMovieElement.setRelease_date(movie.getReleaseDate());
+            searchMovieElement.setId(myMovieId.getId());
 
             searchMovieContainer.getSearchMovieElementArrayList().add(searchMovieElement);
         }

@@ -78,6 +78,7 @@ public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer>
             comingSoonItem.setRating(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_average());
             comingSoonItem.setPosterLink(searchMovieContainer.getSearchMovieElementArrayList().get(i).getPoster_path());
             comingSoonItem.setVotes(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_count());
+            comingSoonItem.setMovieId(searchMovieContainer.getSearchMovieElementArrayList().get(i).getId());
 
             comingSoonContainer.getSearchResultsItemArrayList().add(comingSoonItem);
         }

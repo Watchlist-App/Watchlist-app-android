@@ -103,10 +103,58 @@ public class HomeActivity extends ActionBarActivity
                 startActivity(intent);
                 break;
             }
+
+            case 4: {
+                WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(HomeActivity.this);
+                MovieListContainer movieListContainer = watchListDatabaseHandler.getAllPlaylists();
+
+                String listTitle = "watchlist";
+                String moviesNumber = Integer.toString(watchListDatabaseHandler.getMovieIdsByListTitle(listTitle).getMovieArrayList().size());
+
+                Intent intent = new Intent(HomeActivity.this, MovieListActivity.class);
+                intent.putExtra("listtitle", listTitle);
+                intent.putExtra("moviesnumber", moviesNumber);
+
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                break;
+            }
+
+            case 5: {
+                WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(HomeActivity.this);
+                MovieListContainer movieListContainer = watchListDatabaseHandler.getAllPlaylists();
+
+                String listTitle = "favorites";
+                String moviesNumber = Integer.toString(watchListDatabaseHandler.getMovieIdsByListTitle(listTitle).getMovieArrayList().size());
+
+                Intent intent = new Intent(HomeActivity.this, MovieListActivity.class);
+                intent.putExtra("listtitle", listTitle);
+                intent.putExtra("moviesnumber", moviesNumber);
+
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                break;
+            }
+
+            case 6: {
+                WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(HomeActivity.this);
+                MovieListContainer movieListContainer = watchListDatabaseHandler.getAllPlaylists();
+
+                String listTitle = "watched";
+                String moviesNumber = Integer.toString(watchListDatabaseHandler.getMovieIdsByListTitle(listTitle).getMovieArrayList().size());
+
+                Intent intent = new Intent(HomeActivity.this, MovieListActivity.class);
+                intent.putExtra("listtitle", listTitle);
+                intent.putExtra("moviesnumber", moviesNumber);
+
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                break;
+            }
         }
 
         if(number > 6) {
-            int currentPosition = number - 7;
+            int currentPosition = number - 4;
             WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(HomeActivity.this);
             MovieListContainer movieListContainer = watchListDatabaseHandler.getAllPlaylists();
 
