@@ -62,15 +62,23 @@ public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer>
     private ArrayList<Bitmap> images;
 
     public ComingSoon(Context context, ComingSoonItemAdapter comingSoonItemAdapter, ComingSoonContainer comingSoonContainer) {
-        this.progressDialog = ProgressDialog.show(context, "Loading", "Loading. Please wait...");
         this.context = context;
         this.comingSoonContainer = comingSoonContainer;
         this.comingSoonItemAdapter = comingSoonItemAdapter;
         images = new ArrayList<Bitmap>();
+
+        this.progressDialog = new ProgressDialog(context);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        this.progressDialog = ProgressDialog.show(context, "Loading", "Loading. Please wait...");
     }
 
     @Override
     protected void onPostExecute(SearchMovieContainer searchMovieContainer) {
+        this.progressDialog.hide();
+
         for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
             ComingSoonItem comingSoonItem = new ComingSoonItem();
             comingSoonItem.setTitle(searchMovieContainer.getSearchMovieElementArrayList().get(i).getTitle());
@@ -78,6 +86,7 @@ public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer>
             comingSoonItem.setRating(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_average());
             comingSoonItem.setPosterLink(searchMovieContainer.getSearchMovieElementArrayList().get(i).getPoster_path());
             comingSoonItem.setVotes(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_count());
+            comingSoonItem.setMovieId(searchMovieContainer.getSearchMovieElementArrayList().get(i).getId());
 
             comingSoonContainer.getSearchResultsItemArrayList().add(comingSoonItem);
         }

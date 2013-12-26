@@ -1,11 +1,15 @@
 package com.watchlistapp.movielist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.watchlistapp.R;
+import com.watchlistapp.fullmoviedescription.FullMovieDescriptionActivity;
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
 import com.watchlistapp.themoviedb.LoadMovie;
@@ -27,11 +31,22 @@ public class MovieListActivity extends ActionBarActivity {
         actionBar.setTitle(actionBarTitle);
 
         searchResultsListView = (ListView)findViewById(R.id.movie_list_listview);
+
+        searchResultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MovieListActivity.this, FullMovieDescriptionActivity.class);
+                intent.putExtra("movieId", searchResultsContainer.getSearchResultsItemArrayList().get(position).getMovieId());
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
+            }
+        });
+
         searchResultsContainer = new SearchResultsContainer();
         searchResultsItemAdapter = new SearchResultsItemAdapter(MovieListActivity.this, searchResultsContainer);
         searchResultsListView.setAdapter(searchResultsItemAdapter);
 
-        LoadMovie loadMovie = new LoadMovie(MovieListActivity.this, listTitle, searchResultsItemAdapter, searchResultsContainer);
+        LoadMovie loadMovie = new LoadMovie(MovieListActivity.this, listTitle, searchResultsItemAdapter, searchResultsContainer, MovieListActivity.this);
         loadMovie.execute();
     }
 }

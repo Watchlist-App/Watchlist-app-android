@@ -12,17 +12,19 @@ public class SearchResultsItem {
     private Bitmap poster;
     private String posterLink;
     private String votes;
+    private String movieId;
 
     public SearchResultsItem() {
     }
 
-    public SearchResultsItem(String title, String releaseDate, String rating, Bitmap poster, String posterLink, String votes) {
+    public SearchResultsItem(String title, String releaseDate, String rating, Bitmap poster, String posterLink, String votes, String movieId) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.rating = rating;
         this.poster = poster;
         this.posterLink = posterLink;
         this.votes = votes;
+        this.movieId = movieId;
     }
 
     public Bitmap getPoster() {
@@ -83,5 +85,13 @@ public class SearchResultsItem {
                 ", posterLink='" + posterLink + '\'' +
                 ", votes='" + votes + '\'' +
                 '}';
+    }
+
+    public String getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
     }
 }

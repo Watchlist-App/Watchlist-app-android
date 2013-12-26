@@ -1,9 +1,11 @@
 package com.watchlistapp.themoviedb;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
+import com.watchlistapp.R;
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItem;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
@@ -67,17 +69,27 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
 
     private ArrayList<Bitmap> images;
 
-    public SearchMovies(Context context, String searchQueryString, SearchResultsItemAdapter searchResultsItemAdapter, SearchResultsContainer searchResultsContainer) {
+    private Activity activity;
+
+    public SearchMovies(Context context, String searchQueryString, SearchResultsItemAdapter searchResultsItemAdapter, SearchResultsContainer searchResultsContainer, Activity activity) {
         this.searchResultsItemAdapter = searchResultsItemAdapter;
         this.searchResultsContainer = searchResultsContainer;
         this.context = context;
         this.searchQueryString = searchQueryString;
         //this.progressDialog = ProgressDialog.show(context, "Search", "Searching. Please wait...");
         images = new ArrayList<Bitmap>();
+
+        this.activity = activity;
     }
 
     @Override
     protected void onPostExecute(SearchMovieContainer searchMovieContainer) {
+
+        if(searchMovieContainer.getSearchMovieElementArrayList().isEmpty()) {
+            activity.setContentView(R.layout.activity_no_movies);
+            return;
+        }
+
         for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
             SearchResultsItem searchResultsItem = new SearchResultsItem();
             searchResultsItem.setTitle(searchMovieContainer.getSearchMovieElementArrayList().get(i).getTitle());
@@ -85,6 +97,7 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
             searchResultsItem.setRating(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_average());
             searchResultsItem.setPosterLink(searchMovieContainer.getSearchMovieElementArrayList().get(i).getPoster_path());
             searchResultsItem.setVotes(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_count());
+            searchResultsItem.setMovieId(searchMovieContainer.getSearchMovieElementArrayList().get(i).getId());
             searchResultsContainer.getSearchResultsItemArrayList().add(searchResultsItem);
         }
         searchResultsItemAdapter.notifyDataSetChanged();

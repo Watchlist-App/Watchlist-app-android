@@ -128,13 +128,17 @@ public class NavigationDrawerFragment extends Fragment {
         navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Coming soon", R.drawable.comingsoon));
         navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Popular movies", R.drawable.popularmovies));
         navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Watch List", R.drawable.watchlistmenu));
+        navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Favorites", R.drawable.favourite));
         navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Watched", R.drawable.watched));
-        navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem("Favourite", R.drawable.favourite));
 
         // Add lists that user has
         MovieListContainer movieListContainer = watchListDatabaseHandler.getAllPlaylists();
         for(MovieList movieList : movieListContainer.getMovieListArrayList()) {
-            navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem(movieList.getTitle(), R.drawable.mylists));
+            if(movieList.getTitle().equals("watchlist") || movieList.getTitle().equals("favorites") || movieList.getTitle().equals("watched")) {
+
+            } else {
+                navigationDrawerItemContainer.getNavigationDrawerItemArrayList().add(new NavigationDrawerItem(movieList.getTitle(), R.drawable.mylists));
+            }
         }
         navigationDrawerItemAdapter = new NavigationDrawerItemAdapter(getActivity(), navigationDrawerItemContainer);
         mDrawerListView.setAdapter(navigationDrawerItemAdapter);
