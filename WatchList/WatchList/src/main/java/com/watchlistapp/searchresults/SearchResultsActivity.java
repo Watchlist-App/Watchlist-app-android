@@ -43,7 +43,7 @@ public class SearchResultsActivity extends Activity {
         searchResultsItemAdapter = new SearchResultsItemAdapter(SearchResultsActivity.this, searchResultsContainer);
         searchResultsListView.setAdapter(searchResultsItemAdapter);
 
-        SearchMovies searchMovies = new SearchMovies(SearchResultsActivity.this, queryString, searchResultsItemAdapter, searchResultsContainer);
+        SearchMovies searchMovies = new SearchMovies(SearchResultsActivity.this, queryString, searchResultsItemAdapter, searchResultsContainer, SearchResultsActivity.this);
         searchMovies.execute();
     }
 }
