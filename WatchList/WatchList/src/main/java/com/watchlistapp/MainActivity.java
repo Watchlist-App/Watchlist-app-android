@@ -44,14 +44,13 @@ public class MainActivity extends Activity {
             }
 
             long difference = currentDate.getTime() - lastLoggedInUserDate.getTime();
-            if(difference < 3600) {
+            if(difference < 18000000) { // 5 hours
                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(intent);
             } else {
                 Intent intent = new Intent(MainActivity.this, LogInActivity.class);
                 startActivity(intent);
             }
-
         }
         finish();
     }
