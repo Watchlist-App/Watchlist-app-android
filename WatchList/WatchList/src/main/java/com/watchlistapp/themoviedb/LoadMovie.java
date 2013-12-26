@@ -1,5 +1,6 @@
 package com.watchlistapp.themoviedb;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -41,6 +42,7 @@ public class LoadMovie extends AsyncTask<String, Integer, SearchMovieContainer> 
     private SearchResultsItemAdapter searchResultsItemAdapter;
     private SearchResultsContainer searchResultsContainer;
     private ArrayList<Bitmap> images;
+    private ProgressDialog progressDialog;
 
     public LoadMovie(Context context, String listTitle, SearchResultsItemAdapter searchResultsItemAdapter, SearchResultsContainer searchResultsContainer) {
         this.context = context;
@@ -50,10 +52,18 @@ public class LoadMovie extends AsyncTask<String, Integer, SearchMovieContainer> 
         this.searchResultsContainer = searchResultsContainer;
 
         images = new ArrayList<Bitmap>();
+        this.progressDialog = new ProgressDialog(context);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        this.progressDialog = ProgressDialog.show(context, "Loading", "Loading. Please wait...");
     }
 
     @Override
     protected void onPostExecute(SearchMovieContainer searchMovieContainer) {
+        this.progressDialog.hide();
+
         for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
             SearchResultsItem searchResultsItem = new SearchResultsItem();
             searchResultsItem.setTitle(searchMovieContainer.getSearchMovieElementArrayList().get(i).getTitle());

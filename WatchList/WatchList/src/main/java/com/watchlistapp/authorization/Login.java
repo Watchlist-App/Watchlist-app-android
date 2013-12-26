@@ -98,7 +98,7 @@ public class Login extends AsyncTask<String, Integer, User> {
 
     @Override
     protected void onPostExecute(User user) {
-        progressDialog.hide();
+        this.progressDialog.hide();
 
         // If no such user
         if(user == null) {
@@ -131,11 +131,6 @@ public class Login extends AsyncTask<String, Integer, User> {
                     activity.startActivity(intent);
                     activity.finish();
                 }
-
-                //watchListDatabaseHandler.addUser(loggedInUser);
-
-                Toast toast = Toast.makeText(context, "Good", Toast.LENGTH_SHORT);
-                toast.show();
             } else {
                 Toast toast = Toast.makeText(context, "Uncorrected user data. Try type again...", Toast.LENGTH_SHORT);
                 toast.show();
