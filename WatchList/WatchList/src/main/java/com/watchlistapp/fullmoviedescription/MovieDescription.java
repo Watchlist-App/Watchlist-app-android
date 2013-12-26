@@ -18,27 +18,12 @@ public class MovieDescription {
     private String homepage;
     private String budget;
     private String backdropPath;
+    private String movieId;
 
     private ArrayList<String> genres;
 
     public MovieDescription() {
         genres = new ArrayList<String>();
-    }
-
-    public MovieDescription(String title, String voteAverage, String voteCount, String status, String tagline, String runtime, String releaseDate, String posterPath, String overview, String homepage, String budget, String backdropPath, ArrayList<String> genres) {
-        this.title = title;
-        this.voteAverage = voteAverage;
-        this.voteCount = voteCount;
-        this.status = status;
-        this.tagline = tagline;
-        this.runtime = runtime;
-        this.releaseDate = releaseDate;
-        this.posterPath = posterPath;
-        this.overview = overview;
-        this.homepage = homepage;
-        this.budget = budget;
-        this.backdropPath = backdropPath;
-        this.genres = genres;
     }
 
     public String getTitle() {
@@ -143,5 +128,13 @@ public class MovieDescription {
 
     public void setGenres(ArrayList<String> genres) {
         this.genres = genres;
+    }
+
+    public String getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
     }
 }
