@@ -3,6 +3,9 @@ package com.watchlistapp.addmovietolistdialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.watchlistapp.R;
@@ -32,14 +35,7 @@ public class AddMovieToListDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.add_movie_to_dialog_layout);
-        dialog.setTitle("Test dialog");
-
-        listView = (ListView)getActivity().findViewById(R.id.add_movie_to_list_dialog_fragment_list_view);
-        addMovieToListDialogListsItemContainer = new AddMovieToListDialogListsItemContainer();
-        //fillListContainer(addMovieToListDialogListsItemContainer);
-        addMovieToListDialogListsItemAdapter = new AddMovieToListDialogListsItemAdapter(getActivity(), addMovieToListDialogListsItemContainer);
-        listView.setAdapter(addMovieToListDialogListsItemAdapter);
+        dialog.setTitle("Add movie to list");
         return dialog;
     }
 
@@ -50,6 +46,19 @@ public class AddMovieToListDialogFragment extends DialogFragment {
         for(MovieList movieList : movieListContainer.getMovieListArrayList()) {
             addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().add(new AddMovieToListDialogListsItem(movieList.getTitle(), R.drawable.mylists));
         }
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.add_movie_to_dialog_layout, container, false);
+
+        listView = (ListView)view.findViewById(R.id.add_movie_to_list_dialog_fragment_list_view);
+
+        addMovieToListDialogListsItemContainer = new AddMovieToListDialogListsItemContainer();
+        fillListContainer(addMovieToListDialogListsItemContainer);
+        addMovieToListDialogListsItemAdapter = new AddMovieToListDialogListsItemAdapter(getActivity(), addMovieToListDialogListsItemContainer);
+        listView.setAdapter(addMovieToListDialogListsItemAdapter);
+
+        return view;
     }
 }
