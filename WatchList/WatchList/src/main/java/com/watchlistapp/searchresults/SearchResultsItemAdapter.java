@@ -2,7 +2,6 @@ package com.watchlistapp.searchresults;
 
 import android.app.Activity;
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,8 +12,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.watchlistapp.addmovietolistdialog.AddMovieToListDialogFragment;
 import com.watchlistapp.R;
+import com.watchlistapp.addmovietolistdialog.AddMovieToListDialogFragment;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 
 import java.text.ParseException;
@@ -147,14 +146,15 @@ public class SearchResultsItemAdapter extends BaseAdapter {
             // DialogFragment.show() will take care of adding the fragment
             // in a transaction.  We also want to remove any currently showing
             // dialog, so make our own transaction and take care of that here.
-            FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
+            /*
+
             Fragment prev = activity.getFragmentManager().findFragmentByTag("dialog");
             if (prev != null) {
                 ft.remove(prev);
             }
             ft.addToBackStack(null);
-
-
+            */
+            FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
             // Create and show the dialog
             DialogFragment newFragment = AddMovieToListDialogFragment.newInstance();
             newFragment.show(ft, "dialog");

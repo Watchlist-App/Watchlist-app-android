@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.watchlistapp.R;
@@ -18,6 +19,7 @@ public class AddMovieToListDialogListsItemAdapter extends BaseAdapter {
     private static class ViewHolder {
         public ImageView listIcon;
         public TextView listTitle;
+        public RadioButton radioButton;
     }
     private AddMovieToListDialogListsItemContainer addMovieToListDialogListsItemContainer;
     private Context context;
@@ -58,6 +60,7 @@ public class AddMovieToListDialogListsItemAdapter extends BaseAdapter {
 
             viewHolder.listTitle = (TextView)convertView.findViewById(R.id.add_movie_to_list_dialog_list_title);
             viewHolder.listIcon = (ImageView)convertView.findViewById(R.id.add_movie_to_list_dialog_list_icon);
+            viewHolder.radioButton = (RadioButton)convertView.findViewById(R.id.add_movie_to_list_dialog_list_radio_button);
 
             convertView.setTag(viewHolder);
         } else {

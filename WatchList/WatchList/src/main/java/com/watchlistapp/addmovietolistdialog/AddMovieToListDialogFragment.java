@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
 
 import com.watchlistapp.R;
 import com.watchlistapp.database.WatchListDatabaseHandler;
@@ -21,6 +24,9 @@ public class AddMovieToListDialogFragment extends DialogFragment {
     private ListView listView;
     private AddMovieToListDialogListsItemAdapter addMovieToListDialogListsItemAdapter;
     private AddMovieToListDialogListsItemContainer addMovieToListDialogListsItemContainer;
+    private Button okButton;
+    private Button cancelButton;
+    private Dialog dialog;
 
     /*
      * Create a new instance of AddMovieToListDialogFragment, providing "num"
@@ -34,7 +40,7 @@ public class AddMovieToListDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = new Dialog(getActivity());
+        dialog = new Dialog(getActivity());
         dialog.setTitle("Add movie to list");
         return dialog;
     }
@@ -58,6 +64,27 @@ public class AddMovieToListDialogFragment extends DialogFragment {
         fillListContainer(addMovieToListDialogListsItemContainer);
         addMovieToListDialogListsItemAdapter = new AddMovieToListDialogListsItemAdapter(getActivity(), addMovieToListDialogListsItemContainer);
         listView.setAdapter(addMovieToListDialogListsItemAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                RadioButton radioButton = (RadioButton)view.findViewById(R.id.add_movie_to_list_dialog_list_radio_button);
+                radioButton.setText("test");
+
+                //Toast toast = Toast.makeText(getActivity(), addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().get(position).getTitle(), Toast.LENGTH_SHORT);
+                //toast.show();
+            }
+        });
+
+        okButton = (Button)view.findViewById(R.id.add_movie_to_list_dialog_fragment_ok_button);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDestroyView();
+                onDestroy();
+            }
+        });
 
         return view;
     }
