@@ -106,6 +106,15 @@ public class AddMovieToListDialogFragment extends DialogFragment {
             }
         });
 
+        cancelButton = (Button)view.findViewById(R.id.add_movie_to_list_dialog_fragment_cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDestroyView();
+                onDestroy();
+            }
+        });
+        
         return view;
     }
 }
