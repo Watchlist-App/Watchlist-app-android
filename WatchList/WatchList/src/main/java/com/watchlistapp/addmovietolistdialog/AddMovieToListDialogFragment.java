@@ -51,7 +51,15 @@ public class AddMovieToListDialogFragment extends DialogFragment {
         MovieListContainer movieListContainer = watchListDatabaseHandler.getAllPlaylists();
 
         for(MovieList movieList : movieListContainer.getMovieListArrayList()) {
-            addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().add(new AddMovieToListDialogListsItem(movieList.getTitle(), R.drawable.mylists));
+            if(movieList.getTitle().equals("watchlist")) {
+                addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().add(new AddMovieToListDialogListsItem(movieList.getTitle(), R.drawable.watchlistmenu));
+            } else if(movieList.getTitle().equals("favorites")) {
+                addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().add(new AddMovieToListDialogListsItem(movieList.getTitle(), R.drawable.favourite));
+            } else if(movieList.getTitle().equals("watched")) {
+                addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().add(new AddMovieToListDialogListsItem(movieList.getTitle(), R.drawable.watched));
+            } else {
+                addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().add(new AddMovieToListDialogListsItem(movieList.getTitle(), R.drawable.mylists));
+            }
         }
     }
 
