@@ -13,7 +13,10 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.watchlistapp.R;
+import com.watchlistapp.authorization.LoggedInUser;
+import com.watchlistapp.authorization.LoggedInUserContainer;
 import com.watchlistapp.database.WatchListDatabaseHandler;
+import com.watchlistapp.watchlistserver.AddMovieToListHandler;
 import com.watchlistapp.watchlistserver.MovieList;
 import com.watchlistapp.watchlistserver.MovieListContainer;
 
@@ -98,6 +101,11 @@ public class AddMovieToListDialogFragment extends DialogFragment {
                     Toast toast = Toast.makeText(getActivity(), "No selected list", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
+                    WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(getActivity());
+                    LoggedInUserContainer loggedInUserContainer = watchListDatabaseHandler.getAllUsers();
+                    LoggedInUser loggedInUser = loggedInUserContainer.searchLastLoggedInUser();
+                    String userId = loggedInUser.get
+                    AddMovieToListHandler addMovieToListHandler = new AddMovieToListHandler(addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().get(radioButtonLastStatePosition).get);
                     Toast toast = Toast.makeText(getActivity(), addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().get(radioButtonLastStatePosition).getTitle(), Toast.LENGTH_SHORT);
                     toast.show();
                     onDestroyView();
@@ -114,7 +122,7 @@ public class AddMovieToListDialogFragment extends DialogFragment {
                 onDestroy();
             }
         });
-        
+
         return view;
     }
 }
