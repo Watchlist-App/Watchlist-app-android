@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.watchlistapp.R;
 import com.watchlistapp.database.WatchListDatabaseHandler;
@@ -68,12 +69,15 @@ public class AddMovieToListDialogFragment extends DialogFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 RadioButton radioButton = (RadioButton)view.findViewById(R.id.add_movie_to_list_dialog_list_radio_button);
-                radioButton.setText("test");
 
-                //Toast toast = Toast.makeText(getActivity(), addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().get(position).getTitle(), Toast.LENGTH_SHORT);
-                //toast.show();
+                for(int i = 0; i < addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().size(); i++) {
+                    View v = listView.getChildAt(i);
+                    RadioButton myRadioButton = (RadioButton)v.findViewById(R.id.add_movie_to_list_dialog_list_radio_button);
+                    myRadioButton.setChecked(false);
+                }
+                radioButton.setChecked(true);
+                addMovieToListDialogListsItemContainer.saveState(position);
             }
         });
 
@@ -81,8 +85,16 @@ public class AddMovieToListDialogFragment extends DialogFragment {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onDestroyView();
-                onDestroy();
+                int radioButtonLastStatePosition = addMovieToListDialogListsItemContainer.getLastState();
+                if(radioButtonLastStatePosition == -1) { // if user don't select any list or no lists
+                    Toast toast = Toast.makeText(getActivity(), "No selected list", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    Toast toast = Toast.makeText(getActivity(), addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().get(radioButtonLastStatePosition).getTitle(), Toast.LENGTH_SHORT);
+                    toast.show();
+                    onDestroyView();
+                    onDestroy();
+                }
             }
         });
 

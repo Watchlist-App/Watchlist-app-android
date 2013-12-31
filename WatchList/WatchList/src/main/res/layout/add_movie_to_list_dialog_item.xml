@@ -22,13 +22,18 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/add_movie_to_list_dialog_list_icon"
         android:layout_marginLeft="15dp" />
-    <RadioButton
+    <LinearLayout
         android:descendantFocusability="blocksDescendants"
-        android:id="@+id/add_movie_to_list_dialog_list_radio_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="false"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp" />
+        android:layout_marginRight="5dp">
+        <RadioButton
+            android:clickable="false"
+            android:id="@+id/add_movie_to_list_dialog_list_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </RelativeLayout>

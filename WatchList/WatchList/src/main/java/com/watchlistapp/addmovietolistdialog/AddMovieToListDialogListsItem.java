@@ -6,10 +6,12 @@ package com.watchlistapp.addmovietolistdialog;
 public class AddMovieToListDialogListsItem {
     private String title;
     private int icon;
+    private boolean radioButtonFlag; // for storing RadioButton last state
 
     public AddMovieToListDialogListsItem(String title, int icon) {
         this.title = title;
         this.icon = icon;
+        this.radioButtonFlag = false;
     }
 
     public AddMovieToListDialogListsItem() {
@@ -29,5 +31,13 @@ public class AddMovieToListDialogListsItem {
 
     public void setIcon(int icon) {
         this.icon = icon;
+    }
+
+    public boolean getRadioButtonFlag() {
+        return radioButtonFlag;
+    }
+
+    public void setRadioButtonFlag(boolean radioButtonFlag) {
+        this.radioButtonFlag = radioButtonFlag;
     }
 }
