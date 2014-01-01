@@ -2,6 +2,7 @@ package com.watchlistapp.fullmoviedescription;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 
 /**
  * Created by VEINHORN on 26/12/13.
@@ -38,6 +38,7 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
     private final static String API_BUDGET_TITLE = "budget";
     private final static String API_GENRES_TITLE = "genres";
     private final static String API_GENRES_NAME_TITLE = "name";
+    private final static String API_GENRES_ID_TITLE = "id";
     private final static String API_HOMEPAGE_TITLE = "homepage";
     private final static String API_OVERVIEW_TITLE = "overview";
     private final static String API_POSTER_PATH_TITLE = "poster_path";
@@ -62,8 +63,9 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
     private ColoredRatingBar coloredRatingBar;
     private TextView releaseDateTextView;
     private TextView tagLineTextView;
+    private GridView genresGridView;
 
-    public FullDescriptionLoader(Context context, String movieId, TextView tagLineTextView, TextView movieTitleTextView, ImageView posterImageView, TextView movieOverviewTextView, TextView ratingTextView, TextView votesTextView, ColoredRatingBar coloredRatingBar, TextView releaseDateTextView) {
+    public FullDescriptionLoader(Context context, String movieId, TextView tagLineTextView, TextView movieTitleTextView, ImageView posterImageView, TextView movieOverviewTextView, TextView ratingTextView, TextView votesTextView, ColoredRatingBar coloredRatingBar, TextView releaseDateTextView, GridView genresGridView) {
         this.context = context;
         this.movieId = movieId;
 
@@ -76,6 +78,8 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
         this.votesTextView = votesTextView;
         this.coloredRatingBar = coloredRatingBar;
         this.releaseDateTextView = releaseDateTextView;
+
+        this.genresGridView = genresGridView;
     }
 
     @Override
@@ -99,6 +103,9 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
         PosterLoader posterLoader = new PosterLoader(posterImageView, movieDescription.getPosterPath(), PosterLoader.DOUBLE_BIG);
         posterLoader.execute();
+
+        GenreItemAdapter genreItemAdapter = new GenreItemAdapter(context, movieDescription.getGenreContainer());
+        genresGridView.setAdapter(genreItemAdapter);
     }
 
     @Override
@@ -121,17 +128,20 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
             // Get genres
             JSONArray genresJsonArray = jsonObject.getJSONArray(API_GENRES_TITLE);
-            ArrayList<String> genreNames = new ArrayList<String>();
+            GenreContainer genreContainer = new GenreContainer();
             for(int i = 0; i < genresJsonArray.length(); i++) {
                 JSONObject genreJsonObject = null;
                 try {
                     genreJsonObject = genresJsonArray.getJSONObject(i);
-                    genreNames.add(genreJsonObject.getString(API_GENRES_NAME_TITLE));
+                    Genre genre = new Genre();
+                    genre.setTitle(genreJsonObject.getString(API_GENRES_NAME_TITLE));
+                    genre.setId(genreJsonObject.getString(API_GENRES_ID_TITLE));
+                    genreContainer.getGenresArrayList().add(genre);
                 } catch(JSONException exception) {
                     exception.printStackTrace();
                 }
             }
-            movieDescription.setGenres(genreNames);
+            movieDescription.setGenreContainer(genreContainer);
 
             movieDescription.setHomepage(jsonObject.getString(API_HOMEPAGE_TITLE));
             movieDescription.setOverview(jsonObject.getString(API_OVERVIEW_TITLE));

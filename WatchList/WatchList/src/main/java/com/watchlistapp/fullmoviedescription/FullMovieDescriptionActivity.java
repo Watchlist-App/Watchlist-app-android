@@ -2,6 +2,7 @@ package com.watchlistapp.fullmoviedescription;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
     private TextView releaseDateTextView;
     private TextView tagLineTextView;
 
+    private GridView genresGridView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +37,11 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
         releaseDateTextView = (TextView)findViewById(R.id.full_description_movie_release_date);
         tagLineTextView = (TextView)findViewById(R.id.full_description_tag_line);
 
+        genresGridView = (GridView)findViewById(R.id.full_description_genres_grid_view);
+
         String movieId = getIntent().getStringExtra("movieId");
 
-        FullDescriptionLoader fullDescriptionLoader = new FullDescriptionLoader(FullMovieDescriptionActivity.this, movieId, tagLineTextView, movieTitleTextView, posterImageView, movieOverviewTextView, ratingTextView, votesTextView, coloredRatingBar, releaseDateTextView);
+        FullDescriptionLoader fullDescriptionLoader = new FullDescriptionLoader(FullMovieDescriptionActivity.this, movieId, tagLineTextView, movieTitleTextView, posterImageView, movieOverviewTextView, ratingTextView, votesTextView, coloredRatingBar, releaseDateTextView, genresGridView);
         fullDescriptionLoader.execute();
     }
 }
