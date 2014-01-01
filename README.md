@@ -2,6 +2,8 @@
 
 [PhotoView](https://github.com/chrisbanes/PhotoView)
 
+[![ScreenShot](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](https://www.youtube.com/watch?v=di66WZXNbtg)
+
 <b>Screenshots:</b>
 
 ![image](http://i.imgur.com/EEC5KUw.png)
