@@ -17,7 +17,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.watchlistapp.authorization.LoggedInUser;
+import com.watchlistapp.authorization.LoggedInUserContainer;
 import com.watchlistapp.comingsoon.ComingSoonActivity;
 import com.watchlistapp.database.WatchListDatabaseHandler;
 import com.watchlistapp.movielist.MovieListActivity;
@@ -89,6 +92,11 @@ public class HomeActivity extends ActionBarActivity
     public void onSectionAttached(int number) {
         switch(number) {
             case 1: {
+                WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(HomeActivity.this);
+                LoggedInUserContainer loggedInUserContainer = watchListDatabaseHandler.getAllUsers();
+                LoggedInUser loggedInUser = loggedInUserContainer.searchLastLoggedInUser();
+                Toast toast = Toast.makeText(HomeActivity.this, loggedInUser.getServerId(), Toast.LENGTH_SHORT);
+                toast.show();
                 break;
             }
             case 2: {

@@ -43,6 +43,7 @@ public class Login extends AsyncTask<String, Integer, User> {
     private final static String API_LOGIN_PASSWORD_TITLE = "password";
     private final static String API_LOGIN_LISTS_TITLE = "lists";
     private final static String API_LOGIN_LISTS_LIST_TITLE = "title";
+    private final static String API_LOGIN_USER_ID_TITLE = "id";
 
     // String that contains user name or email
     private String userNameOrEmail;
@@ -153,6 +154,7 @@ public class Login extends AsyncTask<String, Integer, User> {
                 user.setEmail(jsonObject.getString(API_LOGIN_EMAIL_TITLE));
                 user.setName(jsonObject.getString(API_LOGIN_NAME_TITLE));
                 user.setPassword(jsonObject.getString(API_LOGIN_PASSWORD_TITLE));
+                user.setServerId(jsonObject.getString(API_LOGIN_USER_ID_TITLE));
 
                 JSONArray jsonArrayMovieLists = jsonObject.getJSONArray(API_LOGIN_LISTS_TITLE);
 
