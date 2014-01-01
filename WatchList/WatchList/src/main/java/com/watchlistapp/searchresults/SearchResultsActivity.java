@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.watchlistapp.R;
 import com.watchlistapp.fullmoviedescription.FullMovieDescriptionActivity;
-import com.watchlistapp.movielist.MovieListActivity;
 import com.watchlistapp.themoviedb.SearchMovies;
 
 /**
@@ -44,7 +43,7 @@ public class SearchResultsActivity extends Activity {
 
         searchResultsContainer = new SearchResultsContainer();
         // Get the query that we sent from RecentActivity
-        searchResultsItemAdapter = new SearchResultsItemAdapter(SearchResultsActivity.this, searchResultsContainer);
+        searchResultsItemAdapter = new SearchResultsItemAdapter(SearchResultsActivity.this, searchResultsContainer, SearchResultsActivity.this);
         searchResultsListView.setAdapter(searchResultsItemAdapter);
 
         SearchMovies searchMovies = new SearchMovies(SearchResultsActivity.this, queryString, searchResultsItemAdapter, searchResultsContainer, SearchResultsActivity.this);

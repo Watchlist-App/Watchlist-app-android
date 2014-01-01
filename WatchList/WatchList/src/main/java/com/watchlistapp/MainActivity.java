@@ -25,7 +25,6 @@ public class MainActivity extends Activity {
         startActivity(intent);
         finish();
         */
-
         WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(MainActivity.this);
         LoggedInUser loggedInUser = watchListDatabaseHandler.getAllUsers().searchLastLoggedInUser();
 

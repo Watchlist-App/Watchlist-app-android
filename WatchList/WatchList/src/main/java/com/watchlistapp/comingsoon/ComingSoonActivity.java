@@ -39,7 +39,7 @@ public class ComingSoonActivity extends ActionBarActivity {
         });
 
         comingSoonContainer = new ComingSoonContainer();
-        comingSoonItemAdapter = new ComingSoonItemAdapter(ComingSoonActivity.this, comingSoonContainer);
+        comingSoonItemAdapter = new ComingSoonItemAdapter(ComingSoonActivity.this, comingSoonContainer, ComingSoonActivity.this);
         comingSoonListView.setAdapter(comingSoonItemAdapter);
 
         ComingSoon comingSoon = new ComingSoon(ComingSoonActivity.this, comingSoonItemAdapter, comingSoonContainer);
