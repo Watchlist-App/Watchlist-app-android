@@ -43,6 +43,7 @@ public class Login extends AsyncTask<String, Integer, User> {
     private final static String API_LOGIN_PASSWORD_TITLE = "password";
     private final static String API_LOGIN_LISTS_TITLE = "lists";
     private final static String API_LOGIN_LISTS_LIST_TITLE = "title";
+    private final static String API_LOGIN_USER_ID_TITLE = "id";
 
     // String that contains user name or email
     private String userNameOrEmail;
@@ -51,19 +52,25 @@ public class Login extends AsyncTask<String, Integer, User> {
     private ProgressDialog progressDialog;
     private User user;
     private Activity activity;
+    private boolean showProgressDialogFlag;
 
-    public Login(Activity activity, Context context, String userNameOrEmail, String password) {
+    public Login(Activity activity, Context context, String userNameOrEmail, String password, boolean showProgressDialogFlag) {
         this.activity = activity;
         this.context = context;
         this.userNameOrEmail = userNameOrEmail;
         this.password = password;
+        this.showProgressDialogFlag = showProgressDialogFlag;
 
-        this.progressDialog = new ProgressDialog(context);
+        if(showProgressDialogFlag) {
+            this.progressDialog = new ProgressDialog(context);
+        }
     }
 
     @Override
     protected void onPreExecute() {
-        this.progressDialog = ProgressDialog.show(context, "Log in", "Loading. Please wait...", true);
+        if(showProgressDialogFlag) {
+            this.progressDialog = ProgressDialog.show(context, "Log in", "Loading. Please wait...", true);
+        }
     }
 
     /*
@@ -98,8 +105,9 @@ public class Login extends AsyncTask<String, Integer, User> {
 
     @Override
     protected void onPostExecute(User user) {
-        this.progressDialog.hide();
-
+        if(showProgressDialogFlag) {
+            this.progressDialog.hide();
+        }
         // If no such user
         if(user == null) {
             Toast toast = Toast.makeText(context, "No such user", Toast.LENGTH_SHORT);
@@ -119,17 +127,18 @@ public class Login extends AsyncTask<String, Integer, User> {
                 if(watchListDatabaseHandler.isSuchUser(loggedInUser)) {
                     // Poka ne spiski filjmov tut ne obnovlyayutca
                     watchListDatabaseHandler.updateUserContent(loggedInUser);
-
-                    Intent intent = new Intent(context, HomeActivity.class);
-                    activity.startActivity(intent);
-                    activity.finish();
+                    if(showProgressDialogFlag) {
+                        Intent intent = new Intent(context, HomeActivity.class);
+                        activity.startActivity(intent);
+                        activity.finish();
+                    }
                 } else { // else we add new user to database
                     watchListDatabaseHandler.addUserContent(loggedInUser);
-                    Intent intent = new Intent(context, HomeActivity.class);
-                    // Adds animation
-
-                    activity.startActivity(intent);
-                    activity.finish();
+                    if(showProgressDialogFlag) {
+                        Intent intent = new Intent(context, HomeActivity.class);
+                        activity.startActivity(intent);
+                        activity.finish();
+                    }
                 }
             } else {
                 Toast toast = Toast.makeText(context, "Uncorrected user data. Try type again...", Toast.LENGTH_SHORT);
@@ -153,6 +162,7 @@ public class Login extends AsyncTask<String, Integer, User> {
                 user.setEmail(jsonObject.getString(API_LOGIN_EMAIL_TITLE));
                 user.setName(jsonObject.getString(API_LOGIN_NAME_TITLE));
                 user.setPassword(jsonObject.getString(API_LOGIN_PASSWORD_TITLE));
+                user.setServerId(jsonObject.getString(API_LOGIN_USER_ID_TITLE));
 
                 JSONArray jsonArrayMovieLists = jsonObject.getJSONArray(API_LOGIN_LISTS_TITLE);
 

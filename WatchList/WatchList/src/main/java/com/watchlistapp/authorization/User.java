@@ -9,6 +9,7 @@ public class User {
     private String email;
     private String name;
     private String password;
+    private String serverId;
 
     private MovieListContainer movieListContainer;
 
@@ -16,10 +17,11 @@ public class User {
         this.movieListContainer = new MovieListContainer();
     }
 
-    public User(String email, String name, String password) {
+    public User(String email, String name, String password, String serverId) {
         this.email = email;
         this.name = name;
         this.password = password;
+        this.serverId = serverId;
 
         this.movieListContainer = new MovieListContainer();
     }
@@ -48,20 +50,30 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
     public MovieListContainer getMovieListContainer() {
         return movieListContainer;
     }
 
     public void setMovieListContainer(MovieListContainer movieListContainer) {
         this.movieListContainer = movieListContainer;
+    }
+
+    public String getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(String serverId) {
+        this.serverId = serverId;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", serverId='" + serverId + '\'' +
+                ", movieListContainer=" + movieListContainer +
+                '}';
     }
 }

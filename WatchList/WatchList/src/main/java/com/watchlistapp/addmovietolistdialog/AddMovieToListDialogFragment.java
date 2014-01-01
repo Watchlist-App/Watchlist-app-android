@@ -13,8 +13,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.watchlistapp.R;
-import com.watchlistapp.authorization.LoggedInUser;
-import com.watchlistapp.authorization.LoggedInUserContainer;
+import com.watchlistapp.authorization.Login;
 import com.watchlistapp.database.WatchListDatabaseHandler;
 import com.watchlistapp.watchlistserver.AddMovieToListHandler;
 import com.watchlistapp.watchlistserver.MovieList;
@@ -101,12 +100,17 @@ public class AddMovieToListDialogFragment extends DialogFragment {
                     Toast toast = Toast.makeText(getActivity(), "No selected list", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
-                    WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(getActivity());
-                    LoggedInUserContainer loggedInUserContainer = watchListDatabaseHandler.getAllUsers();
-                    LoggedInUser loggedInUser = loggedInUserContainer.searchLastLoggedInUser();
-                    String userId = loggedInUser.get
-                    AddMovieToListHandler addMovieToListHandler = new AddMovieToListHandler(addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().get(radioButtonLastStatePosition).get);
-                    Toast toast = Toast.makeText(getActivity(), addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().get(radioButtonLastStatePosition).getTitle(), Toast.LENGTH_SHORT);
+                    String movieId = getArguments().getString("movieId");
+                    String userId = getArguments().getString("userId");
+                    String listTitle = addMovieToListDialogListsItemContainer.getAddMovieToListDialogListsItemArrayList().get(addMovieToListDialogListsItemContainer.getLastState()).getTitle();
+                    String userEmail = getArguments().getString("userEmail");
+                    String userPassword = getArguments().getString("userPassword");
+                    AddMovieToListHandler addMovieToListHandler = new AddMovieToListHandler(movieId, userId, listTitle);
+                    addMovieToListHandler.execute();
+                    Login login = new Login(getActivity(), getActivity(), userEmail, userPassword, false);
+                    login.execute();
+
+                    Toast toast = Toast.makeText(getActivity(), "Movie was added.", Toast.LENGTH_LONG);
                     toast.show();
                     onDestroyView();
                     onDestroy();

@@ -30,10 +30,10 @@ import java.util.ArrayList;
  */
 public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContainer> {
     private final static String BASE_URL = "http://api.themoviedb.org/3/search/movie";
-    private final static String API_KEY = "2b7854ef68a3c274a0f804c031285c46";
+    public final static String API_KEY = "2b7854ef68a3c274a0f804c031285c46";
     // Required Parameters
     private final static String API_QUERY_TITLE = "query";
-    private final static String API_KEY_TITLE = "api_key";
+    public final static String API_KEY_TITLE = "api_key";
     // Optional Parameters
     private final static String API_PAGE_TITLE = "page";
     private final static String API_LANGUAGE_TITLE = "language";

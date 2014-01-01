@@ -26,4 +26,7 @@
     <color name="no_movies_module_background_color">#85000000</color>
     <color name="no_movies_module_text_color">#95DCD7D7</color>
     <color name="no_movies_module_second_background_color">#50000000</color>
+
+    <color name="tag_line_module">#373636</color>
+    <color name="tag_line_text_color">#B8860B</color>
 </resources>

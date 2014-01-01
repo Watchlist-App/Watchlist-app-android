@@ -1,7 +1,5 @@
 package com.watchlistapp.authorization;
 
-import com.watchlistapp.authorization.User;
-
 /**
  * Created by VEINHORN on 22/12/13.
  */
@@ -18,6 +16,7 @@ public class LoggedInUser extends User {
         this.setEmail(user.getEmail());
         this.setName(user.getName());
         this.setPassword(user.getPassword());
+        this.setServerId(user.getServerId());
         this.setMovieListContainer(user.getMovieListContainer());
     }
 
@@ -31,7 +30,7 @@ public class LoggedInUser extends User {
 
     @Override
     public String toString() {
-        return super.toString() + "\n" + "LoggedInUser{" +
+        return "LoggedInUser{" +
                 "date='" + date + '\'' +
                 '}';
     }

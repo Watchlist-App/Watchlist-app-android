@@ -4,16 +4,21 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.watchlistapp.R;
 import com.watchlistapp.addmovietolistdialog.AddMovieToListDialogFragment;
+import com.watchlistapp.authorization.LoggedInUser;
+import com.watchlistapp.authorization.LoggedInUserContainer;
+import com.watchlistapp.database.WatchListDatabaseHandler;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 
 import java.text.ParseException;
@@ -40,16 +45,18 @@ public class SearchResultsItemAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private Activity activity;
+    private ListView listView;
 
     public SearchResultsItemAdapter() {
 
     }
 
-    public SearchResultsItemAdapter(Context context, SearchResultsContainer searchMovieContainer, Activity activity) {
+    public SearchResultsItemAdapter(Context context, SearchResultsContainer searchMovieContainer, Activity activity, ListView listView) {
         this.context = context;
         this.searchResultsContainer = searchMovieContainer;
         layoutInflater = LayoutInflater.from(context);
         this.activity = activity;
+        this.listView = listView;
     }
 
     @Override
@@ -114,7 +121,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private String convertDate(String inputString) {
+    public static String convertDate(String inputString) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
@@ -143,20 +150,24 @@ public class SearchResultsItemAdapter extends BaseAdapter {
     private View.OnClickListener addToListButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(final View view) {
-            // DialogFragment.show() will take care of adding the fragment
-            // in a transaction.  We also want to remove any currently showing
-            // dialog, so make our own transaction and take care of that here.
-            /*
 
-            Fragment prev = activity.getFragmentManager().findFragmentByTag("dialog");
-            if (prev != null) {
-                ft.remove(prev);
-            }
-            ft.addToBackStack(null);
-            */
             FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
             // Create and show the dialog
             DialogFragment newFragment = AddMovieToListDialogFragment.newInstance();
+
+            //
+            WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(context);
+            LoggedInUserContainer loggedInUserContainer = watchListDatabaseHandler.getAllUsers();
+            LoggedInUser loggedInUser = loggedInUserContainer.searchLastLoggedInUser();
+
+            // Here we put arguments to dialog that will be shown
+            // We put movieId and userId
+            Bundle bundle = new Bundle();
+            bundle.putString("movieId", searchResultsContainer.getSearchResultsItemArrayList().get(listView.getPositionForView(view)).getMovieId());
+            bundle.putString("userId", loggedInUser.getServerId());
+            bundle.putString("userPassword", loggedInUser.getPassword());
+            bundle.putString("userEmail", loggedInUser.getEmail());
+            newFragment.setArguments(bundle);
             newFragment.show(ft, "dialog");
         }
     };

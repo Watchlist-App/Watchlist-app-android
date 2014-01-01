@@ -1,7 +1,5 @@
 package com.watchlistapp.fullmoviedescription;
 
-import java.util.ArrayList;
-
 /**
  * Created by VEINHORN on 26/12/13.
  */
@@ -20,10 +18,10 @@ public class MovieDescription {
     private String backdropPath;
     private String movieId;
 
-    private ArrayList<String> genres;
+    private GenreContainer genreContainer;
 
     public MovieDescription() {
-        genres = new ArrayList<String>();
+        genreContainer = new GenreContainer();
     }
 
     public String getTitle() {
@@ -122,19 +120,19 @@ public class MovieDescription {
         this.backdropPath = backdropPath;
     }
 
-    public ArrayList<String> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(ArrayList<String> genres) {
-        this.genres = genres;
-    }
-
     public String getMovieId() {
         return movieId;
     }
 
     public void setMovieId(String movieId) {
         this.movieId = movieId;
+    }
+
+    public GenreContainer getGenreContainer() {
+        return genreContainer;
+    }
+
+    public void setGenreContainer(GenreContainer genreContainer) {
+        this.genreContainer = genreContainer;
     }
 }

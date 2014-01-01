@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class WatchListDatabaseHandler extends SQLiteOpenHelper {
 
-    public final static String DATABASE_NAME = "watchdb6";
+    public final static String DATABASE_NAME = "watchdb7";
     public final static int DATABASE_VERSION = 1;
 
     // Commands that uses very often
@@ -33,6 +33,7 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
     public final static String TABLE_USERS_NAME = "user_name";
     public final static String TABLE_USERS_PASSWORD = "user_password";
     public final static String TABLE_USERS_DATE = "user_date";
+    public final static String TABLE_USER_SERVER_ID = "server_id";
 
     // "Playlists" table
     public final static String TABLE_USER_PLAYLISTS = "playlists";
@@ -69,7 +70,8 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
                 TABLE_USERS_EMAIL + " TEXT, " +
                 TABLE_USERS_NAME + " TEXT, " +
                 TABLE_USERS_PASSWORD + " TEXT, " +
-                TABLE_USERS_DATE + " TEXT)";
+                TABLE_USERS_DATE + " TEXT, " +
+                TABLE_USER_SERVER_ID + " TEXT)";
 
         // The "playlists" table creation
         String CREATE_PLAYLISTS_TABLE = "CREATE TABLE " + TABLE_USER_PLAYLISTS + " ( " +
@@ -209,6 +211,7 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(TABLE_USERS_NAME, loggedInUser.getName());
         contentValues.put(TABLE_USERS_PASSWORD, loggedInUser.getPassword());
         contentValues.put(TABLE_USERS_DATE, loggedInUser.getDate());
+        contentValues.put(TABLE_USER_SERVER_ID, loggedInUser.getServerId());
 
         // Inserting row
         database.insert(TABLE_USERS, null, contentValues);
@@ -232,6 +235,7 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
                 loggedInUser.setName(cursor.getString(2));
                 loggedInUser.setPassword(cursor.getString(3));
                 loggedInUser.setDate(cursor.getString(4));
+                loggedInUser.setServerId(cursor.getString(5));
 
                 loggedInUserContainer.getLoggedInUserArrayList().add(loggedInUser);
             }while(cursor.moveToNext());
@@ -275,6 +279,7 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(TABLE_USERS_NAME, loggedInUser.getName());
         contentValues.put(TABLE_USERS_PASSWORD, loggedInUser.getPassword());
         contentValues.put(TABLE_USERS_DATE, loggedInUser.getDate());
+        contentValues.put(TABLE_USER_SERVER_ID, loggedInUser.getServerId());
 
         // Updating row
         database.update(TABLE_USERS, contentValues, TABLE_USERS_EMAIL + " = ?",

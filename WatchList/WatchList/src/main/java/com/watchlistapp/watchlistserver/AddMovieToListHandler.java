@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class AddMovieToListHandler extends AsyncTask<String, Integer, Integer> {
 
-    private final static String BASE_URL = "http://http://watchlist-app-server.herokuapp.com/list/";
+    private final static String BASE_URL = "http://watchlist-app-server.herokuapp.com/list/";
 
     private final static String API_ADD_MOVIE_TITLE = "addMovie";
     private final static String API_MOVIE_ID_TITLE = "movieId";
@@ -25,6 +25,8 @@ public class AddMovieToListHandler extends AsyncTask<String, Integer, Integer> {
     String movieId;
     String userId;
     String listTitle;
+
+    String testString;
 
     public AddMovieToListHandler(String movieId, String userId, String listTitle) {
         this.movieId = movieId;
@@ -37,6 +39,7 @@ public class AddMovieToListHandler extends AsyncTask<String, Integer, Integer> {
         String url = BASE_URL + API_ADD_MOVIE_TITLE + "?" + API_MOVIE_ID_TITLE + "=" +
                 movieId + "&" + API_USER_ID_TITLE + "=" + userId + "&" + API_LIST_TITLE_TITLE + "=" + listTitle;
         url = url.replaceAll(" ", "%20");
+        testString = url;
         doRequest(url);
 
         return new Integer(123);
@@ -54,5 +57,13 @@ public class AddMovieToListHandler extends AsyncTask<String, Integer, Integer> {
         } catch(IOException exception) {
             exception.printStackTrace();
         }
+    }
+
+    public String getTestString() {
+        return testString;
+    }
+
+    public void setTestString(String testString) {
+        this.testString = testString;
     }
 }
