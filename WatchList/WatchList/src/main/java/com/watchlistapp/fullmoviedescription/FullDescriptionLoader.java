@@ -1,11 +1,15 @@
 package com.watchlistapp.fullmoviedescription;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.watchlistapp.movielist.GenreMovieListActivity;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
 
@@ -83,7 +87,7 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
     }
 
     @Override
-    protected void onPostExecute(MovieDescription movieDescription) {
+    protected void onPostExecute(final MovieDescription movieDescription) {
         tagLineTextView.setText(movieDescription.getTagline());
         movieTitleTextView.setText(movieDescription.getTitle());
         movieOverviewTextView.setText(movieDescription.getOverview());
@@ -106,6 +110,18 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
         GenreItemAdapter genreItemAdapter = new GenreItemAdapter(context, movieDescription.getGenreContainer());
         genresGridView.setAdapter(genreItemAdapter);
+
+        genresGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String genreId = movieDescription.getGenreContainer().getGenresArrayList().get(position).getId();
+                String genreTitle = movieDescription.getGenreContainer().getGenresArrayList().get(position).getTitle();
+                Intent intent = new Intent(context, GenreMovieListActivity.class);
+                intent.putExtra("genreId", genreId);
+                intent.putExtra("genreTitle", genreTitle);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

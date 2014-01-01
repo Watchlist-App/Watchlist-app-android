@@ -129,7 +129,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numColumns="auto_fit"
-            android:columnWidth="150dp">
+            android:columnWidth="150dp"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="2dp"
+            android:horizontalSpacing="3dp">
         </GridView>
     </LinearLayout>
 </LinearLayout>
