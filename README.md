@@ -1,6 +1,6 @@
 ##Technology stack:
 
-[PhotoView](![image](https://raw.github.com/chrisbanes/PhotoView/master/header_graphic.png))
+![image](https://raw.github.com/chrisbanes/PhotoView/master/header_graphic.png
 
 <b>Screenshots:</b>
 
