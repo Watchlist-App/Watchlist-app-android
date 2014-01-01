@@ -69,6 +69,8 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
     private TextView tagLineTextView;
     private GridView genresGridView;
 
+    private MovieDescription movieDescription;
+
     public FullDescriptionLoader(Context context, String movieId, TextView tagLineTextView, TextView movieTitleTextView, ImageView posterImageView, TextView movieOverviewTextView, TextView ratingTextView, TextView votesTextView, ColoredRatingBar coloredRatingBar, TextView releaseDateTextView, GridView genresGridView) {
         this.context = context;
         this.movieId = movieId;
@@ -88,6 +90,8 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
     @Override
     protected void onPostExecute(final MovieDescription movieDescription) {
+        this.movieDescription = movieDescription;
+
         tagLineTextView.setText(movieDescription.getTagline());
         movieTitleTextView.setText(movieDescription.getTitle());
         movieOverviewTextView.setText(movieDescription.getOverview());
@@ -230,5 +234,9 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
             exception.printStackTrace();
         }
         return jsonString;
+    }
+
+    public MovieDescription getMovieDescription() {
+        return movieDescription;
     }
 }

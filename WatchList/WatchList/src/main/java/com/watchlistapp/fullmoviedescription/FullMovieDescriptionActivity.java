@@ -1,7 +1,9 @@
 package com.watchlistapp.fullmoviedescription;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +25,8 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
 
     private GridView genresGridView;
 
+    private FullDescriptionLoader fullDescriptionLoader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +40,19 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
         coloredRatingBar = (ColoredRatingBar)findViewById(R.id.full_description_movie_rating_bar);
         releaseDateTextView = (TextView)findViewById(R.id.full_description_movie_release_date);
         tagLineTextView = (TextView)findViewById(R.id.full_description_tag_line);
-
         genresGridView = (GridView)findViewById(R.id.full_description_genres_grid_view);
 
-        String movieId = getIntent().getStringExtra("movieId");
+        posterImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FullMovieDescriptionActivity.this, FullPosterViewActivity.class);
+                intent.putExtra("posterUrl", fullDescriptionLoader.getMovieDescription().getPosterPath());
+                startActivity(intent);
+            }
+        });
 
-        FullDescriptionLoader fullDescriptionLoader = new FullDescriptionLoader(FullMovieDescriptionActivity.this, movieId, tagLineTextView, movieTitleTextView, posterImageView, movieOverviewTextView, ratingTextView, votesTextView, coloredRatingBar, releaseDateTextView, genresGridView);
+        String movieId = getIntent().getStringExtra("movieId");
+        fullDescriptionLoader = new FullDescriptionLoader(FullMovieDescriptionActivity.this, movieId, tagLineTextView, movieTitleTextView, posterImageView, movieOverviewTextView, ratingTextView, votesTextView, coloredRatingBar, releaseDateTextView, genresGridView);
         fullDescriptionLoader.execute();
     }
 }
