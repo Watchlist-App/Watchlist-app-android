@@ -18,6 +18,7 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
     private TextView votesTextView;
     private ColoredRatingBar coloredRatingBar;
     private TextView releaseDateTextView;
+    private TextView tagLineTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +32,11 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
         votesTextView = (TextView)findViewById(R.id.full_description_movie_votes);
         coloredRatingBar = (ColoredRatingBar)findViewById(R.id.full_description_movie_rating_bar);
         releaseDateTextView = (TextView)findViewById(R.id.full_description_movie_release_date);
+        tagLineTextView = (TextView)findViewById(R.id.full_description_tag_line);
 
         String movieId = getIntent().getStringExtra("movieId");
 
-        FullDescriptionLoader fullDescriptionLoader = new FullDescriptionLoader(FullMovieDescriptionActivity.this, movieId, movieTitleTextView, posterImageView, movieOverviewTextView, ratingTextView, votesTextView, coloredRatingBar, releaseDateTextView);
+        FullDescriptionLoader fullDescriptionLoader = new FullDescriptionLoader(FullMovieDescriptionActivity.this, movieId, tagLineTextView, movieTitleTextView, posterImageView, movieOverviewTextView, ratingTextView, votesTextView, coloredRatingBar, releaseDateTextView);
         fullDescriptionLoader.execute();
     }
 }

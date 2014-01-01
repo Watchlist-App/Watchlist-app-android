@@ -61,12 +61,14 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
     private TextView votesTextView;
     private ColoredRatingBar coloredRatingBar;
     private TextView releaseDateTextView;
+    private TextView tagLineTextView;
 
-    public FullDescriptionLoader(Context context, String movieId, TextView movieTitleTextView, ImageView posterImageView, TextView movieOverviewTextView, TextView ratingTextView, TextView votesTextView, ColoredRatingBar coloredRatingBar, TextView releaseDateTextView) {
+    public FullDescriptionLoader(Context context, String movieId, TextView tagLineTextView, TextView movieTitleTextView, ImageView posterImageView, TextView movieOverviewTextView, TextView ratingTextView, TextView votesTextView, ColoredRatingBar coloredRatingBar, TextView releaseDateTextView) {
         this.context = context;
         this.movieId = movieId;
 
         // Setting views
+        this.tagLineTextView = tagLineTextView;
         this.movieTitleTextView = movieTitleTextView;
         this.posterImageView = posterImageView;
         this.movieOverviewTextView = movieOverviewTextView;
@@ -78,6 +80,7 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
     @Override
     protected void onPostExecute(MovieDescription movieDescription) {
+        tagLineTextView.setText(movieDescription.getTagline());
         movieTitleTextView.setText(movieDescription.getTitle());
         movieOverviewTextView.setText(movieDescription.getOverview());
         String rating = movieDescription.getVoteAverage() + "/" + "10";
