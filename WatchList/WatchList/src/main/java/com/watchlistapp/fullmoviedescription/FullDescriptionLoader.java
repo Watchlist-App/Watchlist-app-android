@@ -5,6 +5,9 @@ import android.os.AsyncTask;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.watchlistapp.ratingbar.ColoredRatingBar;
+import com.watchlistapp.searchresults.SearchResultsItemAdapter;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -51,23 +54,45 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
     private String movieId;
 
     // Views
-    TextView movieTitleTextView;
-    ImageView posterImageView;
-    TextView movieOverviewTextView;
+    private TextView movieTitleTextView;
+    private ImageView posterImageView;
+    private TextView movieOverviewTextView;
+    private TextView ratingTextView;
+    private TextView votesTextView;
+    private ColoredRatingBar coloredRatingBar;
+    private TextView releaseDateTextView;
 
-    public FullDescriptionLoader(Context context, String movieId, TextView movieTitleTextView, ImageView posterImageView, TextView movieOverviewTextView) {
+    public FullDescriptionLoader(Context context, String movieId, TextView movieTitleTextView, ImageView posterImageView, TextView movieOverviewTextView, TextView ratingTextView, TextView votesTextView, ColoredRatingBar coloredRatingBar, TextView releaseDateTextView) {
         this.context = context;
         this.movieId = movieId;
 
+        // Setting views
         this.movieTitleTextView = movieTitleTextView;
         this.posterImageView = posterImageView;
         this.movieOverviewTextView = movieOverviewTextView;
+        this.ratingTextView = ratingTextView;
+        this.votesTextView = votesTextView;
+        this.coloredRatingBar = coloredRatingBar;
+        this.releaseDateTextView = releaseDateTextView;
     }
 
     @Override
     protected void onPostExecute(MovieDescription movieDescription) {
         movieTitleTextView.setText(movieDescription.getTitle());
         movieOverviewTextView.setText(movieDescription.getOverview());
+        String rating = movieDescription.getVoteAverage() + "/" + "10";
+        ratingTextView.setText(rating);
+        String votes = movieDescription.getVoteCount() + " votes";
+        votesTextView.setText(votes);
+        coloredRatingBar.setRating(Float.valueOf(movieDescription.getVoteAverage()) / (float)2);
+        String releaseDate = movieDescription.getReleaseDate();
+        // Sometimes on themoviedb date may be empty
+        if(releaseDate.equals("")) {
+            releaseDate = "Release date: Unknown";
+        } else {
+            releaseDate = "Release date: " + SearchResultsItemAdapter.convertDate(releaseDate);
+        }
+        releaseDateTextView.setText(releaseDate);
 
         PosterLoader posterLoader = new PosterLoader(posterImageView, movieDescription.getPosterPath(), PosterLoader.DOUBLE_BIG);
         posterLoader.execute();

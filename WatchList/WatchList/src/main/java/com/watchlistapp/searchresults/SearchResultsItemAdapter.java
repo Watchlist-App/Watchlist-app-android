@@ -121,7 +121,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private String convertDate(String inputString) {
+    public static String convertDate(String inputString) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
