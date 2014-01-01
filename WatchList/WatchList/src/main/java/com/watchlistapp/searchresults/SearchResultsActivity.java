@@ -43,7 +43,7 @@ public class SearchResultsActivity extends Activity {
 
         searchResultsContainer = new SearchResultsContainer();
         // Get the query that we sent from RecentActivity
-        searchResultsItemAdapter = new SearchResultsItemAdapter(SearchResultsActivity.this, searchResultsContainer, SearchResultsActivity.this);
+        searchResultsItemAdapter = new SearchResultsItemAdapter(SearchResultsActivity.this, searchResultsContainer, SearchResultsActivity.this, searchResultsListView);
         searchResultsListView.setAdapter(searchResultsItemAdapter);
 
         SearchMovies searchMovies = new SearchMovies(SearchResultsActivity.this, queryString, searchResultsItemAdapter, searchResultsContainer, SearchResultsActivity.this);

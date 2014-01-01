@@ -52,19 +52,25 @@ public class Login extends AsyncTask<String, Integer, User> {
     private ProgressDialog progressDialog;
     private User user;
     private Activity activity;
+    private boolean showProgressDialogFlag;
 
-    public Login(Activity activity, Context context, String userNameOrEmail, String password) {
+    public Login(Activity activity, Context context, String userNameOrEmail, String password, boolean showProgressDialogFlag) {
         this.activity = activity;
         this.context = context;
         this.userNameOrEmail = userNameOrEmail;
         this.password = password;
+        this.showProgressDialogFlag = showProgressDialogFlag;
 
-        this.progressDialog = new ProgressDialog(context);
+        if(showProgressDialogFlag) {
+            this.progressDialog = new ProgressDialog(context);
+        }
     }
 
     @Override
     protected void onPreExecute() {
-        this.progressDialog = ProgressDialog.show(context, "Log in", "Loading. Please wait...", true);
+        if(showProgressDialogFlag) {
+            this.progressDialog = ProgressDialog.show(context, "Log in", "Loading. Please wait...", true);
+        }
     }
 
     /*
@@ -99,8 +105,9 @@ public class Login extends AsyncTask<String, Integer, User> {
 
     @Override
     protected void onPostExecute(User user) {
-        this.progressDialog.hide();
-
+        if(showProgressDialogFlag) {
+            this.progressDialog.hide();
+        }
         // If no such user
         if(user == null) {
             Toast toast = Toast.makeText(context, "No such user", Toast.LENGTH_SHORT);
@@ -120,17 +127,18 @@ public class Login extends AsyncTask<String, Integer, User> {
                 if(watchListDatabaseHandler.isSuchUser(loggedInUser)) {
                     // Poka ne spiski filjmov tut ne obnovlyayutca
                     watchListDatabaseHandler.updateUserContent(loggedInUser);
-
-                    Intent intent = new Intent(context, HomeActivity.class);
-                    activity.startActivity(intent);
-                    activity.finish();
+                    if(showProgressDialogFlag) {
+                        Intent intent = new Intent(context, HomeActivity.class);
+                        activity.startActivity(intent);
+                        activity.finish();
+                    }
                 } else { // else we add new user to database
                     watchListDatabaseHandler.addUserContent(loggedInUser);
-                    Intent intent = new Intent(context, HomeActivity.class);
-                    // Adds animation
-
-                    activity.startActivity(intent);
-                    activity.finish();
+                    if(showProgressDialogFlag) {
+                        Intent intent = new Intent(context, HomeActivity.class);
+                        activity.startActivity(intent);
+                        activity.finish();
+                    }
                 }
             } else {
                 Toast toast = Toast.makeText(context, "Uncorrected user data. Try type again...", Toast.LENGTH_SHORT);

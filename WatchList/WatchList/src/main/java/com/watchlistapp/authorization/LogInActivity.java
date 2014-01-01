@@ -42,7 +42,7 @@ public class LogInActivity extends ActionBarActivity {
                 String emailOrName = email.getText().toString();
                 String userPassword = password.getText().toString();
 
-                login = new Login(LogInActivity.this, LogInActivity.this, emailOrName, userPassword);
+                login = new Login(LogInActivity.this, LogInActivity.this, emailOrName, userPassword, true);
                 login.execute(); // run "log in" in background
             }
         });
