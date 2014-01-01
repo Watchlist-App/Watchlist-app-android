@@ -47,10 +47,7 @@ public class FullPosterLoader extends AsyncTask<String, Integer, Bitmap> {
 
     @Override
     protected void onPostExecute(Bitmap bitmap) {
-        bitmap = bitmap.createBitmap(1400, 2040, Bitmap.Config.ARGB_8888);
-        //imageView.setImageBitmap(bitmap);
-        //Drawable bitmap2 = context.getResources().getDrawable(R.drawable.background);
-        imageView.setImageBitmap(bitmap);
+        imageView.setImageBitmap(bitmap.createScaledBitmap(bitmap, 1400, 2040, false));
         photoViewAttacher = new PhotoViewAttacher(imageView);
     }
 
