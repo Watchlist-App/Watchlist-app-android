@@ -1,3 +1,7 @@
+##Technology stack:
+
+[PhotoView](https://github.com/chrisbanes/PhotoView)
+
 <b>Screenshots:</b>
 
 ![image](http://i.imgur.com/EEC5KUw.png)
