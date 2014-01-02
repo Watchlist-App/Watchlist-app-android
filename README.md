@@ -1,9 +1,9 @@
-###Technology stack:
+###Libs used in this project:
 
 [PhotoView](https://github.com/chrisbanes/PhotoView)
 
 ###Demo:<br>
-[![ScreenShot](http://i.imgur.com/rdmiotp.png)](https://www.youtube.com/watch?v=di66WZXNbtg)
+[![ScreenShot](http://i.imgur.com/WA8568g.png)](https://www.youtube.com/watch?v=di66WZXNbtg)
 
 <b>Screenshots:</b>
 
