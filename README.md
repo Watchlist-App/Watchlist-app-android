@@ -1,4 +1,17 @@
-demo
-============
+#Watchlist Android App
 
-[![Demo](http://img.youtube.com/vi/di66WZXNbtg/0.jpg)](http://www.youtube.com/watch?v=di66WZXNbtg)
+###Demo:
+[![ScreenShot](http://i.imgur.com/WA8568g.png)](https://www.youtube.com/watch?v=di66WZXNbtg)
+
+###Screenshots:
+
+![image](http://i.imgur.com/vXaJhNn.png?1)
+![image](http://i.imgur.com/QhG5LZY.png?1)
+![image](http://i.imgur.com/5bjIOU2.png?1)
+![image](http://i.imgur.com/ST3t8hf.png?1)
+![image](http://i.imgur.com/3YqO6oz.png?1)
+![image](http://i.imgur.com/3YqO6oz.png?1)
+
+#Libs used in this project:
+
+[PhotoView](https://github.com/chrisbanes/PhotoView)
