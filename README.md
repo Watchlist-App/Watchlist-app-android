@@ -1,4 +1,4 @@
-#Watchlist web app
+#Watchlist Android App
 
 ###Demo:<br>
 [![ScreenShot](http://i.imgur.com/WA8568g.png)](https://www.youtube.com/watch?v=di66WZXNbtg)
