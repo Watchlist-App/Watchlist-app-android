@@ -2,7 +2,7 @@
 
 [PhotoView](https://github.com/chrisbanes/PhotoView)
 
-#Demo:<br>
+###Demo:<br>
 [![ScreenShot](http://i.imgur.com/WA8568g.png)](https://www.youtube.com/watch?v=di66WZXNbtg)
 
 <b>Screenshots:</b>
