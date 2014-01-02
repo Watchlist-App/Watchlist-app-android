@@ -3,7 +3,7 @@
 ###Demo:<br>
 [![ScreenShot](http://i.imgur.com/WA8568g.png)](https://www.youtube.com/watch?v=di66WZXNbtg)
 
-<b>Screenshots:</b>
+###Screenshots:<br>
 
 ![image](http://i.imgur.com/EEC5KUw.png)
 ![image](http://i.imgur.com/rUqbqEJ.png)
