@@ -3,7 +3,7 @@
 [PhotoView](https://github.com/chrisbanes/PhotoView)
 
 <b>Demo:</b>
-[![ScreenShot](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](https://www.youtube.com/watch?v=di66WZXNbtg)
+[![ScreenShot](http://i.imgur.com/WA8568g.png)](https://www.youtube.com/watch?v=di66WZXNbtg)
 
 <b>Screenshots:</b>
 
