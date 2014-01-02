@@ -11,7 +11,7 @@
 ![image](http://i.imgur.com/M7uIf45.png)
 ![image](http://i.imgur.com/akrjQMh.png)
 
-###Libs used in this project:
+#Libs used in this project:
 
 [PhotoView](https://github.com/chrisbanes/PhotoView)
 
