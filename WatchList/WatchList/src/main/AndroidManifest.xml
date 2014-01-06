@@ -58,8 +58,8 @@
         <activity
             android:name=".movielist.GenreMovieListActivity"
             android:label="Genre list"/>
-        <activity android:name=".fullmoviedescription.FullPosterViewActivity"
+        <activity
+            android:name=".fullmoviedescription.FullPosterViewActivity"
             android:label="Full poster view activity"/>
     </application>
-
 </manifest>

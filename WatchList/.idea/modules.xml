@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ HorizontalVariableListViewLibrary/ HorizontalVariableListViewLibrary.iml" filepath="$PROJECT_DIR$/ HorizontalVariableListViewLibrary/ HorizontalVariableListViewLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HorizontalVariableListView/HorizontalVariableListView.iml" filepath="$PROJECT_DIR$/HorizontalVariableListView/HorizontalVariableListView.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../LyricFinder/LyricFinder.iml" filepath="$PROJECT_DIR$/../../LyricFinder/LyricFinder.iml" />
       <module fileurl="file://$PROJECT_DIR$/WatchList.iml" filepath="$PROJECT_DIR$/WatchList.iml" />
       <module fileurl="file://$PROJECT_DIR$/WatchList/WatchList-WatchList.iml" filepath="$PROJECT_DIR$/WatchList/WatchList-WatchList.iml" />
