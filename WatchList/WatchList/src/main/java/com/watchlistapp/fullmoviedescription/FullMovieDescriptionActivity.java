@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.RoundedImageView;
 import com.watchlistapp.R;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 
@@ -18,7 +18,7 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
 
     // Views
     private TextView movieTitleTextView;
-    private ImageView posterImageView;
+    private RoundedImageView posterImageView;
     private TextView movieOverviewTextView;
     private TextView ratingTextView;
     private TextView votesTextView;
@@ -40,7 +40,7 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
         setContentView(R.layout.activity_full_movie_description);
 
         movieTitleTextView = (TextView)findViewById(R.id.full_description_movie_title);
-        posterImageView = (ImageView)findViewById(R.id.full_description_movie_poster);
+        posterImageView = (RoundedImageView)findViewById(R.id.full_description_movie_poster);
         movieOverviewTextView = (TextView)findViewById(R.id.full_description_movie_description);
         ratingTextView = (TextView)findViewById(R.id.full_description_movie_rating);
         votesTextView = (TextView)findViewById(R.id.full_description_movie_votes);

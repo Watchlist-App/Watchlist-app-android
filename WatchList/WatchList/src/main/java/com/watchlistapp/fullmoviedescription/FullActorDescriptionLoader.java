@@ -2,9 +2,9 @@ package com.watchlistapp.fullmoviedescription;
 
 import android.os.AsyncTask;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.RoundedImageView;
 import com.textjustifylibrary.TextViewEx;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
 
@@ -40,14 +40,14 @@ public class FullActorDescriptionLoader extends AsyncTask<String, Integer, FullA
     private String actorId;
 
     // Views
-    private ImageView actorAvatarImageView;
+    private RoundedImageView actorAvatarImageView;
     private TextView actorNameTextView;
     private TextView actorBirthdayTextView;
     private TextView actorPlaceOfBirthTextView;
     private TextView actorHomePageTextView;
     private TextViewEx actorBiographyTextView;
 
-    public FullActorDescriptionLoader(String actorId, ImageView actorAvatarImageView, TextView actorNameTextView, TextView actorBirthdayTextView, TextView actorPlaceOfBirthTextView,
+    public FullActorDescriptionLoader(String actorId, RoundedImageView actorAvatarImageView, TextView actorNameTextView, TextView actorBirthdayTextView, TextView actorPlaceOfBirthTextView,
                                       TextView actorHomePageTextView, TextViewEx actorBiographyTextView) {
         this.actorId = actorId;
         this.actorAvatarImageView = actorAvatarImageView;

@@ -36,6 +36,18 @@
                     android:background="@drawable/search_results_info_module"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content">
+                    <com.makeramen.RoundedImageView
+                        android:id="@+id/full_description_movie_poster"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="200dp"
+                        android:minHeight="250dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        app:corner_radius="5dp"/>
+                    <!--
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -45,6 +57,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp" />
+                        -->
                     <TextView
                         android:textSize="30sp"
                         android:textStyle="bold"

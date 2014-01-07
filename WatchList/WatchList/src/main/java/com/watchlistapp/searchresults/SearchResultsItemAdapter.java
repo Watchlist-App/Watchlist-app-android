@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.makeramen.RoundedImageView;
 import com.watchlistapp.R;
 import com.watchlistapp.addmovietolistdialog.AddMovieToListDialogFragment;
 import com.watchlistapp.authorization.LoggedInUser;
@@ -31,7 +31,7 @@ import java.util.Date;
 public class SearchResultsItemAdapter extends BaseAdapter {
 
     private static class ViewHolder {
-        public ImageView poster;
+        public RoundedImageView poster;
         public TextView title;
         public TextView releaseDate;
         public TextView rating;
@@ -81,7 +81,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         if(convertView == null) {
             convertView = layoutInflater.inflate(R.layout.search_results_item, null);
             viewHolder = new ViewHolder();
-            viewHolder.poster = (ImageView)convertView.findViewById(R.id.search_results_poster);
+            viewHolder.poster = (RoundedImageView)convertView.findViewById(R.id.search_results_poster);
             viewHolder.title = (TextView)convertView.findViewById(R.id.search_results_title);
             viewHolder.rating = (TextView)convertView.findViewById(R.id.search_results_rating);
             viewHolder.releaseDate = (TextView)convertView.findViewById(R.id.search_results_release_date);
