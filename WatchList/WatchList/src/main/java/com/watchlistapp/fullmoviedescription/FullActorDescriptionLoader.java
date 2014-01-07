@@ -1,6 +1,7 @@
 package com.watchlistapp.fullmoviedescription;
 
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +33,8 @@ public class FullActorDescriptionLoader extends AsyncTask<String, Integer, FullA
     private final static String API_NAME_TITLE = "name";
     private final static String API_BIRTHDAY_TITLE = "birthday";
     private final static String API_PLACE_OF_BIRTH_TITLE = "place_of_birth";
+    private final static String API_HOMEPAGE_TITLE = "homepage";
+    private final static String API_BIOGRAPHY_TITLE = "biography";
 
     private String actorId;
 
@@ -40,13 +43,18 @@ public class FullActorDescriptionLoader extends AsyncTask<String, Integer, FullA
     private TextView actorNameTextView;
     private TextView actorBirthdayTextView;
     private TextView actorPlaceOfBirthTextView;
+    private TextView actorHomePageTextView;
+    private TextView actorBiographyTextView;
 
-    public FullActorDescriptionLoader(String actorId, ImageView actorAvatarImageView, TextView actorNameTextView, TextView actorBirthdayTextView, TextView actorPlaceOfBirthTextView) {
+    public FullActorDescriptionLoader(String actorId, ImageView actorAvatarImageView, TextView actorNameTextView, TextView actorBirthdayTextView, TextView actorPlaceOfBirthTextView,
+                                      TextView actorHomePageTextView, TextView actorBiographyTextView) {
         this.actorId = actorId;
         this.actorAvatarImageView = actorAvatarImageView;
         this.actorNameTextView = actorNameTextView;
         this.actorBirthdayTextView = actorBirthdayTextView;
         this.actorPlaceOfBirthTextView = actorPlaceOfBirthTextView;
+        this.actorHomePageTextView = actorHomePageTextView;
+        this.actorBiographyTextView = actorBiographyTextView;
     }
 
     @Override
@@ -56,6 +64,14 @@ public class FullActorDescriptionLoader extends AsyncTask<String, Integer, FullA
         actorNameTextView.setText("Name: " + fullActorDescription.getName());
         actorBirthdayTextView.setText("Birthday: " + SearchResultsItemAdapter.convertDate(fullActorDescription.getBirthday()));
         actorPlaceOfBirthTextView.setText("Place of birth: " + fullActorDescription.getPlaceOfBirth());
+        actorHomePageTextView.setText("Homepage");
+        actorHomePageTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        actorBiographyTextView.setText(fullActorDescription.getBiography());
     }
 
     @Override
@@ -75,6 +91,8 @@ public class FullActorDescriptionLoader extends AsyncTask<String, Integer, FullA
             fullActorDescription.setName(jsonObject.getString(API_NAME_TITLE));
             fullActorDescription.setBirthday(jsonObject.getString(API_BIRTHDAY_TITLE));
             fullActorDescription.setPlaceOfBirth(jsonObject.getString(API_PLACE_OF_BIRTH_TITLE));
+            fullActorDescription.setHomePage(jsonObject.getString(API_HOMEPAGE_TITLE));
+            fullActorDescription.setBiography(jsonObject.getString(API_BIOGRAPHY_TITLE));
         } catch(JSONException exception) {
             exception.printStackTrace();
         }

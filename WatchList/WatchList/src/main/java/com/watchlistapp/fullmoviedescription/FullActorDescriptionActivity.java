@@ -13,6 +13,8 @@ public class FullActorDescriptionActivity extends ActionBarActivity {
     private TextView actorNameTextView;
     private TextView actorBirthdayTextView;
     private TextView actorPlaceOfBirthTextView;
+    private TextView actorHomePageTextView;
+    private TextView actorBiographyTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +25,13 @@ public class FullActorDescriptionActivity extends ActionBarActivity {
         actorNameTextView = (TextView)findViewById(R.id.full_actor_description_name);
         actorBirthdayTextView = (TextView)findViewById(R.id.full_actor_description_birthday);
         actorPlaceOfBirthTextView = (TextView)findViewById(R.id.full_actor_description_place_of_birth);
-
+        actorHomePageTextView = (TextView)findViewById(R.id.full_actor_description_homepage);
+        actorBiographyTextView = (TextView)findViewById(R.id.full_actor_description_biography);
         String actorId = getIntent().getStringExtra("actorId");
         //Toast.makeText(this, actorId, Toast.LENGTH_SHORT).show();
 
         FullActorDescriptionLoader fullActorDescriptionLoader = new FullActorDescriptionLoader(actorId, actorAvatarImageView, actorNameTextView, actorBirthdayTextView,
-                actorPlaceOfBirthTextView);
+                actorPlaceOfBirthTextView, actorHomePageTextView, actorBiographyTextView);
         fullActorDescriptionLoader.execute();
     }
 }
