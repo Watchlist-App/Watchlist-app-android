@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.textjustifylibrary.TextViewEx;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
 
 import org.apache.http.HttpEntity;
@@ -44,10 +45,10 @@ public class FullActorDescriptionLoader extends AsyncTask<String, Integer, FullA
     private TextView actorBirthdayTextView;
     private TextView actorPlaceOfBirthTextView;
     private TextView actorHomePageTextView;
-    private TextView actorBiographyTextView;
+    private TextViewEx actorBiographyTextView;
 
     public FullActorDescriptionLoader(String actorId, ImageView actorAvatarImageView, TextView actorNameTextView, TextView actorBirthdayTextView, TextView actorPlaceOfBirthTextView,
-                                      TextView actorHomePageTextView, TextView actorBiographyTextView) {
+                                      TextView actorHomePageTextView, TextViewEx actorBiographyTextView) {
         this.actorId = actorId;
         this.actorAvatarImageView = actorAvatarImageView;
         this.actorNameTextView = actorNameTextView;
@@ -71,7 +72,7 @@ public class FullActorDescriptionLoader extends AsyncTask<String, Integer, FullA
 
             }
         });
-        actorBiographyTextView.setText(fullActorDescription.getBiography());
+        actorBiographyTextView.setText(fullActorDescription.getBiography(), true);
     }
 
     @Override

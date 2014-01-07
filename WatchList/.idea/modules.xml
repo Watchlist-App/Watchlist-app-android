@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ HorizontalVariableListViewLibrary/ HorizontalVariableListViewLibrary.iml" filepath="$PROJECT_DIR$/ HorizontalVariableListViewLibrary/ HorizontalVariableListViewLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/HorizontalVariableListView/HorizontalVariableListView.iml" filepath="$PROJECT_DIR$/HorizontalVariableListView/HorizontalVariableListView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ HorizontalVariableListViewLibrary/HorizontalVariableListViewLibrary.iml" filepath="$PROJECT_DIR$/ HorizontalVariableListViewLibrary/HorizontalVariableListViewLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../LyricFinder/LyricFinder.iml" filepath="$PROJECT_DIR$/../../LyricFinder/LyricFinder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TextJustifyLibrary/TextJustifyLibrary.iml" filepath="$PROJECT_DIR$/TextJustifyLibrary/TextJustifyLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/WatchList.iml" filepath="$PROJECT_DIR$/WatchList.iml" />
       <module fileurl="file://$PROJECT_DIR$/WatchList/WatchList-WatchList.iml" filepath="$PROJECT_DIR$/WatchList/WatchList-WatchList.iml" />
     </modules>
