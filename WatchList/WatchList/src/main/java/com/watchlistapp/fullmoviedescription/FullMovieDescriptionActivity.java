@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.watchlistapp.R;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 
+import it.sephiroth.android.library.widget.HListView;
+
 public class FullMovieDescriptionActivity extends ActionBarActivity {
 
     // Views
@@ -27,6 +29,10 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
 
     private FullDescriptionLoader fullDescriptionLoader;
 
+    private HListView actorsHorizontalListView;
+    private ActorItemsListAdapter actorItemsListAdapter;
+    private ActorItemsContainer actorItemsContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +47,7 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
         releaseDateTextView = (TextView)findViewById(R.id.full_description_movie_release_date);
         tagLineTextView = (TextView)findViewById(R.id.full_description_tag_line);
         genresGridView = (GridView)findViewById(R.id.full_description_genres_grid_view);
+        actorsHorizontalListView = (HListView)findViewById(R.id.full_description_movie_actors_list_view);
 
         posterImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,5 +61,11 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
         String movieId = getIntent().getStringExtra("movieId");
         fullDescriptionLoader = new FullDescriptionLoader(FullMovieDescriptionActivity.this, movieId, tagLineTextView, movieTitleTextView, posterImageView, movieOverviewTextView, ratingTextView, votesTextView, coloredRatingBar, releaseDateTextView, genresGridView);
         fullDescriptionLoader.execute();
+
+        actorItemsContainer = new ActorItemsContainer();
+        actorItemsListAdapter = new ActorItemsListAdapter(this, actorItemsContainer);
+        actorsHorizontalListView.setAdapter(actorItemsListAdapter);
+        ActorsLoader actorsLoader = new ActorsLoader(this, movieId, actorItemsListAdapter, actorItemsContainer);
+        actorsLoader.execute();
     }
 }
