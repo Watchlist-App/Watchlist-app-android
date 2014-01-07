@@ -119,27 +119,38 @@
                 android:layout_marginLeft="5dp" />
         </RelativeLayout>
     </RelativeLayout>
-    <LinearLayout
-        android:background="@drawable/search_results_info_module"
-        android:layout_marginTop="5dp"
+    <ScrollView
+        android:layout_marginTop="3dp"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <GridView
-            android:id="@+id/full_description_genres_grid_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numColumns="auto_fit"
-            android:columnWidth="150dp"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="2dp"
-            android:horizontalSpacing="3dp">
-        </GridView>
-        <it.sephiroth.android.library.widget.HListView
-            android:id="@+id/full_description_movie_actors_list_view"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:background="@drawable/search_results_info_module"
+            android:layout_marginTop="5dp"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#11000000"
-            android:scrollbars="none"/>
-    </LinearLayout>
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+            <GridView
+                android:id="@+id/full_description_genres_grid_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numColumns="auto_fit"
+                android:columnWidth="150dp"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="2dp"
+                android:horizontalSpacing="3dp"
+                android:layout_marginBottom="3dp">
+            </GridView>
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/full_description_movie_actors_list_view"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#95000000"
+                android:scrollbars="none"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sddsddddsddsddddddddddjklsdghsdafiwequfsdkljgkshgjlhfdgjhfdjgkhfdjghdfljghdjfkgh;asdjf;klasjf;ksdajfksdlajfksladjfklsdajfls;dkajfks;ladjfksdjfklsdajfksdlajfksldajf;sasddsddddddddddjklsdghsdafiwequfsdkljgkshgjlhfdgjhfdjgkhfdjghdfljghdjfkgh;asdjf;klasjf;ksdajfksdlajfksladjfklsdajfls;dkajfks;ladjfksdjfklsdajfksdlajfksldajf;sasddsddddddddddjklsdghsdafiwequfsdkljgkshgjlhfdgjhfdjgkhfdjghdfljghdjfkgh;asdjf;klasjf;ksdajfksdlajfksladjfklsdajfls;dkajfks;ladjfksdjfklsdajfksdlajfksldajf;sasddsddddddddddjklsdghsdafiwequfsdkljgkshgjlhfdgjhfdjgkhfdjghdfljghdjfkgh;asdjf;klasjf;ksdajfksdlajfksladjfklsdajfls;dkajfks;ladjfksdjfklsdajfksdlajfksldajf;sasddsddddddddddjklsdghsdafiwequfsdkljgkshgjlhfdgjhfdjgkhfdjghdfljghdjfkgh;asdjf;klasjf;ksdajfksdlajfksladjfklsdajfls;dkajfks;ladjfksdjfklsdajfksdlajfksldajf;saddddddjklsdghsdafiwequfsdkljgkshgjlhfdgjhfdjgkhfdjghdfljghdjfkgh;asdjf;klasjf;ksdajfksdlajfksladjfklsdajfls;dkajfks;ladjfksdjfklsdajfksdlajfksldajf;sa"/>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
