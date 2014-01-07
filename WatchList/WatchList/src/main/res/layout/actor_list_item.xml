@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout
-        android:background="#333131"
+        android:background="#545151"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
