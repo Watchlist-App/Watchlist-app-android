@@ -57,6 +57,7 @@ public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
             ActorItem actorItem = new ActorItem();
             actorItem.setName(actor.getName());
             actorItem.setCharacter(actor.getCharacter());
+            actorItem.setId(actor.getId());
             actorItemsContainer.getActorItemArrayList().add(actorItem);
         }
         this.actorItemsListAdapter.notifyDataSetChanged();

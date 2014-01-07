@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.watchlistapp.R;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 
+import it.sephiroth.android.library.widget.AdapterView;
 import it.sephiroth.android.library.widget.HListView;
 
 public class FullMovieDescriptionActivity extends ActionBarActivity {
@@ -65,6 +66,15 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
         actorItemsContainer = new ActorItemsContainer();
         actorItemsListAdapter = new ActorItemsListAdapter(this, actorItemsContainer);
         actorsHorizontalListView.setAdapter(actorItemsListAdapter);
+        actorsHorizontalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(FullMovieDescriptionActivity.this, FullActorDescriptionActivity.class);
+                intent.putExtra("actorId", actorItemsContainer.getActorItemArrayList().get(position).getId());
+                startActivity(intent);
+            }
+        });
+
         ActorsLoader actorsLoader = new ActorsLoader(this, movieId, actorItemsListAdapter, actorItemsContainer);
         actorsLoader.execute();
     }
