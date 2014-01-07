@@ -164,14 +164,7 @@
                     android:layout_height="wrap_content"
                     android:background="#95000000"
                     android:scrollbars="none"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="sddsddddsddsddddddddddjklsdghsdafiwequfsdkljgkshgjlhfdgjhfdjgkhfdjghdfljghdjfkgh;asdjf;klasjf;ksdajfksdlajfksladjfklsdajfls;dkajfks;ladjfksdjfklsdajfksdlajfksldajf;sasddsddddddddddjklsdghsdafiwequfsdkljgkshgjlhfdgjhfdjgkhfdjghdfljghdjfkgh;asdjf;klasjf;ksdajfksdlajfksladjfklsdajfls;dkajfks;ladjfksdjfklsdajfksdlajfksldajf;sasddsddddddddddjklsdghsdafiwequfsdkljgkshgjlhfdgjhfdjgkhfdjghdfljghdjfkgh;asdjf;klasjf;ksdajfksdlajfksladjfklsdajfls;dkajfks;ladjfksdjfklsdajfksdlajfksldajf;sasddsddddddddddjklsdghsdafiwequfsdkljgkshgjlhfdgjhfdjgkhfdjghdfljghdjfkgh;asdjf;klasjf;ksdajfksdlajfksladjfklsdajfls;dkajfks;ladjfksdjfklsdajfksdlajfksldajf;sasddsddddddddddjklsdghsdafiwequfsdkljgkshgjlhfdgjhfdjgkhfdjghdfljghdjfkgh;asdjf;klasjf;ksdajfksdlajfksladjfklsdajfls;dkajfks;ladjfksdjfklsdajfksdlajfksldajf;saddddddjklsdghsdafiwequfsdkljgkshgjlhfdgjhfdjgkhfdjghdfljghdjfkgh;asdjf;klasjf;ksdajfksdlajfksladjfklsdajfls;dkajfks;ladjfksdjfklsdajfksdlajfksldajf;sa"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-
-
 </LinearLayout>
