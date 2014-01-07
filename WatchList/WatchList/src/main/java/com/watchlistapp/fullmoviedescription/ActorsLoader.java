@@ -52,6 +52,7 @@ public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
 
     @Override
     protected void onPostExecute(ActorContainer actorContainer) {
+
         for(Actor actor : actorContainer.getActorArrayList()) {
             ActorItem actorItem = new ActorItem();
             actorItem.setName(actor.getName());
@@ -59,8 +60,12 @@ public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
             actorItemsContainer.getActorItemArrayList().add(actorItem);
         }
         this.actorItemsListAdapter.notifyDataSetChanged();
-        //this.actorContainer = actorContainer;
-        //this.actorItemsListAdapter.notifyDataSetChanged();
+
+        for(int i = 0; i < actorContainer.getActorArrayList().size(); i++) {
+            ActorAvatarLoader actorAvatarLoader = new ActorAvatarLoader(actorItemsListAdapter, actorItemsContainer, i,
+                    actorContainer.getActorArrayList().get(i).getProfile_path(), ActorAvatarLoader.BIG);
+            actorAvatarLoader.execute();
+        }
     }
 
     @Override

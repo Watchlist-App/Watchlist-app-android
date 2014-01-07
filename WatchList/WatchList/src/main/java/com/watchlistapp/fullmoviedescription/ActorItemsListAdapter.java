@@ -61,8 +61,9 @@ public class ActorItemsListAdapter extends BaseAdapter {
         }
 
         viewHolder.name.setText(actorItemsContainer.getActorItemArrayList().get(position).getName());
-        viewHolder.actorAvatar.setImageResource(R.drawable.poster);
+        viewHolder.actorAvatar.setImageBitmap(actorItemsContainer.getActorItemArrayList().get(position).getActorAvatar());
         viewHolder.character.setText(actorItemsContainer.getActorItemArrayList().get(position).getCharacter());
+
         return convertView;
     }
 }
