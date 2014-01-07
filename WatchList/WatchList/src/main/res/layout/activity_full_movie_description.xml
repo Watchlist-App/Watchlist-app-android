@@ -126,6 +126,7 @@
                         android:layout_marginLeft="5dp" />
                 </RelativeLayout>
             </RelativeLayout>
+
             <LinearLayout
                 android:background="@drawable/search_results_info_module"
                 android:layout_marginTop="3dp"
@@ -143,6 +144,20 @@
                     android:horizontalSpacing="3dp"
                     android:layout_marginBottom="3dp">
                 </GridView>
+                <LinearLayout
+                    android:background="#000000"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:textColor="#CFC4C4"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="3dp"
+                        android:text="Cast"/>
+                </LinearLayout>
                 <it.sephiroth.android.library.widget.HListView
                     android:id="@+id/full_description_movie_actors_list_view"
                     android:layout_width="fill_parent"
