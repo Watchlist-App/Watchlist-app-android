@@ -6,9 +6,9 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.RoundedImageView;
 import com.watchlistapp.movielist.GenreMovieListActivity;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
@@ -60,7 +60,7 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
     // Views
     private TextView movieTitleTextView;
-    private ImageView posterImageView;
+    private RoundedImageView posterImageView;
     private TextView movieOverviewTextView;
     private TextView ratingTextView;
     private TextView votesTextView;
@@ -71,7 +71,7 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
     private MovieDescription movieDescription;
 
-    public FullDescriptionLoader(Context context, String movieId, TextView tagLineTextView, TextView movieTitleTextView, ImageView posterImageView, TextView movieOverviewTextView, TextView ratingTextView, TextView votesTextView, ColoredRatingBar coloredRatingBar, TextView releaseDateTextView, GridView genresGridView) {
+    public FullDescriptionLoader(Context context, String movieId, TextView tagLineTextView, TextView movieTitleTextView, RoundedImageView posterImageView, TextView movieOverviewTextView, TextView ratingTextView, TextView votesTextView, ColoredRatingBar coloredRatingBar, TextView releaseDateTextView, GridView genresGridView) {
         this.context = context;
         this.movieId = movieId;
 

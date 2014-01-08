@@ -16,3 +16,5 @@
 
 [PhotoView](https://github.com/chrisbanes/PhotoView)
 [HorizontalVariableListView](https://github.com/sephiroth74/HorizontalVariableListView)
+[RoundedImageView](https://github.com/vinc3m1/RoundedImageView)
+[Android-Universal-Image-Loader](https://github.com/nostra13/Android-Universal-Image-Loader)

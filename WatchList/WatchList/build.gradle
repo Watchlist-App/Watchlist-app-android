@@ -17,7 +17,7 @@ android {
     buildToolsVersion '19.0.0'
 
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 9
         targetSdkVersion 19
     }
 
@@ -30,4 +30,7 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:+'
     compile project(': HorizontalVariableListViewLibrary')
+    compile files('libs/universal-image-loader-1.9.1.jar')
+    compile project(':TextJustifyLibrary')
+    compile project(':RoundedImageViewLibrary')
 }

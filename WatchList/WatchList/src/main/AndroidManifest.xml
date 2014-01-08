@@ -6,7 +6,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="7"
+        android:minSdkVersion="9"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -52,14 +52,19 @@
             android:label="@string/title_activity_movie_list" >
         </activity>
         <activity
-            android:name=".fullmoviedescription.FullMovieDescriptionActivity"
+            android:name="com.watchlistapp.fullmoviedescription.FullMovieDescriptionActivity"
             android:label="@string/title_activity_full_movie_description" >
         </activity>
         <activity
-            android:name=".movielist.GenreMovieListActivity"
-            android:label="Genre list"/>
+            android:name="com.watchlistapp.movielist.GenreMovieListActivity"
+            android:label="Genre list" />
         <activity
-            android:name=".fullmoviedescription.FullPosterViewActivity"
-            android:label="Full poster view activity"/>
+            android:name="com.watchlistapp.fullmoviedescription.FullPosterViewActivity"
+            android:label="Full poster view activity" />
+        <activity
+            android:name="com.watchlistapp.fullmoviedescription.FullActorDescriptionActivity"
+            android:label="@string/title_activity_full_actor_description" >
+        </activity>
     </application>
+
 </manifest>

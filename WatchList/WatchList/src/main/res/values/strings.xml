@@ -54,5 +54,6 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_movie_list">MovieListActivity</string>
     <string name="title_activity_full_movie_description">FullMovieDescriptionActivity</string>
+    <string name="title_activity_full_actor_description">FullActorDescriptionActivity</string>
 
 </resources>

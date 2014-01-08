@@ -1,1 +1,1 @@
-include ':WatchList', ': HorizontalVariableListViewLibrary'
+include ':WatchList', ': HorizontalVariableListViewLibrary', ':TextJustifyLibrary', ':RoundedImageViewLibrary'
