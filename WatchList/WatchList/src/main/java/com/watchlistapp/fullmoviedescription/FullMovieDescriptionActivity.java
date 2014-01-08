@@ -39,6 +39,9 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_movie_description);
 
+        String movieTitle = getIntent().getStringExtra("movieTitle");
+        getSupportActionBar().setTitle(movieTitle);
+
         movieTitleTextView = (TextView)findViewById(R.id.full_description_movie_title);
         posterImageView = (RoundedImageView)findViewById(R.id.full_description_movie_poster);
         movieOverviewTextView = (TextView)findViewById(R.id.full_description_movie_description);
@@ -71,6 +74,7 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(FullMovieDescriptionActivity.this, FullActorDescriptionActivity.class);
                 intent.putExtra("actorId", actorItemsContainer.getActorItemArrayList().get(position).getId());
+                intent.putExtra("actorName", actorItemsContainer.getActorItemArrayList().get(position).getName());
                 startActivity(intent);
             }
         });

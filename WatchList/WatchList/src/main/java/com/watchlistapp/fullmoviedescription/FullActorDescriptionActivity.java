@@ -22,6 +22,9 @@ public class FullActorDescriptionActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_actor_description);
 
+        String actorName = getIntent().getStringExtra("actorName");
+        getSupportActionBar().setTitle(actorName);
+
         actorAvatarImageView = (RoundedImageView)findViewById(R.id.full_actor_description_avatar);
         actorNameTextView = (TextView)findViewById(R.id.full_actor_description_name);
         actorBirthdayTextView = (TextView)findViewById(R.id.full_actor_description_birthday);
@@ -29,7 +32,6 @@ public class FullActorDescriptionActivity extends ActionBarActivity {
         actorHomePageTextView = (TextView)findViewById(R.id.full_actor_description_homepage);
         actorBiographyTextView = (TextViewEx)findViewById(R.id.full_actor_description_biography);
         String actorId = getIntent().getStringExtra("actorId");
-        //Toast.makeText(this, actorId, Toast.LENGTH_SHORT).show();
 
         FullActorDescriptionLoader fullActorDescriptionLoader = new FullActorDescriptionLoader(actorId, actorAvatarImageView, actorNameTextView, actorBirthdayTextView,
                 actorPlaceOfBirthTextView, actorHomePageTextView, actorBiographyTextView);

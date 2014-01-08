@@ -35,6 +35,7 @@ public class GenreMovieListActivity extends SearchResultsActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(GenreMovieListActivity.this, FullMovieDescriptionActivity.class);
                 intent.putExtra("movieId", searchResultsContainer.getSearchResultsItemArrayList().get(position).getMovieId());
+                intent.putExtra("movieTitle", searchResultsContainer.getSearchResultsItemArrayList().get(position).getTitle());
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
             }
