@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="5dip">
+
+    <ImageView
+        android:src="@drawable/poster"
+        android:id="@+id/crewAvatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="false" />
+    <LinearLayout
+        android:background="#6A6666"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/tag_line_text_color"
+            android:textSize="15sp"
+            android:text="sdfsdfsd"
+            android:id="@+id/crewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:background="#545151"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView
+            android:textStyle="italic"
+            android:textColor="@color/tag_line_text_color"
+            android:textSize="15sp"
+            android:text="dsfsdfsd"
+            android:id="@+id/crewJob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

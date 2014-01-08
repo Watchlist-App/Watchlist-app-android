@@ -19,88 +19,86 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 /**
- * Created by VEINHORN on 07/01/14.
+ * Created by VEINHORN on 08/01/14.
  */
-
-public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
+public class CrewLoader extends AsyncTask<String, Integer, CrewContainer> {
 
     private final static String BASE_URL = "http://api.themoviedb.org/3/movie/";
     private final static String API_KEY = "2b7854ef68a3c274a0f804c031285c46";
     private final static String API_KEY_TITLE = "api_key";
     private final static String API_APPEND_TO_RESPONSE = "append_to_response=trailers,credits";
     private final static String API_CREDITS_TITLE = "credits";
-    private final static String API_CAST_TITLE = "cast";
+    private final static String API_CREW_TITLE = "crew";
 
-    private final static String API_ID_TITLE = "id";
+    private final static String API_DEPARTMENT_TITLE = "department";
     private final static String API_NAME_TITLE = "name";
-    private final static String API_CHARACTER_TITLE = "character";
-    private final static String API_ORDER_TITLE = "order";
-    private final static String API_CAST_ID_TITLE = "cast_id";
+    private final static String API_ID_TITLE = "id";
+    private final static String API_JOB_TITLE = "job";
     private final static String API_PROFILE_PATH_TITLE = "profile_path";
 
     private Context context;
     private String movieId;
-    private ActorItemsListAdapter actorItemsListAdapter;
-    private ActorItemsContainer actorItemsContainer;
+    private CrewItemsListAdapter crewItemsListAdapter;
+    private CrewItemsContainer crewItemsContainer;
 
-    public ActorsLoader(Context context, String movieId, ActorItemsListAdapter actorItemsListAdapter, ActorItemsContainer actorItemsContainer) {
+    public CrewLoader(Context context, String movieId, CrewItemsListAdapter crewItemsListAdapter, CrewItemsContainer crewItemsContainer) {
         this.context = context;
         this.movieId = movieId;
-        this.actorItemsListAdapter = actorItemsListAdapter;
-        this.actorItemsContainer = actorItemsContainer;
+        this.crewItemsListAdapter = crewItemsListAdapter;
+        this.crewItemsContainer = crewItemsContainer;
     }
 
     @Override
-    protected void onPostExecute(ActorContainer actorContainer) {
-        for(Actor actor : actorContainer.getActorArrayList()) {
-            if(!actor.getProfile_path().equals("null")) {
-                ActorItem actorItem = new ActorItem();
-                actorItem.setProfile_path(actor.getProfile_path());
-                actorItem.setName(actor.getName());
-                actorItem.setCharacter(actor.getCharacter());
-                actorItem.setId(actor.getId());
-                actorItemsContainer.getActorItemArrayList().add(actorItem);
+    protected void onPostExecute(CrewContainer crewContainer) {
+        for(Crew crew : crewContainer.getCrewArrayList()) {
+            if(!crew.getProfilePath().equals("null")) {
+                CrewItem crewItem = new CrewItem();
+                crewItem.setProfilePath(crew.getProfilePath());
+                crewItem.setName(crew.getName());
+                crewItem.setJob(crew.getJob());
+                crewItem.setId(crew.getId());
+                crewItem.setDepartment(crew.getDepartment());
+                crewItemsContainer.getCrewItemArrayList().add(crewItem);
             }
         }
-        this.actorItemsListAdapter.notifyDataSetChanged();
+        this.crewItemsListAdapter.notifyDataSetChanged();
 
-        for(int i = 0; i < actorItemsContainer.getActorItemArrayList().size(); i++) {
-            ActorAvatarLoader actorAvatarLoader = new ActorAvatarLoader(actorItemsListAdapter, actorItemsContainer, i,
-                    actorItemsContainer.getActorItemArrayList().get(i).getProfile_path(), ActorAvatarLoader.BIG);
-            actorAvatarLoader.execute();
+        for(int i = 0; i < crewItemsContainer.getCrewItemArrayList().size(); i++) {
+            CrewAvatarLoader crewAvatarLoader = new CrewAvatarLoader(crewItemsListAdapter, crewItemsContainer, i,
+                crewItemsContainer.getCrewItemArrayList().get(i).getProfilePath(), CrewAvatarLoader.BIG);
+            crewAvatarLoader.execute();
         }
     }
 
     @Override
-    protected ActorContainer doInBackground(String... params) {
-        ActorContainer actorContainer = null;
+    protected CrewContainer doInBackground(String... params) {
+        CrewContainer crewContainer = null;
         String url = BASE_URL + movieId + "?" + API_KEY_TITLE + "=" + API_KEY + "&" + API_APPEND_TO_RESPONSE;
         JSONObject jsonObject = getJSONObject(url);
-        actorContainer = parseJSONObject(jsonObject);
-        return actorContainer;
+        crewContainer = parseJSONObject(jsonObject);
+        return crewContainer;
     }
 
-    private ActorContainer parseJSONObject(JSONObject jsonObject) {
-        ActorContainer actorContainer = new ActorContainer();
+    private CrewContainer parseJSONObject(JSONObject jsonObject) {
+        CrewContainer crewContainer = new CrewContainer();
 
         try {
             JSONObject creditsJsonObject = jsonObject.getJSONObject(API_CREDITS_TITLE);
-            JSONArray castJsonArray = creditsJsonObject.getJSONArray(API_CAST_TITLE);
-            for(int i = 0; i < castJsonArray.length(); i++) {
-                JSONObject actorJsonObject = castJsonArray.getJSONObject(i);
-                Actor actor = new Actor();
-                actor.setId(actorJsonObject.getString(API_ID_TITLE));
-                actor.setCharacter(actorJsonObject.getString(API_CHARACTER_TITLE));
-                actor.setName(actorJsonObject.getString(API_NAME_TITLE));
-                actor.setOrder(actorJsonObject.getString(API_ORDER_TITLE));
-                actor.setCastId(actorJsonObject.getString(API_CAST_ID_TITLE));
-                actor.setProfile_path(actorJsonObject.getString(API_PROFILE_PATH_TITLE));
-                actorContainer.getActorArrayList().add(actor);
+            JSONArray crewJsonArray = creditsJsonObject.getJSONArray(API_CREW_TITLE);
+            for(int i = 0; i < crewJsonArray.length(); i++) {
+                JSONObject crewJsonObject = crewJsonArray.getJSONObject(i);
+                Crew crew = new Crew();
+                crew.setDepartment(crewJsonObject.getString(API_DEPARTMENT_TITLE));
+                crew.setId(crewJsonObject.getString(API_ID_TITLE));
+                crew.setJob(crewJsonObject.getString(API_JOB_TITLE));
+                crew.setName(crewJsonObject.getString(API_NAME_TITLE));
+                crew.setProfilePath(crewJsonObject.getString(API_PROFILE_PATH_TITLE));
+                crewContainer.getCrewArrayList().add(crew);
             }
         } catch(JSONException exception) {
             exception.printStackTrace();
         }
-        return actorContainer;
+        return crewContainer;
     }
 
     private JSONObject getJSONObject(String url) {

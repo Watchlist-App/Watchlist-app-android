@@ -30,10 +30,17 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
 
     private FullDescriptionLoader fullDescriptionLoader;
 
+    // Actors horizontal scroll listview
     private HListView actorsHorizontalListView;
     private ActorItemsListAdapter actorItemsListAdapter;
     private ActorItemsContainer actorItemsContainer;
+    ///////////////////////////////////////////////////
 
+    // Crew horizontal scroll listview
+    private HListView crewHorizontallListView;
+    private CrewItemsListAdapter crewItemsListAdapter;
+    private CrewItemsContainer crewItemsContainer;
+    ///////////////////////////////////////////////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +59,7 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
         tagLineTextView = (TextView)findViewById(R.id.full_description_tag_line);
         genresGridView = (GridView)findViewById(R.id.full_description_genres_grid_view);
         actorsHorizontalListView = (HListView)findViewById(R.id.full_description_movie_actors_list_view);
+        crewHorizontallListView = (HListView)findViewById(R.id.full_description_movie_crew_list_view);
 
         posterImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +87,14 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
             }
         });
 
+        crewItemsContainer = new CrewItemsContainer();
+        crewItemsListAdapter = new CrewItemsListAdapter(this, crewItemsContainer);
+        crewHorizontallListView.setAdapter(crewItemsListAdapter);
+
         ActorsLoader actorsLoader = new ActorsLoader(this, movieId, actorItemsListAdapter, actorItemsContainer);
         actorsLoader.execute();
+
+        CrewLoader crewLoader = new CrewLoader(this, movieId, crewItemsListAdapter, crewItemsContainer);
+        crewLoader.execute();
     }
 }
