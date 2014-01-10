@@ -1,7 +1,7 @@
 #Watchlist Android App
 
 ###Demo:
-[![ScreenShot](http://i.imgur.com/WA8568g.png)](https://www.youtube.com/watch?v=di66WZXNbtg)
+[![ScreenShot](http://i.imgur.com/WA8568g.png)](https://www.youtube.com/watch?v=ne4hb4nJjHE)
 
 ###Screenshots:
 
@@ -14,7 +14,9 @@
 
 #Libs used in this project:
 
-[PhotoView](https://github.com/chrisbanes/PhotoView)
-[HorizontalVariableListView](https://github.com/sephiroth74/HorizontalVariableListView)
-[RoundedImageView](https://github.com/vinc3m1/RoundedImageView)
-[Android-Universal-Image-Loader](https://github.com/nostra13/Android-Universal-Image-Loader)
+* [PhotoView](https://github.com/chrisbanes/PhotoView)
+* [HorizontalVariableListView](https://github.com/sephiroth74/HorizontalVariableListView)
+* [RoundedImageView](https://github.com/vinc3m1/RoundedImageView)
+* [Android-Universal-Image-Loader](https://github.com/nostra13/Android-Universal-Image-Loader)
+* [TextJustify-Android](https://github.com/bluejamesbond/TextJustify-Android)
+
