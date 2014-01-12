@@ -1,20 +1,24 @@
 package com.watchlistapp.fullmoviedescription;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.makeramen.RoundedImageView;
 import com.watchlistapp.R;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
+import com.watchlistapp.youtube.DeveloperKey;
+import com.watchlistapp.youtube.YouTubeFailureRecoveryActivity;
 
 import it.sephiroth.android.library.widget.AdapterView;
 import it.sephiroth.android.library.widget.HListView;
 
-public class FullMovieDescriptionActivity extends ActionBarActivity {
+public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity {
 
     // Views
     private TextView movieTitleTextView;
@@ -41,13 +45,18 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
     private CrewItemsListAdapter crewItemsListAdapter;
     private CrewItemsContainer crewItemsContainer;
     ///////////////////////////////////////////////////
+
+    private YouTubePlayerView youTubePlayerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_movie_description);
 
         String movieTitle = getIntent().getStringExtra("movieTitle");
-        getSupportActionBar().setTitle(movieTitle);
+        //getSupportActionBar().setTitle(movieTitle);
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(movieTitle);
 
         movieTitleTextView = (TextView)findViewById(R.id.full_description_movie_title);
         posterImageView = (RoundedImageView)findViewById(R.id.full_description_movie_poster);
@@ -60,6 +69,9 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
         genresGridView = (GridView)findViewById(R.id.full_description_genres_grid_view);
         actorsHorizontalListView = (HListView)findViewById(R.id.full_description_movie_actors_list_view);
         crewHorizontallListView = (HListView)findViewById(R.id.full_description_movie_crew_list_view);
+
+        youTubePlayerView = (YouTubePlayerView)findViewById(R.id.youtube_view);
+        youTubePlayerView.initialize(DeveloperKey.DEVELOPER_KEY, this);
 
         posterImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,5 +108,17 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
 
         CrewLoader crewLoader = new CrewLoader(this, movieId, crewItemsListAdapter, crewItemsContainer);
         crewLoader.execute();
+    }
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
+        if(!wasRestored) {
+            player.cueVideo("fhWaJi1Hsfo");
+        }
+    }
+
+    @Override
+    protected YouTubePlayer.Provider getYouTubePlayerProvider() {
+        return (YouTubePlayerView)findViewById(R.id.youtube_view);
     }
 }
