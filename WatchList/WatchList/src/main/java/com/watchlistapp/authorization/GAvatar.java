@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import com.watchlistapp.MD5Util;
+import com.watchlistapp.utils.MD5Util;
 import com.watchlistapp.database.WatchListDatabaseHandler;
 
 import java.io.IOException;

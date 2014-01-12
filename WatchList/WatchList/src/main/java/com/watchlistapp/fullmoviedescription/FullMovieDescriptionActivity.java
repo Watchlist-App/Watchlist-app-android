@@ -14,6 +14,7 @@ import com.watchlistapp.R;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 import com.watchlistapp.youtube.DeveloperKey;
 import com.watchlistapp.youtube.YouTubeFailureRecoveryActivity;
+import com.watchlistapp.youtube.YouTubeLoader;
 
 import it.sephiroth.android.library.widget.AdapterView;
 import it.sephiroth.android.library.widget.HListView;
@@ -47,6 +48,7 @@ public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity
     ///////////////////////////////////////////////////
 
     private YouTubePlayerView youTubePlayerView;
+    private String movieTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity
         setContentView(R.layout.activity_full_movie_description);
 
         String movieTitle = getIntent().getStringExtra("movieTitle");
+        this.movieTitle = movieTitle;
         //getSupportActionBar().setTitle(movieTitle);
         ActionBar actionBar = getActionBar();
         actionBar.setTitle(movieTitle);
@@ -113,7 +116,9 @@ public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
         if(!wasRestored) {
-            player.cueVideo("fhWaJi1Hsfo");
+            YouTubeLoader youTubeLoader = new YouTubeLoader(movieTitle, player);
+            youTubeLoader.execute();
+            //player.cueVideo("fhWaJi1Hsfo");
         }
     }
 
