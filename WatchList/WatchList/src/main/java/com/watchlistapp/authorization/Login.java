@@ -80,7 +80,7 @@ public class Login extends AsyncTask<String, Integer, User> {
         if(user == null) {
             String myUrl = BASE_URL + "?" + BASE_URL_NAME + "=" + userNameOrEmail;
             myUrl = myUrl.replaceAll(" ", "%20");
-            JSONArray myJsonArray = RequestsUtil.getJSONArray(url);
+            JSONArray myJsonArray = RequestsUtil.getJSONArray(myUrl);
             User myUser = parseJSONArray(myJsonArray);
             this.user = myUser;
 

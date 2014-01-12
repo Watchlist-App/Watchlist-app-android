@@ -17,7 +17,7 @@ public class ActorAvatarLoader extends AsyncTask<String, Integer, Bitmap> {
 
     public final static String SMALL = "w92";
     public final static String MEDIUM = "w154";
-    public final static String BIG = "w185";
+    public final static String BIG = "w185"; //175*278 ->> original
     public final static String DOUBLE_BIG = "w342";
     public final static String LARGE = "w500";
     public final static String ORIGINAL = "original";
@@ -26,11 +26,13 @@ public class ActorAvatarLoader extends AsyncTask<String, Integer, Bitmap> {
     private ActorItemsListAdapter actorItemsListAdapter;
     private ActorItemsContainer actorItemsContainer;
     private int position;
+    private String posterSize;
 
     public ActorAvatarLoader(ActorItemsListAdapter actorItemsListAdapter, ActorItemsContainer actorItemsContainer,int position, String posterUrl, String posterSize) {
         this.actorItemsListAdapter = actorItemsListAdapter;
         this.actorItemsContainer = actorItemsContainer;
         this.position = position;
+        this.posterSize = posterSize;
 
         if(posterSize == null) {
             url = BASE_URL + BIG + "/" + posterUrl;
@@ -51,6 +53,9 @@ public class ActorAvatarLoader extends AsyncTask<String, Integer, Bitmap> {
         try {
             url = new URL(this.url);
             bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            if(posterSize.equals(BIG)) {
+                bitmap = bitmap.createScaledBitmap(bitmap, 175, 280, false);
+            }
             actorItemsContainer.getActorItemArrayList().get(position).setActorAvatar(bitmap);
         } catch(MalformedURLException exception) {
             exception.printStackTrace();

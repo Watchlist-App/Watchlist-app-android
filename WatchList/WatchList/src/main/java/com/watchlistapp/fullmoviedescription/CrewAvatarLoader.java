@@ -27,11 +27,13 @@ public class CrewAvatarLoader extends AsyncTask<String, Integer, Bitmap> {
     private CrewItemsListAdapter crewItemsListAdapter;
     private CrewItemsContainer crewItemsContainer;
     private int position;
+    private String posterSize;
 
     public CrewAvatarLoader(CrewItemsListAdapter crewItemsListAdapter, CrewItemsContainer crewItemsContainer,int position, String posterUrl, String posterSize) {
         this.crewItemsListAdapter = crewItemsListAdapter;
         this.crewItemsContainer = crewItemsContainer;
         this.position = position;
+        this.posterSize = posterSize;
 
         if(posterSize == null) {
             url = BASE_URL + BIG + "/" + posterUrl;
@@ -52,6 +54,9 @@ public class CrewAvatarLoader extends AsyncTask<String, Integer, Bitmap> {
         try {
             url = new URL(this.url);
             bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            if(posterSize.equals(BIG)) {
+                bitmap = bitmap.createScaledBitmap(bitmap, 175, 280, false);
+            }
             crewItemsContainer.getCrewItemArrayList().get(position).setCrewAvatar(bitmap);
         } catch(MalformedURLException exception) {
             exception.printStackTrace();
