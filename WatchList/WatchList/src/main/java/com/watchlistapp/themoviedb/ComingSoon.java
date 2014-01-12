@@ -8,20 +8,13 @@ import android.os.AsyncTask;
 import com.watchlistapp.comingsoon.ComingSoonContainer;
 import com.watchlistapp.comingsoon.ComingSoonItem;
 import com.watchlistapp.comingsoon.ComingSoonItemAdapter;
+import com.watchlistapp.utils.RequestsUtil;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -103,49 +96,9 @@ public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer>
     protected SearchMovieContainer doInBackground(String... params) {
         SearchMovieContainer searchMovieContainer = null;
         String url = BASE_URL + "?" + API_KEY_TITLE + "=" + API_KEY;
-        jsonObject = getJSONObject(url);
+        jsonObject = RequestsUtil.getJSONObject(url);
         searchMovieContainer = parseJSONObject(jsonObject);
         return searchMovieContainer;
-    }
-
-    public JSONObject getJSONObject(String url) {
-        // Making HTTP request
-        try {
-            DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet(url);
-            httpGet.setHeader("Content-type", "application/json");
-            HttpResponse httpResponse = defaultHttpClient.execute(httpGet);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            inputStream = httpEntity.getContent();
-        } catch(ClientProtocolException exception) {
-            exception.printStackTrace();
-        } catch(IOException exception) {
-            exception.printStackTrace();
-        } catch(IllegalStateException exception) {
-            exception.printStackTrace();
-        }
-
-        // Convert input stream to string
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
-            StringBuilder stringBuilder = new StringBuilder();
-            String line = null;
-            while((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line + "\n");
-            }
-            inputStream.close();
-            jsonString = stringBuilder.toString();
-        } catch(IOException exception) {
-            exception.printStackTrace();
-        }
-
-        // Try parse json string into json object
-        try {
-            jsonObject = new JSONObject(jsonString);
-        } catch(JSONException exception) {
-            exception.printStackTrace();
-        }
-        return jsonObject;
     }
 
     // Parse json into ComingSoonContainer
@@ -157,7 +110,7 @@ public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer>
 
             for(int i = 1; i <= pages; i++) {
                 String url = BASE_URL + "?" + API_KEY_TITLE + "=" + API_KEY + "&" + API_PAGE_TITLE + "=" + Integer.toString(i);
-                jsonObject = getJSONObject(url);
+                jsonObject = RequestsUtil.getJSONObject(url);
                 parseJSONObject(searchMovieContainer, jsonObject);
             }
 

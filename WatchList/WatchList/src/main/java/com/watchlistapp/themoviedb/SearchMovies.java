@@ -9,20 +9,13 @@ import com.watchlistapp.R;
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItem;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
+import com.watchlistapp.utils.RequestsUtil;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -116,51 +109,11 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
         SearchMovieContainer searchMovieContainer = null;
         String url = BASE_URL + "?" + API_KEY_TITLE + "=" + API_KEY + "&" + API_QUERY_TITLE + "=" + searchQueryString;
         url = url.replaceAll(" ", "%20");
-        jsonObject = getJSONObject(url);
+        jsonObject = RequestsUtil.getJSONObject(url);
         searchMovieContainer = parseJSONObject(jsonObject);
         //loadImages();
 
         return searchMovieContainer;
-    }
-
-    public JSONObject getJSONObject(String url) {
-        // Making HTTP request
-        try {
-            DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet(url);
-            httpGet.setHeader("Content-type", "application/json");
-            HttpResponse httpResponse = defaultHttpClient.execute(httpGet);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            inputStream = httpEntity.getContent();
-        } catch(ClientProtocolException exception) {
-            exception.printStackTrace();
-        } catch(IOException exception) {
-            exception.printStackTrace();
-        } catch(IllegalStateException exception) {
-            exception.printStackTrace();
-        }
-
-        // Convert input stream to string
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
-            StringBuilder stringBuilder = new StringBuilder();
-            String line = null;
-            while((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line + "\n");
-            }
-            inputStream.close();
-            jsonString = stringBuilder.toString();
-        } catch(IOException exception) {
-            exception.printStackTrace();
-        }
-
-        // Try parse json string into json object
-        try {
-            jsonObject = new JSONObject(jsonString);
-        } catch(JSONException exception) {
-            exception.printStackTrace();
-        }
-        return jsonObject;
     }
 
     // Parse json into SearchMovieContainer

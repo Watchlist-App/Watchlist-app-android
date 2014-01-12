@@ -7,6 +7,7 @@ import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
 import com.watchlistapp.themoviedb.SearchMovieContainer;
 import com.watchlistapp.themoviedb.SearchMovies;
+import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONObject;
 
@@ -29,7 +30,7 @@ public class GenreMoviesLoader extends SearchMovies {
     protected SearchMovieContainer doInBackground(String... params) {
         SearchMovieContainer searchMovieContainer = null;
         String url = BASE_URL + genreId + "/" + API_MOVIES_TITLE + "?" + API_KEY_TITLE + "=" + API_KEY;
-        JSONObject jsonObject = getJSONObject(url);
+        JSONObject jsonObject = RequestsUtil.getJSONObject(url);
         searchMovieContainer = parseJSONObject(jsonObject);
         return searchMovieContainer;
     }

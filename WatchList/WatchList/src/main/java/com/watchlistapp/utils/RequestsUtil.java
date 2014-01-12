@@ -5,6 +5,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,6 +32,20 @@ public class RequestsUtil {
             exception.printStackTrace();
         }
         return jsonObject;
+    }
+
+    public static JSONArray getJSONArray(String url) {
+        url = url.replaceAll(" ", "%20");
+        InputStream inputStream = getInputStream(url);
+        String jsonString = convertInputStreamToString(inputStream);
+
+        JSONArray jsonArray = null;
+        try {
+            jsonArray = new JSONArray(jsonString);
+        } catch(JSONException exception) {
+            exception.printStackTrace();
+        }
+        return jsonArray;
     }
 
     // This method get InputStream from url
