@@ -1,4 +1,4 @@
-package com.watchlistapp;
+package com.watchlistapp.utils;
 
 /**
  * Created by VEINHORN on 25/12/13.

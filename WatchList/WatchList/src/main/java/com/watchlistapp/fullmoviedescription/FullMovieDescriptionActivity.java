@@ -1,20 +1,25 @@
 package com.watchlistapp.fullmoviedescription;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.makeramen.RoundedImageView;
 import com.watchlistapp.R;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
+import com.watchlistapp.youtube.DeveloperKey;
+import com.watchlistapp.youtube.YouTubeFailureRecoveryActivity;
+import com.watchlistapp.youtube.YouTubeLoader;
 
 import it.sephiroth.android.library.widget.AdapterView;
 import it.sephiroth.android.library.widget.HListView;
 
-public class FullMovieDescriptionActivity extends ActionBarActivity {
+public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity {
 
     // Views
     private TextView movieTitleTextView;
@@ -30,9 +35,20 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
 
     private FullDescriptionLoader fullDescriptionLoader;
 
+    // Actors horizontal scroll listview
     private HListView actorsHorizontalListView;
     private ActorItemsListAdapter actorItemsListAdapter;
     private ActorItemsContainer actorItemsContainer;
+    ///////////////////////////////////////////////////
+
+    // Crew horizontal scroll listview
+    private HListView crewHorizontallListView;
+    private CrewItemsListAdapter crewItemsListAdapter;
+    private CrewItemsContainer crewItemsContainer;
+    ///////////////////////////////////////////////////
+
+    private YouTubePlayerView youTubePlayerView;
+    private String movieTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +56,10 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
         setContentView(R.layout.activity_full_movie_description);
 
         String movieTitle = getIntent().getStringExtra("movieTitle");
-        getSupportActionBar().setTitle(movieTitle);
+        this.movieTitle = movieTitle;
+        //getSupportActionBar().setTitle(movieTitle);
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(movieTitle);
 
         movieTitleTextView = (TextView)findViewById(R.id.full_description_movie_title);
         posterImageView = (RoundedImageView)findViewById(R.id.full_description_movie_poster);
@@ -52,6 +71,10 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
         tagLineTextView = (TextView)findViewById(R.id.full_description_tag_line);
         genresGridView = (GridView)findViewById(R.id.full_description_genres_grid_view);
         actorsHorizontalListView = (HListView)findViewById(R.id.full_description_movie_actors_list_view);
+        crewHorizontallListView = (HListView)findViewById(R.id.full_description_movie_crew_list_view);
+
+        youTubePlayerView = (YouTubePlayerView)findViewById(R.id.youtube_view);
+        youTubePlayerView.initialize(DeveloperKey.DEVELOPER_KEY, this);
 
         posterImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +102,28 @@ public class FullMovieDescriptionActivity extends ActionBarActivity {
             }
         });
 
+        crewItemsContainer = new CrewItemsContainer();
+        crewItemsListAdapter = new CrewItemsListAdapter(this, crewItemsContainer);
+        crewHorizontallListView.setAdapter(crewItemsListAdapter);
+
         ActorsLoader actorsLoader = new ActorsLoader(this, movieId, actorItemsListAdapter, actorItemsContainer);
         actorsLoader.execute();
+
+        CrewLoader crewLoader = new CrewLoader(this, movieId, crewItemsListAdapter, crewItemsContainer);
+        crewLoader.execute();
+    }
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
+        if(!wasRestored) {
+            YouTubeLoader youTubeLoader = new YouTubeLoader(movieTitle, player);
+            youTubeLoader.execute();
+            //player.cueVideo("fhWaJi1Hsfo");
+        }
+    }
+
+    @Override
+    protected YouTubePlayer.Provider getYouTubePlayerProvider() {
+        return (YouTubePlayerView)findViewById(R.id.youtube_view);
     }
 }

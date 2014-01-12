@@ -3,20 +3,11 @@ package com.watchlistapp.fullmoviedescription;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import com.watchlistapp.utils.RequestsUtil;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 
 /**
  * Created by VEINHORN on 07/01/14.
@@ -52,19 +43,21 @@ public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
 
     @Override
     protected void onPostExecute(ActorContainer actorContainer) {
-
         for(Actor actor : actorContainer.getActorArrayList()) {
-            ActorItem actorItem = new ActorItem();
-            actorItem.setName(actor.getName());
-            actorItem.setCharacter(actor.getCharacter());
-            actorItem.setId(actor.getId());
-            actorItemsContainer.getActorItemArrayList().add(actorItem);
+            if(!actor.getProfile_path().equals("null")) {
+                ActorItem actorItem = new ActorItem();
+                actorItem.setProfile_path(actor.getProfile_path());
+                actorItem.setName(actor.getName());
+                actorItem.setCharacter(actor.getCharacter());
+                actorItem.setId(actor.getId());
+                actorItemsContainer.getActorItemArrayList().add(actorItem);
+            }
         }
         this.actorItemsListAdapter.notifyDataSetChanged();
 
-        for(int i = 0; i < actorContainer.getActorArrayList().size(); i++) {
+        for(int i = 0; i < actorItemsContainer.getActorItemArrayList().size(); i++) {
             ActorAvatarLoader actorAvatarLoader = new ActorAvatarLoader(actorItemsListAdapter, actorItemsContainer, i,
-                    actorContainer.getActorArrayList().get(i).getProfile_path(), ActorAvatarLoader.BIG);
+                    actorItemsContainer.getActorItemArrayList().get(i).getProfile_path(), ActorAvatarLoader.BIG);
             actorAvatarLoader.execute();
         }
     }
@@ -73,7 +66,7 @@ public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
     protected ActorContainer doInBackground(String... params) {
         ActorContainer actorContainer = null;
         String url = BASE_URL + movieId + "?" + API_KEY_TITLE + "=" + API_KEY + "&" + API_APPEND_TO_RESPONSE;
-        JSONObject jsonObject = getJSONObject(url);
+        JSONObject jsonObject = RequestsUtil.getJSONObject(url);
         actorContainer = parseJSONObject(jsonObject);
         return actorContainer;
     }
@@ -99,60 +92,5 @@ public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
             exception.printStackTrace();
         }
         return actorContainer;
-    }
-
-    private JSONObject getJSONObject(String url) {
-        InputStream inputStream = getInputStream(url);
-        String jsonString = convertInputStreamToString(inputStream);
-
-        JSONObject jsonObject = null;
-        try {
-            jsonObject = new JSONObject(jsonString);
-        } catch(JSONException exception) {
-            exception.printStackTrace();
-        }
-        return jsonObject;
-    }
-
-    // This method get InputStream from url
-    private InputStream getInputStream(String url) {
-        InputStream inputStream = null;
-
-        // Making HTTP request
-        try {
-            DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet(url);
-            httpGet.setHeader("Content-type", "application/json");
-            HttpResponse httpResponse = defaultHttpClient.execute(httpGet);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            inputStream = httpEntity.getContent();
-        } catch(ClientProtocolException exception) {
-            exception.printStackTrace();
-        } catch(IOException exception) {
-            exception.printStackTrace();
-        } catch(IllegalStateException exception) {
-            exception.printStackTrace();
-        }
-        return inputStream;
-    }
-
-    // This method converts InputStream to json string
-    private String convertInputStreamToString(InputStream inputStream) {
-        String jsonString = null;
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
-            StringBuilder stringBuilder = new StringBuilder();
-            String line = null;
-            while((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line + "\n");
-            }
-            inputStream.close();
-            jsonString = stringBuilder.toString();
-        } catch(UnsupportedEncodingException exception) {
-            exception.printStackTrace();
-        } catch(IOException exception) {
-            exception.printStackTrace();
-        }
-        return jsonString;
     }
 }

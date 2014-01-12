@@ -25,12 +25,6 @@ public class LogInActivity extends ActionBarActivity {
         setContentView(R.layout.activity_login);
 
         getSupportActionBar().hide();
-        /*
-        // Sets the action bar color as a drawable
-        ActionBar actionBar = getSupportActionBar();
-        String actionBarColor = getString(R.color.login_activity_actionbar_color);
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(actionBarColor)));
-        */
 
         email = (EditText)findViewById(R.id.activity_login_email_edit_text);
         password = (EditText)findViewById(R.id.activity_login_password_edit_text);
