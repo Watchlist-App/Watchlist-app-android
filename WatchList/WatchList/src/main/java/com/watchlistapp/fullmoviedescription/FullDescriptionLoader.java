@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.makeramen.RoundedImageView;
 import com.watchlistapp.movielist.GenreMovieListActivity;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
-import com.watchlistapp.searchresults.SearchResultsItemAdapter;
+import com.watchlistapp.utils.DateUtil;
 import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONArray;
@@ -95,7 +95,7 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
         if(releaseDate.equals("")) {
             releaseDate = "Release date: Unknown";
         } else {
-            releaseDate = "Release date: " + SearchResultsItemAdapter.convertDate(releaseDate);
+            releaseDate = "Release date: " + DateUtil.convertDate(releaseDate);
         }
         releaseDateTextView.setText(releaseDate);
 

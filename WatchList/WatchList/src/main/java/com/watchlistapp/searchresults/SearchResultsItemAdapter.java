@@ -20,10 +20,7 @@ import com.watchlistapp.authorization.LoggedInUser;
 import com.watchlistapp.authorization.LoggedInUserContainer;
 import com.watchlistapp.database.WatchListDatabaseHandler;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.watchlistapp.utils.DateUtil;
 
 /**
  * Created by VEINHORN on 02/12/13.
@@ -107,7 +104,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         if(releaseDate.equals("")) {
             releaseDate = "Release date: Unknown";
         } else {
-            releaseDate = "Release date: " + convertDate(releaseDate);
+            releaseDate = "Release date: " + DateUtil.convertDate(releaseDate);
         }
         // Convert from one time format to another
 
@@ -119,19 +116,6 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         viewHolder.votesRatingBar.setRating(ratingBarVote);
         viewHolder.poster.setImageBitmap(searchResultsContainer.getSearchResultsItemArrayList().get(position).getPoster());
         return convertView;
-    }
-
-    public static String convertDate(String inputString) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        try {
-            date = simpleDateFormat.parse(inputString);
-        } catch(ParseException exception) {
-            exception.printStackTrace();
-        }
-        SimpleDateFormat postFormater = new SimpleDateFormat("MMMM dd, yyyy");
-        String postDate = postFormater.format(date);
-        return postDate;
     }
 
     /*

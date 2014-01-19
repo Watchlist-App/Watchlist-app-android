@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.makeramen.RoundedImageView;
 import com.textjustifylibrary.TextViewEx;
-import com.watchlistapp.searchresults.SearchResultsItemAdapter;
+import com.watchlistapp.utils.DateUtil;
 import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONException;
@@ -53,7 +53,7 @@ public class FullActorDescriptionLoader extends AsyncTask<String, Integer, FullA
         FullActorAvatarLoader fullActorAvatarLoader = new FullActorAvatarLoader(fullActorDescription.getProfilePath(), FullActorAvatarLoader.LARGE, actorAvatarImageView);
         fullActorAvatarLoader.execute();
         actorNameTextView.setText("Name: " + fullActorDescription.getName());
-        actorBirthdayTextView.setText("Birthday: " + SearchResultsItemAdapter.convertDate(fullActorDescription.getBirthday()));
+        actorBirthdayTextView.setText("Birthday: " + DateUtil.convertDate(fullActorDescription.getBirthday()));
         actorPlaceOfBirthTextView.setText("Place of birth: " + fullActorDescription.getPlaceOfBirth());
         actorHomePageTextView.setText("Homepage");
         actorHomePageTextView.setOnClickListener(new View.OnClickListener() {
