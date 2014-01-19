@@ -120,12 +120,9 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
     @Override
     protected MovieDescription doInBackground(String... params) {
-        MovieDescription movieDescription = null;
         String url = BASE_URL + movieId + "?" + API_KEY_TITLE + "=" + API_KEY;
         JSONObject jsonObject = RequestsUtil.getJSONObject(url);
-
         movieDescription = parseJSONObject(jsonObject);
-
         return movieDescription;
     }
 

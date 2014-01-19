@@ -9,7 +9,7 @@
     <color name="registration_email_start_text_color">#666666</color>
     <color name="registration_email_text_color">#6699FF</color>
 
-    <color name="registration_loginbutton_not_pressed_state_color">#111111</color>
+    <color name="registration_login_button_not_pressed_state_color">#95000000</color>
     <color name="registration_login_button_not_pressed_border_color">#8A4B08</color>
     <color name="signupmodulecolor">#65222222</color>
 

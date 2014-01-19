@@ -31,7 +31,8 @@
         </activity>
         <activity
             android:name="com.watchlistapp.authorization.LogInActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity
             android:name="com.watchlistapp.searchresults.SearchResultsActivity"

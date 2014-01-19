@@ -12,9 +12,9 @@
 
     <!-- Registration layout string resources -->
     <string name="fragment_main_watchlist_title">Watch List</string>
-    <string name="fragment_registration_email_start_text">Enter your e-mail...</string>
-    <string name="fragment_registration_nickname_start_text">Enter your nickname...</string>
-    <string name="fragment_registration_password_start_text">Enter your password...</string>
+    <string name="fragment_registration_email_start_text">Enter your e-mail</string>
+    <string name="fragment_registration_nickname_start_text">Enter your nickname</string>
+    <string name="fragment_registration_password_start_text">Enter your password</string>
     <!-- End -->
     <string name="title_activity_main">MainActivity</string>
     <string name="hello_world">Hello world!</string>
