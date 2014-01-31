@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.watchlistapp.R;
+import com.watchlistapp.apikeys.DeveloperKeys;
 import com.watchlistapp.database.WatchListDatabaseHandler;
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItem;
@@ -26,8 +27,6 @@ public class LoadMovie extends AsyncTask<String, Integer, SearchMovieContainer> 
 
     private final static String BASE_URL = "http://api.themoviedb.org/3/movie/";
     private final static String API_KEY_TITLE = "api_key";
-    private final static String API_KEY = "2b7854ef68a3c274a0f804c031285c46";
-
     private final static String API_TITLE_TITLE = "title";
 
     private Activity activity;
@@ -91,7 +90,7 @@ public class LoadMovie extends AsyncTask<String, Integer, SearchMovieContainer> 
         MovieContainer movieContainer = watchListDatabaseHandler.getMovieIdsByListTitle(listTitle);
 
         for(com.watchlistapp.watchlistserver.Movie myMovieId : movieContainer.getMovieArrayList()) {
-            String url = BASE_URL + myMovieId.getId() + "?" + API_KEY_TITLE + "=" + API_KEY;
+            String url = BASE_URL + myMovieId.getId() + "?" + API_KEY_TITLE + "=" + DeveloperKeys.THE_MOVIE_DB_DEVELOPER_KEY;
             JSONObject jsonObject = RequestsUtil.getJSONObject(url);
             Movie movie = parseJSONObject(jsonObject);
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
+import com.watchlistapp.apikeys.DeveloperKeys;
 import com.watchlistapp.comingsoon.ComingSoonContainer;
 import com.watchlistapp.comingsoon.ComingSoonItem;
 import com.watchlistapp.comingsoon.ComingSoonItemAdapter;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer> {
 
     private final static String BASE_URL = "http://api.themoviedb.org/3/movie/upcoming";
-    private final static String API_KEY = "2b7854ef68a3c274a0f804c031285c46";
     private final static String API_PAGE_TITLE = "page";
     private final static String API_KEY_TITLE = "api_key";
     private final static String API_TOTAL_PAGES_TITLE = "total_pages";
@@ -95,7 +95,7 @@ public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer>
     @Override
     protected SearchMovieContainer doInBackground(String... params) {
         SearchMovieContainer searchMovieContainer = null;
-        String url = BASE_URL + "?" + API_KEY_TITLE + "=" + API_KEY;
+        String url = BASE_URL + "?" + API_KEY_TITLE + "=" + DeveloperKeys.THE_MOVIE_DB_DEVELOPER_KEY;
         jsonObject = RequestsUtil.getJSONObject(url);
         searchMovieContainer = parseJSONObject(jsonObject);
         return searchMovieContainer;
@@ -109,7 +109,7 @@ public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer>
             int pages = jsonObject.getInt(API_TOTAL_PAGES_TITLE);
 
             for(int i = 1; i <= pages; i++) {
-                String url = BASE_URL + "?" + API_KEY_TITLE + "=" + API_KEY + "&" + API_PAGE_TITLE + "=" + Integer.toString(i);
+                String url = BASE_URL + "?" + API_KEY_TITLE + "=" + DeveloperKeys.THE_MOVIE_DB_DEVELOPER_KEY + "&" + API_PAGE_TITLE + "=" + Integer.toString(i);
                 jsonObject = RequestsUtil.getJSONObject(url);
                 parseJSONObject(searchMovieContainer, jsonObject);
             }
