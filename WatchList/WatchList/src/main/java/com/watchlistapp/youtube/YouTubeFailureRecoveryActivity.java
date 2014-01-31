@@ -6,7 +6,7 @@ import android.widget.Toast;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.watchlistapp.apikeys.DeveloperKeys;
+import com.watchlistapp.utils.DeveloperKeys;
 
 /**
  * Created by VEINHORN on 12/01/14.

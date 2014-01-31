@@ -7,7 +7,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.watchlistapp.R;
-import com.watchlistapp.apikeys.DeveloperKeys;
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.database.WatchListDatabaseHandler;
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItem;

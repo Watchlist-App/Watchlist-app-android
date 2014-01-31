@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
-import com.watchlistapp.apikeys.DeveloperKeys;
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.comingsoon.ComingSoonContainer;
 import com.watchlistapp.comingsoon.ComingSoonItem;
 import com.watchlistapp.comingsoon.ComingSoonItemAdapter;

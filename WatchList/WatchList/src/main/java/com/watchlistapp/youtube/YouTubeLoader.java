@@ -3,7 +3,7 @@ package com.watchlistapp.youtube;
 import android.os.AsyncTask;
 
 import com.google.android.youtube.player.YouTubePlayer;
-import com.watchlistapp.apikeys.DeveloperKeys;
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONArray;

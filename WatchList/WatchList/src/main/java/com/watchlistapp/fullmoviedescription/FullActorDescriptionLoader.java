@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.makeramen.RoundedImageView;
 import com.textjustifylibrary.TextViewEx;
 import com.watchlistapp.utils.DateUtil;
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONException;
@@ -19,7 +20,6 @@ public class FullActorDescriptionLoader extends AsyncTask<String, Integer, FullA
 
     private final static String BASE_URL = "http://api.themoviedb.org/3/person/";
     private final static String API_KEY_TITLE = "api_key";
-    private final static String API_KEY = "2b7854ef68a3c274a0f804c031285c46";
     private final static String API_PROFILE_PATH_TITLE = "profile_path";
     private final static String API_NAME_TITLE = "name";
     private final static String API_BIRTHDAY_TITLE = "birthday";
@@ -68,7 +68,7 @@ public class FullActorDescriptionLoader extends AsyncTask<String, Integer, FullA
     @Override
     protected FullActorDescription doInBackground(String... params) {
         FullActorDescription fullActorDescription = null;
-        String url = BASE_URL + actorId + "?" + API_KEY_TITLE + "=" + API_KEY;
+        String url = BASE_URL + actorId + "?" + API_KEY_TITLE + "=" + DeveloperKeys.THE_MOVIE_DB_DEVELOPER_KEY;
         JSONObject jsonObject = RequestsUtil.getJSONObject(url);
         fullActorDescription = parseJSONObject(jsonObject);
         return fullActorDescription;

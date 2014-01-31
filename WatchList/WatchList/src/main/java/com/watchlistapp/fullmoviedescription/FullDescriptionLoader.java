@@ -12,6 +12,7 @@ import com.makeramen.RoundedImageView;
 import com.watchlistapp.movielist.GenreMovieListActivity;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 import com.watchlistapp.utils.DateUtil;
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONArray;
@@ -22,11 +23,8 @@ import org.json.JSONObject;
  * Created by VEINHORN on 26/12/13.
  */
 public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescription> {
-
     private final static String BASE_URL = "http://api.themoviedb.org/3/movie/";
-
     private final static String API_KEY_TITLE = "api_key";
-    private final static String API_KEY = "2b7854ef68a3c274a0f804c031285c46";
 
     private final static String API_BACKDROP_PATH_TITLE = "backdrop_path";
     private final static String API_BUDGET_TITLE = "budget";
@@ -120,7 +118,7 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
     @Override
     protected MovieDescription doInBackground(String... params) {
-        String url = BASE_URL + movieId + "?" + API_KEY_TITLE + "=" + API_KEY;
+        String url = BASE_URL + movieId + "?" + API_KEY_TITLE + "=" + DeveloperKeys.THE_MOVIE_DB_DEVELOPER_KEY;
         JSONObject jsonObject = RequestsUtil.getJSONObject(url);
         movieDescription = parseJSONObject(jsonObject);
         return movieDescription;
