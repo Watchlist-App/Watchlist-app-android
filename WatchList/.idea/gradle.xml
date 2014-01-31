@@ -5,6 +5,15 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ HorizontalVariableListViewLibrary" />
+            <option value="$PROJECT_DIR$/RoundedImageViewLibrary" />
+            <option value="$PROJECT_DIR$/TextJustifyLibrary" />
+            <option value="$PROJECT_DIR$/WatchList" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>

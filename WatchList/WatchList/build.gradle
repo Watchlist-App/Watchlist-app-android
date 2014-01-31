@@ -34,4 +34,5 @@ dependencies {
     compile project(':TextJustifyLibrary')
     compile project(':RoundedImageViewLibrary')
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+    compile files('libs/volley.jar')
 }

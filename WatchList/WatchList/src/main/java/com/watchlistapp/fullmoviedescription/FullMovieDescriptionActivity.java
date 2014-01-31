@@ -12,7 +12,7 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import com.makeramen.RoundedImageView;
 import com.watchlistapp.R;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
-import com.watchlistapp.youtube.YouTubeDeveloperKey;
+import com.watchlistapp.apikeys.DeveloperKeys;
 import com.watchlistapp.youtube.YouTubeFailureRecoveryActivity;
 import com.watchlistapp.youtube.YouTubeLoader;
 
@@ -74,7 +74,7 @@ public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity
         crewHorizontallListView = (HListView)findViewById(R.id.full_description_movie_crew_list_view);
 
         youTubePlayerView = (YouTubePlayerView)findViewById(R.id.youtube_view);
-        youTubePlayerView.initialize(YouTubeDeveloperKey.DEVELOPER_KEY, this);
+        youTubePlayerView.initialize(DeveloperKeys.YOUTUBE_DEVELOPER_KEY, this);
 
         posterImageView.setOnClickListener(new View.OnClickListener() {
             @Override

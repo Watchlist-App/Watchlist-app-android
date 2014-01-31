@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
+import com.watchlistapp.apikeys.DeveloperKeys;
 
 /**
  * Created by VEINHORN on 12/01/14.
@@ -32,7 +33,7 @@ public abstract class YouTubeFailureRecoveryActivity extends YouTubeBaseActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == RECOVERY_DIALOG_REQUEST) {
             // Retry initialization if user performed a recovery action
-            getYouTubePlayerProvider().initialize(YouTubeDeveloperKey.DEVELOPER_KEY, this);
+            getYouTubePlayerProvider().initialize(DeveloperKeys.YOUTUBE_DEVELOPER_KEY, this);
         }
     }
 

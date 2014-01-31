@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.watchlistapp.R;
+import com.watchlistapp.apikeys.DeveloperKeys;
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItem;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
@@ -23,7 +24,6 @@ import java.util.ArrayList;
  */
 public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContainer> {
     private final static String BASE_URL = "http://api.themoviedb.org/3/search/movie";
-    public final static String API_KEY = "2b7854ef68a3c274a0f804c031285c46";
     // Required Parameters
     private final static String API_QUERY_TITLE = "query";
     public final static String API_KEY_TITLE = "api_key";
@@ -107,7 +107,7 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
     @Override
     protected SearchMovieContainer doInBackground(String... params) {
         SearchMovieContainer searchMovieContainer = null;
-        String url = BASE_URL + "?" + API_KEY_TITLE + "=" + API_KEY + "&" + API_QUERY_TITLE + "=" + searchQueryString;
+        String url = BASE_URL + "?" + API_KEY_TITLE + "=" + DeveloperKeys.THE_MOVIE_DB_DEVELOPER_KEY + "&" + API_QUERY_TITLE + "=" + searchQueryString;
         url = url.replaceAll(" ", "%20");
         jsonObject = RequestsUtil.getJSONObject(url);
         searchMovieContainer = parseJSONObject(jsonObject);
