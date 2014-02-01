@@ -3,6 +3,7 @@ package com.watchlistapp.fullmoviedescription;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONArray;
@@ -16,7 +17,6 @@ import org.json.JSONObject;
 public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
 
     private final static String BASE_URL = "http://api.themoviedb.org/3/movie/";
-    private final static String API_KEY = "2b7854ef68a3c274a0f804c031285c46";
     private final static String API_KEY_TITLE = "api_key";
     private final static String API_APPEND_TO_RESPONSE = "append_to_response=trailers,credits";
     private final static String API_CREDITS_TITLE = "credits";
@@ -65,7 +65,7 @@ public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
     @Override
     protected ActorContainer doInBackground(String... params) {
         ActorContainer actorContainer = null;
-        String url = BASE_URL + movieId + "?" + API_KEY_TITLE + "=" + API_KEY + "&" + API_APPEND_TO_RESPONSE;
+        String url = BASE_URL + movieId + "?" + API_KEY_TITLE + "=" + DeveloperKeys.THE_MOVIE_DB_DEVELOPER_KEY + "&" + API_APPEND_TO_RESPONSE;
         JSONObject jsonObject = RequestsUtil.getJSONObject(url);
         actorContainer = parseJSONObject(jsonObject);
         return actorContainer;

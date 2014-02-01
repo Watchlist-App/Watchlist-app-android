@@ -12,7 +12,7 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import com.makeramen.RoundedImageView;
 import com.watchlistapp.R;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
-import com.watchlistapp.apikeys.DeveloperKeys;
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.youtube.YouTubeFailureRecoveryActivity;
 import com.watchlistapp.youtube.YouTubeLoader;
 
