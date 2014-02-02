@@ -56,6 +56,8 @@ public class CrewAvatarLoader extends AsyncTask<String, Integer, Bitmap> {
             bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             if(posterSize.equals(BIG)) {
                 bitmap = bitmap.createScaledBitmap(bitmap, 175, 280, false);
+            } else if(posterSize.equals(SMALL)) {
+                bitmap = bitmap.createScaledBitmap(bitmap, 175, 280, false);
             }
             crewItemsContainer.getCrewItemArrayList().get(position).setCrewAvatar(bitmap);
         } catch(MalformedURLException exception) {

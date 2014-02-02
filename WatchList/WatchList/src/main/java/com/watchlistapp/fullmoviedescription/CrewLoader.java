@@ -2,6 +2,8 @@ package com.watchlistapp.fullmoviedescription;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.Display;
+import android.view.WindowManager;
 
 import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
@@ -52,7 +54,21 @@ public class CrewLoader extends AsyncTask<String, Integer, CrewContainer> {
                 crewItemsContainer.getCrewItemArrayList().add(crewItem);
             }
         }
-        this.crewItemsListAdapter.notifyDataSetChanged();
+        //this.crewItemsListAdapter.notifyDataSetChanged();
+
+        // Get the screen size(height and width)
+        WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        // Here I use old methods
+        int displayWidth = display.getWidth();
+        int displayHeight = display.getHeight();
+
+        String imageSize = null;
+        if((displayWidth == 480 && displayHeight == 800) || (displayWidth == 540 && displayHeight == 960)) {
+            imageSize = CrewAvatarLoader.SMALL;
+        } else {
+            imageSize = CrewAvatarLoader.BIG;
+        }
 
         for(int i = 0; i < crewItemsContainer.getCrewItemArrayList().size(); i++) {
             CrewAvatarLoader crewAvatarLoader = new CrewAvatarLoader(crewItemsListAdapter, crewItemsContainer, i,

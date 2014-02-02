@@ -2,6 +2,8 @@ package com.watchlistapp.fullmoviedescription;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.Display;
+import android.view.WindowManager;
 
 import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
@@ -53,11 +55,25 @@ public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
                 actorItemsContainer.getActorItemArrayList().add(actorItem);
             }
         }
-        this.actorItemsListAdapter.notifyDataSetChanged();
+        //this.actorItemsListAdapter.notifyDataSetChanged();
+
+        // Get the screen size(height and width)
+        WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        // Here I use old methods
+        int displayWidth = display.getWidth();
+        int displayHeight = display.getHeight();
+
+        String imageSize = null;
+        if((displayWidth == 480 && displayHeight == 800) || (displayWidth == 540 && displayHeight == 960)) {
+            imageSize = ActorAvatarLoader.SMALL;
+        } else {
+            imageSize = ActorAvatarLoader.BIG;
+        }
 
         for(int i = 0; i < actorItemsContainer.getActorItemArrayList().size(); i++) {
             ActorAvatarLoader actorAvatarLoader = new ActorAvatarLoader(actorItemsListAdapter, actorItemsContainer, i,
-                    actorItemsContainer.getActorItemArrayList().get(i).getProfile_path(), ActorAvatarLoader.BIG);
+                    actorItemsContainer.getActorItemArrayList().get(i).getProfile_path(), imageSize);
             actorAvatarLoader.execute();
         }
     }

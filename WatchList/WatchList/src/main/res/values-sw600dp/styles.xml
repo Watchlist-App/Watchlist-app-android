@@ -6,7 +6,7 @@
         <item name="android:paddingBottom">3dp</item>
         <item name="android:paddingTop">3dp</item>
         <item name="android:textColor">#BDBDBD</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColorHint">@color/registration_email_start_text_color</item>
         <item name="android:layout_width">fill_parent</item>
