@@ -55,6 +55,8 @@ public class ActorAvatarLoader extends AsyncTask<String, Integer, Bitmap> {
             bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
             if(posterSize.equals(BIG)) {
                 bitmap = bitmap.createScaledBitmap(bitmap, 175, 280, false);
+            } else if(posterSize.equals(SMALL)) {
+                bitmap = bitmap.createScaledBitmap(bitmap, 175, 280, false);
             }
             actorItemsContainer.getActorItemArrayList().get(position).setActorAvatar(bitmap);
         } catch(MalformedURLException exception) {

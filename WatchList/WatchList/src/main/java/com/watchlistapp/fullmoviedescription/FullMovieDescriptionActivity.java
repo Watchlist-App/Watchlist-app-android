@@ -118,7 +118,6 @@ public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity
         if(!wasRestored) {
             YouTubeLoader youTubeLoader = new YouTubeLoader(movieTitle, player);
             youTubeLoader.execute();
-            //player.cueVideo("fhWaJi1Hsfo");
         }
     }
 

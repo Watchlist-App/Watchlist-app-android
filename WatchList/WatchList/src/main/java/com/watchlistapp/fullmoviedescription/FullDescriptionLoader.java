@@ -3,7 +3,9 @@ package com.watchlistapp.fullmoviedescription;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -97,7 +99,20 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
         }
         releaseDateTextView.setText(releaseDate);
 
-        PosterLoader posterLoader = new PosterLoader(posterImageView, movieDescription.getPosterPath(), PosterLoader.DOUBLE_BIG);
+        // Get the screen size(height and width)
+        WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        // Here I use old methods
+        int displayWidth = display.getWidth();
+        int displayHeight = display.getHeight();
+
+        // Later I need to add the support of 540*960px screen sizes
+        PosterLoader posterLoader = null;
+        if(displayWidth == 480 && displayHeight == 800) {
+            posterLoader = new PosterLoader(posterImageView, movieDescription.getPosterPath(), PosterLoader.BIG);
+        } else {
+            posterLoader = new PosterLoader(posterImageView, movieDescription.getPosterPath(), PosterLoader.DOUBLE_BIG);
+        }
         posterLoader.execute();
 
         GenreItemAdapter genreItemAdapter = new GenreItemAdapter(context, movieDescription.getGenreContainer());
