@@ -54,7 +54,7 @@ public class CrewLoader extends AsyncTask<String, Integer, CrewContainer> {
                 crewItemsContainer.getCrewItemArrayList().add(crewItem);
             }
         }
-        this.crewItemsListAdapter.notifyDataSetChanged();
+        //this.crewItemsListAdapter.notifyDataSetChanged();
 
         // Get the screen size(height and width)
         WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
@@ -64,7 +64,7 @@ public class CrewLoader extends AsyncTask<String, Integer, CrewContainer> {
         int displayHeight = display.getHeight();
 
         String imageSize = null;
-        if(displayWidth == 480 && displayHeight == 800) {
+        if((displayWidth == 480 && displayHeight == 800) || (displayWidth == 540 && displayHeight == 960)) {
             imageSize = CrewAvatarLoader.SMALL;
         } else {
             imageSize = CrewAvatarLoader.BIG;

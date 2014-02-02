@@ -24,7 +24,7 @@ import org.json.JSONObject;
 /**
  * Created by VEINHORN on 26/12/13.
  */
-public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescription> {
+public class FullMovieDescriptionLoader extends AsyncTask<String, Integer, MovieDescription> {
     private final static String BASE_URL = "http://api.themoviedb.org/3/movie/";
     private final static String API_KEY_TITLE = "api_key";
 
@@ -61,7 +61,7 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
     private MovieDescription movieDescription;
 
-    public FullDescriptionLoader(Context context, String movieId, TextView tagLineTextView, TextView movieTitleTextView, RoundedImageView posterImageView, TextView movieOverviewTextView, TextView ratingTextView, TextView votesTextView, ColoredRatingBar coloredRatingBar, TextView releaseDateTextView, GridView genresGridView) {
+    public FullMovieDescriptionLoader(Context context, String movieId, TextView tagLineTextView, TextView movieTitleTextView, RoundedImageView posterImageView, TextView movieOverviewTextView, TextView ratingTextView, TextView votesTextView, ColoredRatingBar coloredRatingBar, TextView releaseDateTextView, GridView genresGridView) {
         this.context = context;
         this.movieId = movieId;
 
@@ -108,7 +108,7 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
         // Later I need to add the support of 540*960px screen sizes
         PosterLoader posterLoader = null;
-        if(displayWidth == 480 && displayHeight == 800) {
+        if((displayWidth == 480 && displayHeight == 800) || (displayWidth == 540 && displayHeight == 960)) {
             posterLoader = new PosterLoader(posterImageView, movieDescription.getPosterPath(), PosterLoader.BIG);
         } else {
             posterLoader = new PosterLoader(posterImageView, movieDescription.getPosterPath(), PosterLoader.DOUBLE_BIG);

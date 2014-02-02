@@ -55,7 +55,7 @@ public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
                 actorItemsContainer.getActorItemArrayList().add(actorItem);
             }
         }
-        this.actorItemsListAdapter.notifyDataSetChanged();
+        //this.actorItemsListAdapter.notifyDataSetChanged();
 
         // Get the screen size(height and width)
         WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
@@ -65,7 +65,7 @@ public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
         int displayHeight = display.getHeight();
 
         String imageSize = null;
-        if(displayWidth == 480 && displayHeight == 800) {
+        if((displayWidth == 480 && displayHeight == 800) || (displayWidth == 540 && displayHeight == 960)) {
             imageSize = ActorAvatarLoader.SMALL;
         } else {
             imageSize = ActorAvatarLoader.BIG;

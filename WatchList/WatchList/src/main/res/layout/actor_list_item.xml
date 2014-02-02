@@ -3,7 +3,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#6A6666">
+    android:background="#6A6666"
+    android:layout_margin="2dp">
 
     <ImageView
         android:src="@drawable/poster"

@@ -33,7 +33,7 @@ public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity
 
     private GridView genresGridView;
 
-    private FullDescriptionLoader fullDescriptionLoader;
+    private FullMovieDescriptionLoader fullMovieDescriptionLoader;
 
     // Actors horizontal scroll listview
     private HListView actorsHorizontalListView;
@@ -80,14 +80,14 @@ public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FullMovieDescriptionActivity.this, FullPosterViewActivity.class);
-                intent.putExtra("posterUrl", fullDescriptionLoader.getMovieDescription().getPosterPath());
+                intent.putExtra("posterUrl", fullMovieDescriptionLoader.getMovieDescription().getPosterPath());
                 startActivity(intent);
             }
         });
 
         String movieId = getIntent().getStringExtra("movieId");
-        fullDescriptionLoader = new FullDescriptionLoader(FullMovieDescriptionActivity.this, movieId, tagLineTextView, movieTitleTextView, posterImageView, movieOverviewTextView, ratingTextView, votesTextView, coloredRatingBar, releaseDateTextView, genresGridView);
-        fullDescriptionLoader.execute();
+        fullMovieDescriptionLoader = new FullMovieDescriptionLoader(FullMovieDescriptionActivity.this, movieId, tagLineTextView, movieTitleTextView, posterImageView, movieOverviewTextView, ratingTextView, votesTextView, coloredRatingBar, releaseDateTextView, genresGridView);
+        fullMovieDescriptionLoader.execute();
 
         actorItemsContainer = new ActorItemsContainer();
         actorItemsListAdapter = new ActorItemsListAdapter(this, actorItemsContainer);
