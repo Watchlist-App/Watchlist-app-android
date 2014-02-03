@@ -47,7 +47,7 @@ public class HomeActivity extends ActionBarActivity
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_background_color)));
-        actionBar.setTitle(Html.fromHtml("<b><font color=\"#B60606\">" + getString(R.string.title_activity_home) + "</font></b>"));
+        actionBar.setTitle(Html.fromHtml("<b><font color=\"#424242\">" + getString(R.string.title_activity_home) + "</font></b>"));
         //#BFC4C3         B60606
         mNavigationDrawerFragment = (NavigationDrawerFragment)getSupportFragmentManager().findFragmentById(R.id.navigation_drawer_activity_home);
         // Set up the drawer

@@ -2,7 +2,9 @@ package com.watchlistapp.fullmoviedescription;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -59,7 +61,8 @@ public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity
         this.movieTitle = movieTitle;
         //getSupportActionBar().setTitle(movieTitle);
         ActionBar actionBar = getActionBar();
-        actionBar.setTitle(movieTitle);
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_background_color)));
+        actionBar.setTitle(Html.fromHtml("<b><font color=\"#424242\">" + movieTitle + "</font></b>"));
 
         movieTitleTextView = (TextView)findViewById(R.id.full_description_movie_title);
         posterImageView = (RoundedImageView)findViewById(R.id.full_description_movie_poster);

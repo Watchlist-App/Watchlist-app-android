@@ -316,7 +316,7 @@ new ArrayAdapter<String>(
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setTitle(R.string.app_name);
-        actionBar.setTitle(Html.fromHtml("<b><font color=\"#B60606\">" + getString(R.string.app_name) + "</font></b>"));
+        actionBar.setTitle(Html.fromHtml("<b><font color=\"#424242\">" + getString(R.string.app_name) + "</font></b>"));
     }
 
     private ActionBar getActionBar() {
