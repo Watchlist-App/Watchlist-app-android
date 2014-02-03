@@ -66,6 +66,11 @@
             android:name="com.watchlistapp.fullmoviedescription.FullActorDescriptionActivity"
             android:label="@string/title_activity_full_actor_description" >
         </activity>
+        <activity
+            android:name=".authorization.ProfileActivity"
+            android:label="@string/profile_activity_title">
+        </activity>
+
     </application>
 
 </manifest>

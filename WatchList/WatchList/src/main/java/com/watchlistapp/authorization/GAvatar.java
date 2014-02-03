@@ -19,13 +19,17 @@ import java.net.URL;
 public class GAvatar extends AsyncTask<String, Integer, Bitmap> {
 
     private final static String BASE_URL = "http://www.gravatar.com/avatar/";
+    public final static String SMALL = "?s=64";
+    public final static String MEDIUM = "?s=180";
 
     private ImageView userAvatarImageView;
     private Context context;
+    private String avatarSize;
 
-    public GAvatar(Context context, ImageView userAvatarImageView) {
+    public GAvatar(Context context, ImageView userAvatarImageView, String avatarSize) {
         this.context = context;
         this.userAvatarImageView = userAvatarImageView;
+        this.avatarSize = avatarSize;
     }
 
     @Override
@@ -43,9 +47,9 @@ public class GAvatar extends AsyncTask<String, Integer, Bitmap> {
             LoggedInUser loggedInUser = loggedInUserContainer.searchLastLoggedInUser();
             // If last user doesn't exist
             if(loggedInUser == null) {
-                url = new URL(BASE_URL + "123?s=64");
+                url = new URL(BASE_URL + "123" + avatarSize);
             } else {
-                String myUrl = BASE_URL + MD5Util.md5Hex(loggedInUser.getEmail()) + "?s=64";
+                String myUrl = BASE_URL + MD5Util.md5Hex(loggedInUser.getEmail()) + avatarSize;
                 url = new URL(myUrl);
             }
             bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
