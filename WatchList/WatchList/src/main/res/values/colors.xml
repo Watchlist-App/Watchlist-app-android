@@ -2,7 +2,6 @@
 <resources>
     <color name="text">#1E1E1E</color>
     <color name="main_fragment_title_text_color">#E6E6E6</color>
-    <color name="actionbar_color">#E6E6E6</color>
     <color name="login_activity_actionbar_color">#777777</color>
     <color name="registration_form_color">#99000000</color>
     <color name="registration_app_title">#888888</color>
@@ -29,4 +28,8 @@
 
     <color name="tag_line_module">#373636</color>
     <color name="tag_line_text_color">#B8860B</color>
+
+    <!-- Action Bar colors -->
+    <color name="actionbar_background_color">#1A3931</color>
+    <!-- End -->
 </resources>

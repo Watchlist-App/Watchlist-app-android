@@ -3,11 +3,8 @@ package com.watchlistapp;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
@@ -35,9 +32,9 @@ public class RecentActivity extends ActionBarActivity {
         setContentView(R.layout.activity_recent);
 
         // Sets the action bar color as a drawable
-        ActionBar actionBar = getSupportActionBar();
-        String actionBarColor = getString(R.color.actionbar_color);
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(actionBarColor)));
+        //ActionBar actionBar = getSupportActionBar();
+        //String actionBarColor = getString(R.color.actionbar_color);
+        //actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(actionBarColor)));
 
         button = (Button)findViewById(R.id.showsusersbutton);
         textView = (TextView)findViewById(R.id.showsuserstextview);

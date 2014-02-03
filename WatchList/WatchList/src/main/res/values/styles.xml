@@ -20,6 +20,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
     </style>
+    <!-- End -->
 
     <!-- Rating bar style -->
     <style name="coloredRatingBarStyle">
