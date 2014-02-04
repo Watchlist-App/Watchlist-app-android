@@ -1,4 +1,4 @@
-package com.watchlistapp.themoviedb;
+package com.watchlistapp.movielist;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -7,6 +7,9 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.watchlistapp.R;
+import com.watchlistapp.themoviedb.Movie;
+import com.watchlistapp.themoviedb.SearchMovieContainer;
+import com.watchlistapp.themoviedb.SearchMovieElement;
 import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.database.WatchListDatabaseHandler;
 import com.watchlistapp.searchresults.SearchResultsContainer;

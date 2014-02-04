@@ -1,4 +1,4 @@
-package com.watchlistapp.themoviedb;
+package com.watchlistapp.movielist;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
+import com.watchlistapp.themoviedb.SearchMovieContainer;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -51,7 +52,7 @@ public class PosterLoader extends AsyncTask<String, Integer, ArrayList<Bitmap>> 
             try {
                 url = new URL("http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185" + searchMovieContainer.getSearchMovieElementArrayList().get(position).getPoster_path());
                 bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                searchResultsContainer.getSearchResultsItemArrayList().get(position).setPoster(bmp);
+                searchResultsContainer.getSearchResultsItemArrayList().get(position);
             } catch(MalformedURLException exception) {
                 exception.printStackTrace();
             } catch(IOException exception) {

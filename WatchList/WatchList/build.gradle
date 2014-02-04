@@ -35,4 +35,5 @@ dependencies {
     compile project(':RoundedImageViewLibrary')
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile files('libs/volley.jar')
+    compile files('libs/picasso-2.2.0.jar')
 }

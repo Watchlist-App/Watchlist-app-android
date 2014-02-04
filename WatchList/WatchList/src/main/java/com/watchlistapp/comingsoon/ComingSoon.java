@@ -1,10 +1,13 @@
-package com.watchlistapp.themoviedb;
+package com.watchlistapp.comingsoon;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
+import com.watchlistapp.movielist.PosterLoader;
+import com.watchlistapp.themoviedb.SearchMovieContainer;
+import com.watchlistapp.themoviedb.SearchMovieElement;
 import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.comingsoon.ComingSoonContainer;
 import com.watchlistapp.comingsoon.ComingSoonItem;

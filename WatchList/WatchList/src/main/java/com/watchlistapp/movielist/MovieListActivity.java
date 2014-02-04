@@ -14,7 +14,6 @@ import com.watchlistapp.R;
 import com.watchlistapp.fullmoviedescription.FullMovieDescriptionActivity;
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
-import com.watchlistapp.themoviedb.LoadMovie;
 
 public class MovieListActivity extends ActionBarActivity {
 

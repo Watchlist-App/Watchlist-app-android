@@ -107,13 +107,17 @@ public class FullMovieDescriptionLoader extends AsyncTask<String, Integer, Movie
         int displayHeight = display.getHeight();
 
         // Later I need to add the support of 540*960px screen sizes
-        PosterLoader posterLoader = null;
+        //PosterLoader posterLoader = null;
+        NewPosterLoader newPosterLoader = null;
         if((displayWidth == 480 && displayHeight == 800) || (displayWidth == 540 && displayHeight == 960)) {
-            posterLoader = new PosterLoader(posterImageView, movieDescription.getPosterPath(), PosterLoader.BIG);
+            newPosterLoader = new NewPosterLoader(context, posterImageView, movieDescription.getPosterPath(), PosterLoader.BIG);
+            //posterLoader = new PosterLoader(posterImageView, movieDescription.getPosterPath(), PosterLoader.BIG);
         } else {
-            posterLoader = new PosterLoader(posterImageView, movieDescription.getPosterPath(), PosterLoader.DOUBLE_BIG);
+            newPosterLoader = new NewPosterLoader(context, posterImageView, movieDescription.getPosterPath(), PosterLoader.DOUBLE_BIG);
+            //posterLoader = new PosterLoader(posterImageView, movieDescription.getPosterPath(), PosterLoader.DOUBLE_BIG);
         }
-        posterLoader.execute();
+        newPosterLoader.loadPoster();
+        //posterLoader.execute();
 
         GenreItemAdapter genreItemAdapter = new GenreItemAdapter(context, movieDescription.getGenreContainer());
         genresGridView.setAdapter(genreItemAdapter);

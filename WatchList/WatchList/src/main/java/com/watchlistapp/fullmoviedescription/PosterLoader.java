@@ -12,6 +12,8 @@ import java.net.URL;
 /**
  * Created by VEINHORN on 26/12/13.
  */
+
+@Deprecated
 public class PosterLoader extends AsyncTask<String, Integer, Bitmap> {
 
     private final static String BASE_URL = "http://image.tmdb.org/t/p/";

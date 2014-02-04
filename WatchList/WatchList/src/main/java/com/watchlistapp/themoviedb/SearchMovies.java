@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.watchlistapp.R;
+import com.watchlistapp.movielist.PosterLoader;
 import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItem;
