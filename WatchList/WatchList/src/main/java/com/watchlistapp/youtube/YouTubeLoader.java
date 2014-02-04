@@ -3,6 +3,7 @@ package com.watchlistapp.youtube;
 import android.os.AsyncTask;
 
 import com.google.android.youtube.player.YouTubePlayer;
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONArray;
@@ -46,7 +47,7 @@ public class YouTubeLoader extends AsyncTask<String, Integer, MovieId> {
     @Override
     protected MovieId doInBackground(String... params) {
         String url = BASE_URL + "?" + API_QUERY_TITLE + "=" + requestString + "&" + API_TYPE_TITLE + "=" + API_TYPE_VIDEO + "&" +
-                API_PART_TITLE + "=" + API_PART_SNIPPET + "&" + API_ORDER_TITLE + "=" + API_ORDER_RELEVANCE + "&" + API_KEY_TITLE + "=" + DeveloperKey.DEVELOPER_KEY;
+                API_PART_TITLE + "=" + API_PART_SNIPPET + "&" + API_ORDER_TITLE + "=" + API_ORDER_RELEVANCE + "&" + API_KEY_TITLE + "=" + DeveloperKeys.YOUTUBE_DEVELOPER_KEY;
         JSONObject jsonObject = RequestsUtil.getJSONObject(url);
         MovieId movieId = parseSearchResults(jsonObject);
         return movieId;

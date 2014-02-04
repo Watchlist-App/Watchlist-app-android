@@ -3,6 +3,7 @@ package com.watchlistapp.movielist;
 import android.app.Activity;
 import android.content.Context;
 
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
 import com.watchlistapp.themoviedb.SearchMovieContainer;
@@ -29,7 +30,7 @@ public class GenreMoviesLoader extends SearchMovies {
     @Override
     protected SearchMovieContainer doInBackground(String... params) {
         SearchMovieContainer searchMovieContainer = null;
-        String url = BASE_URL + genreId + "/" + API_MOVIES_TITLE + "?" + API_KEY_TITLE + "=" + API_KEY;
+        String url = BASE_URL + genreId + "/" + API_MOVIES_TITLE + "?" + API_KEY_TITLE + "=" + DeveloperKeys.THE_MOVIE_DB_DEVELOPER_KEY;
         JSONObject jsonObject = RequestsUtil.getJSONObject(url);
         searchMovieContainer = parseJSONObject(jsonObject);
         return searchMovieContainer;

@@ -4,23 +4,24 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.watchlistapp.authorization.LoggedInUser;
-import com.watchlistapp.authorization.LoggedInUserContainer;
+import com.watchlistapp.authorization.ProfileActivity;
 import com.watchlistapp.comingsoon.ComingSoonActivity;
 import com.watchlistapp.database.WatchListDatabaseHandler;
 import com.watchlistapp.movielist.MovieListActivity;
@@ -42,6 +43,10 @@ public class HomeActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_background_color)));
+        actionBar.setTitle(Html.fromHtml("<b><font color=\"#424242\">" + getString(R.string.title_activity_home) + "</font></b>"));
+        //#BFC4C3         B60606
         mNavigationDrawerFragment = (NavigationDrawerFragment)getSupportFragmentManager().findFragmentById(R.id.navigation_drawer_activity_home);
         // Set up the drawer
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer_activity_home, (DrawerLayout)findViewById(R.id.drawer_layout_home_activity));
@@ -92,11 +97,8 @@ public class HomeActivity extends ActionBarActivity
     public void onSectionAttached(int number) {
         switch(number) {
             case 1: {
-                WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(HomeActivity.this);
-                LoggedInUserContainer loggedInUserContainer = watchListDatabaseHandler.getAllUsers();
-                LoggedInUser loggedInUser = loggedInUserContainer.searchLastLoggedInUser();
-                Toast toast = Toast.makeText(HomeActivity.this, loggedInUser.getServerId(), Toast.LENGTH_SHORT);
-                toast.show();
+                Intent intent = new Intent(this, ProfileActivity.class);
+                startActivity(intent);
                 break;
             }
             case 2: {

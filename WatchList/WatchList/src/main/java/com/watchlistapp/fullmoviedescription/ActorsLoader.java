@@ -2,7 +2,10 @@ package com.watchlistapp.fullmoviedescription;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.Display;
+import android.view.WindowManager;
 
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONArray;
@@ -16,7 +19,6 @@ import org.json.JSONObject;
 public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
 
     private final static String BASE_URL = "http://api.themoviedb.org/3/movie/";
-    private final static String API_KEY = "2b7854ef68a3c274a0f804c031285c46";
     private final static String API_KEY_TITLE = "api_key";
     private final static String API_APPEND_TO_RESPONSE = "append_to_response=trailers,credits";
     private final static String API_CREDITS_TITLE = "credits";
@@ -53,11 +55,25 @@ public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
                 actorItemsContainer.getActorItemArrayList().add(actorItem);
             }
         }
-        this.actorItemsListAdapter.notifyDataSetChanged();
+        //this.actorItemsListAdapter.notifyDataSetChanged();
+
+        // Get the screen size(height and width)
+        WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        // Here I use old methods
+        int displayWidth = display.getWidth();
+        int displayHeight = display.getHeight();
+
+        String imageSize = null;
+        if((displayWidth == 480 && displayHeight == 800) || (displayWidth == 540 && displayHeight == 960)) {
+            imageSize = ActorAvatarLoader.SMALL;
+        } else {
+            imageSize = ActorAvatarLoader.BIG;
+        }
 
         for(int i = 0; i < actorItemsContainer.getActorItemArrayList().size(); i++) {
             ActorAvatarLoader actorAvatarLoader = new ActorAvatarLoader(actorItemsListAdapter, actorItemsContainer, i,
-                    actorItemsContainer.getActorItemArrayList().get(i).getProfile_path(), ActorAvatarLoader.BIG);
+                    actorItemsContainer.getActorItemArrayList().get(i).getProfile_path(), imageSize);
             actorAvatarLoader.execute();
         }
     }
@@ -65,7 +81,7 @@ public class ActorsLoader extends AsyncTask<String, Integer, ActorContainer> {
     @Override
     protected ActorContainer doInBackground(String... params) {
         ActorContainer actorContainer = null;
-        String url = BASE_URL + movieId + "?" + API_KEY_TITLE + "=" + API_KEY + "&" + API_APPEND_TO_RESPONSE;
+        String url = BASE_URL + movieId + "?" + API_KEY_TITLE + "=" + DeveloperKeys.THE_MOVIE_DB_DEVELOPER_KEY + "&" + API_APPEND_TO_RESPONSE;
         JSONObject jsonObject = RequestsUtil.getJSONObject(url);
         actorContainer = parseJSONObject(jsonObject);
         return actorContainer;

@@ -68,7 +68,7 @@ public class NavigationDrawerItemAdapter extends BaseAdapter {
         if(navigationDrawerItemContainer.getNavigationDrawerItemArrayList().get(position).getIconId() != 0) {
             viewHolder.icon.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), navigationDrawerItemContainer.getNavigationDrawerItemArrayList().get(position).getIconId()));
         } else {
-            GAvatar gAvatar = new GAvatar(context, viewHolder.icon);
+            GAvatar gAvatar = new GAvatar(context, viewHolder.icon, GAvatar.SMALL);
             gAvatar.execute();
         }
 

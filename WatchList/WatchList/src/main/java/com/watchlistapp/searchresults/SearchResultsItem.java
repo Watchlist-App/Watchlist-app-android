@@ -1,7 +1,5 @@
 package com.watchlistapp.searchresults;
 
-import android.graphics.Bitmap;
-
 /**
  * Created by VEINHORN on 02/12/13.
  */
@@ -9,30 +7,11 @@ public class SearchResultsItem {
     private String title;
     private String releaseDate;
     private String rating;
-    private Bitmap poster;
     private String posterLink;
     private String votes;
     private String movieId;
 
     public SearchResultsItem() {
-    }
-
-    public SearchResultsItem(String title, String releaseDate, String rating, Bitmap poster, String posterLink, String votes, String movieId) {
-        this.title = title;
-        this.releaseDate = releaseDate;
-        this.rating = rating;
-        this.poster = poster;
-        this.posterLink = posterLink;
-        this.votes = votes;
-        this.movieId = movieId;
-    }
-
-    public Bitmap getPoster() {
-        return poster;
-    }
-
-    public void setPoster(Bitmap poster) {
-        this.poster = poster;
     }
 
     public String getTitle() {
@@ -73,18 +52,6 @@ public class SearchResultsItem {
 
     public void setVotes(String votes) {
         this.votes = votes;
-    }
-
-    @Override
-    public String toString() {
-        return "SearchResultsItem{" +
-                "title='" + title + '\'' +
-                ", releaseDate='" + releaseDate + '\'' +
-                ", rating='" + rating + '\'' +
-                ", poster=" + poster +
-                ", posterLink='" + posterLink + '\'' +
-                ", votes='" + votes + '\'' +
-                '}';
     }
 
     public String getMovieId() {

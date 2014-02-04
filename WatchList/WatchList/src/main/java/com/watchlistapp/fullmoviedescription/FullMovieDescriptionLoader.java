@@ -3,7 +3,9 @@ package com.watchlistapp.fullmoviedescription;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -11,7 +13,8 @@ import android.widget.TextView;
 import com.makeramen.RoundedImageView;
 import com.watchlistapp.movielist.GenreMovieListActivity;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
-import com.watchlistapp.searchresults.SearchResultsItemAdapter;
+import com.watchlistapp.utils.DateUtil;
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONArray;
@@ -21,12 +24,9 @@ import org.json.JSONObject;
 /**
  * Created by VEINHORN on 26/12/13.
  */
-public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescription> {
-
+public class FullMovieDescriptionLoader extends AsyncTask<String, Integer, MovieDescription> {
     private final static String BASE_URL = "http://api.themoviedb.org/3/movie/";
-
     private final static String API_KEY_TITLE = "api_key";
-    private final static String API_KEY = "2b7854ef68a3c274a0f804c031285c46";
 
     private final static String API_BACKDROP_PATH_TITLE = "backdrop_path";
     private final static String API_BUDGET_TITLE = "budget";
@@ -61,7 +61,7 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
     private MovieDescription movieDescription;
 
-    public FullDescriptionLoader(Context context, String movieId, TextView tagLineTextView, TextView movieTitleTextView, RoundedImageView posterImageView, TextView movieOverviewTextView, TextView ratingTextView, TextView votesTextView, ColoredRatingBar coloredRatingBar, TextView releaseDateTextView, GridView genresGridView) {
+    public FullMovieDescriptionLoader(Context context, String movieId, TextView tagLineTextView, TextView movieTitleTextView, RoundedImageView posterImageView, TextView movieOverviewTextView, TextView ratingTextView, TextView votesTextView, ColoredRatingBar coloredRatingBar, TextView releaseDateTextView, GridView genresGridView) {
         this.context = context;
         this.movieId = movieId;
 
@@ -95,12 +95,24 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
         if(releaseDate.equals("")) {
             releaseDate = "Release date: Unknown";
         } else {
-            releaseDate = "Release date: " + SearchResultsItemAdapter.convertDate(releaseDate);
+            releaseDate = "Release date: " + DateUtil.convertDate(releaseDate);
         }
         releaseDateTextView.setText(releaseDate);
 
-        PosterLoader posterLoader = new PosterLoader(posterImageView, movieDescription.getPosterPath(), PosterLoader.DOUBLE_BIG);
-        posterLoader.execute();
+        // Get the screen size(height and width)
+        WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        // Here I use old methods
+        int displayWidth = display.getWidth();
+        int displayHeight = display.getHeight();
+
+        NewPosterLoader newPosterLoader = null;
+        if((displayWidth == 480 && displayHeight == 800) || (displayWidth == 540 && displayHeight == 960)) {
+            newPosterLoader = new NewPosterLoader(context, posterImageView, movieDescription.getPosterPath(), NewPosterLoader.BIG);
+        } else {
+            newPosterLoader = new NewPosterLoader(context, posterImageView, movieDescription.getPosterPath(), NewPosterLoader.DOUBLE_BIG);
+        }
+        newPosterLoader.loadPoster();
 
         GenreItemAdapter genreItemAdapter = new GenreItemAdapter(context, movieDescription.getGenreContainer());
         genresGridView.setAdapter(genreItemAdapter);
@@ -120,12 +132,9 @@ public class FullDescriptionLoader extends AsyncTask<String, Integer, MovieDescr
 
     @Override
     protected MovieDescription doInBackground(String... params) {
-        MovieDescription movieDescription = null;
-        String url = BASE_URL + movieId + "?" + API_KEY_TITLE + "=" + API_KEY;
+        String url = BASE_URL + movieId + "?" + API_KEY_TITLE + "=" + DeveloperKeys.THE_MOVIE_DB_DEVELOPER_KEY;
         JSONObject jsonObject = RequestsUtil.getJSONObject(url);
-
         movieDescription = parseJSONObject(jsonObject);
-
         return movieDescription;
     }
 

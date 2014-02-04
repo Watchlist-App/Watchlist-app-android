@@ -2,7 +2,9 @@ package com.watchlistapp.fullmoviedescription;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -12,7 +14,7 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import com.makeramen.RoundedImageView;
 import com.watchlistapp.R;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
-import com.watchlistapp.youtube.DeveloperKey;
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.youtube.YouTubeFailureRecoveryActivity;
 import com.watchlistapp.youtube.YouTubeLoader;
 
@@ -33,7 +35,7 @@ public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity
 
     private GridView genresGridView;
 
-    private FullDescriptionLoader fullDescriptionLoader;
+    private FullMovieDescriptionLoader fullMovieDescriptionLoader;
 
     // Actors horizontal scroll listview
     private HListView actorsHorizontalListView;
@@ -59,7 +61,8 @@ public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity
         this.movieTitle = movieTitle;
         //getSupportActionBar().setTitle(movieTitle);
         ActionBar actionBar = getActionBar();
-        actionBar.setTitle(movieTitle);
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_background_color)));
+        actionBar.setTitle(Html.fromHtml("<b><font color=\"#424242\">" + movieTitle + "</font></b>"));
 
         movieTitleTextView = (TextView)findViewById(R.id.full_description_movie_title);
         posterImageView = (RoundedImageView)findViewById(R.id.full_description_movie_poster);
@@ -74,20 +77,20 @@ public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity
         crewHorizontallListView = (HListView)findViewById(R.id.full_description_movie_crew_list_view);
 
         youTubePlayerView = (YouTubePlayerView)findViewById(R.id.youtube_view);
-        youTubePlayerView.initialize(DeveloperKey.DEVELOPER_KEY, this);
+        youTubePlayerView.initialize(DeveloperKeys.YOUTUBE_DEVELOPER_KEY, this);
 
         posterImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FullMovieDescriptionActivity.this, FullPosterViewActivity.class);
-                intent.putExtra("posterUrl", fullDescriptionLoader.getMovieDescription().getPosterPath());
+                intent.putExtra("posterUrl", fullMovieDescriptionLoader.getMovieDescription().getPosterPath());
                 startActivity(intent);
             }
         });
 
         String movieId = getIntent().getStringExtra("movieId");
-        fullDescriptionLoader = new FullDescriptionLoader(FullMovieDescriptionActivity.this, movieId, tagLineTextView, movieTitleTextView, posterImageView, movieOverviewTextView, ratingTextView, votesTextView, coloredRatingBar, releaseDateTextView, genresGridView);
-        fullDescriptionLoader.execute();
+        fullMovieDescriptionLoader = new FullMovieDescriptionLoader(FullMovieDescriptionActivity.this, movieId, tagLineTextView, movieTitleTextView, posterImageView, movieOverviewTextView, ratingTextView, votesTextView, coloredRatingBar, releaseDateTextView, genresGridView);
+        fullMovieDescriptionLoader.execute();
 
         actorItemsContainer = new ActorItemsContainer();
         actorItemsListAdapter = new ActorItemsListAdapter(this, actorItemsContainer);
@@ -118,7 +121,6 @@ public class FullMovieDescriptionActivity extends YouTubeFailureRecoveryActivity
         if(!wasRestored) {
             YouTubeLoader youTubeLoader = new YouTubeLoader(movieTitle, player);
             youTubeLoader.execute();
-            //player.cueVideo("fhWaJi1Hsfo");
         }
     }
 

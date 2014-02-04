@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import com.watchlistapp.R;
 import com.watchlistapp.fullmoviedescription.FullMovieDescriptionActivity;
-import com.watchlistapp.themoviedb.ComingSoon;
 
 /**
  * Created by VEINHORN on 11/12/13.

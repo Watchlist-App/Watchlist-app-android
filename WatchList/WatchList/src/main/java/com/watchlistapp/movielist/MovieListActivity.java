@@ -1,9 +1,11 @@
 package com.watchlistapp.movielist;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,7 +14,6 @@ import com.watchlistapp.R;
 import com.watchlistapp.fullmoviedescription.FullMovieDescriptionActivity;
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
-import com.watchlistapp.themoviedb.LoadMovie;
 
 public class MovieListActivity extends ActionBarActivity {
 
@@ -28,7 +29,8 @@ public class MovieListActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         String listTitle = getIntent().getStringExtra("listtitle");
         String actionBarTitle = listTitle + " (" + getIntent().getStringExtra("moviesnumber") + " movies)";
-        actionBar.setTitle(actionBarTitle);
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_background_color)));
+        actionBar.setTitle(Html.fromHtml("<b><font color=\"#424242\">" + actionBarTitle + "</font></b>"));
 
         searchResultsListView = (ListView)findViewById(R.id.movie_list_listview);
 
@@ -46,7 +48,6 @@ public class MovieListActivity extends ActionBarActivity {
         searchResultsContainer = new SearchResultsContainer();
         searchResultsItemAdapter = new SearchResultsItemAdapter(MovieListActivity.this, searchResultsContainer, MovieListActivity.this, searchResultsListView);
         searchResultsListView.setAdapter(searchResultsItemAdapter);
-
         LoadMovie loadMovie = new LoadMovie(MovieListActivity.this, listTitle, searchResultsItemAdapter, searchResultsContainer, MovieListActivity.this);
         loadMovie.execute();
     }

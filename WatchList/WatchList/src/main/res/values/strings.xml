@@ -12,9 +12,9 @@
 
     <!-- Registration layout string resources -->
     <string name="fragment_main_watchlist_title">Watch List</string>
-    <string name="fragment_registration_email_start_text">Enter your e-mail...</string>
-    <string name="fragment_registration_nickname_start_text">Enter your nickname...</string>
-    <string name="fragment_registration_password_start_text">Enter your password...</string>
+    <string name="fragment_registration_email_start_text">Enter your e-mail</string>
+    <string name="fragment_registration_nickname_start_text">Enter your nickname</string>
+    <string name="fragment_registration_password_start_text">Enter your password</string>
     <!-- End -->
     <string name="title_activity_main">MainActivity</string>
     <string name="hello_world">Hello world!</string>
@@ -51,9 +51,12 @@
     <!-- Amazon Activity -->
     <string name="amazon_activity_label">Amazon List</string>
     <!-- End -->
-    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_home">Home</string>
     <string name="title_activity_movie_list">MovieListActivity</string>
     <string name="title_activity_full_movie_description">FullMovieDescriptionActivity</string>
     <string name="title_activity_full_actor_description">FullActorDescriptionActivity</string>
 
+    <!-- Profile Activity -->
+    <string name="profile_activity_title">Profile</string>
+    <!-- End -->
 </resources>
