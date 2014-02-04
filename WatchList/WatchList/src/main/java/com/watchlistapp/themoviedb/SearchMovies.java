@@ -2,22 +2,18 @@ package com.watchlistapp.themoviedb;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.watchlistapp.R;
-import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItem;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.util.ArrayList;
 
 /**
  * Created by VEINHORN on 02/12/13.
@@ -49,19 +45,10 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
 
     private Context context;
     private String searchQueryString; // string that stores info that user searches
-
-    //
     private JSONObject jsonObject;
-    //private ProgressDialog progressDialog;
-    private String jsonString;
-    private InputStream inputStream;
     private SearchMovieContainer searchMovieContainer;
-
     private SearchResultsItemAdapter searchResultsItemAdapter;
     private SearchResultsContainer searchResultsContainer;
-
-    private ArrayList<Bitmap> images;
-
     private Activity activity;
 
     public SearchMovies(Context context, String searchQueryString, SearchResultsItemAdapter searchResultsItemAdapter, SearchResultsContainer searchResultsContainer, Activity activity) {
@@ -69,9 +56,6 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
         this.searchResultsContainer = searchResultsContainer;
         this.context = context;
         this.searchQueryString = searchQueryString;
-        //this.progressDialog = ProgressDialog.show(context, "Search", "Searching. Please wait...");
-        images = new ArrayList<Bitmap>();
-
         this.activity = activity;
     }
 
@@ -92,16 +76,8 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
             searchResultsItem.setVotes(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_count());
             searchResultsItem.setMovieId(searchMovieContainer.getSearchMovieElementArrayList().get(i).getId());
             searchResultsContainer.getSearchResultsItemArrayList().add(searchResultsItem);
+            searchResultsItemAdapter.notifyDataSetChanged();
         }
-        searchResultsItemAdapter.notifyDataSetChanged();
-
-        for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
-            PosterLoader posterLoader = new PosterLoader(searchMovieContainer, images, searchResultsItemAdapter, searchResultsContainer, i);
-            posterLoader.execute();
-        }
-
-        //loadImages();
-        //progressDialog.hide();
     }
 
     @Override
@@ -111,8 +87,6 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
         url = url.replaceAll(" ", "%20");
         jsonObject = RequestsUtil.getJSONObject(url);
         searchMovieContainer = parseJSONObject(jsonObject);
-        //loadImages();
-
         return searchMovieContainer;
     }
 
@@ -162,14 +136,6 @@ public class SearchMovies extends AsyncTask<String, Integer, SearchMovieContaine
 
     public void setSearchQueryString(String searchQueryString) {
         this.searchQueryString = searchQueryString;
-    }
-
-    public String getJsonString() {
-        return jsonString;
-    }
-
-    public void setJsonString(String jsonString) {
-        this.jsonString = jsonString;
     }
 
     public SearchMovieContainer getSearchMovieContainer() {

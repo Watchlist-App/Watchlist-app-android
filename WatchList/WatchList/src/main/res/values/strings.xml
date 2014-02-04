@@ -56,4 +56,7 @@
     <string name="title_activity_full_movie_description">FullMovieDescriptionActivity</string>
     <string name="title_activity_full_actor_description">FullActorDescriptionActivity</string>
 
+    <!-- Profile Activity -->
+    <string name="profile_activity_title">Profile</string>
+    <!-- End -->
 </resources>

@@ -1,14 +1,13 @@
-package com.watchlistapp.themoviedb;
+package com.watchlistapp.comingsoon;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
+import com.watchlistapp.themoviedb.SearchMovieContainer;
+import com.watchlistapp.themoviedb.SearchMovieElement;
 import com.watchlistapp.utils.DeveloperKeys;
-import com.watchlistapp.comingsoon.ComingSoonContainer;
-import com.watchlistapp.comingsoon.ComingSoonItem;
-import com.watchlistapp.comingsoon.ComingSoonItemAdapter;
 import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONArray;
@@ -23,14 +22,11 @@ import java.util.ArrayList;
  */
 
 public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer> {
-
     private final static String BASE_URL = "http://api.themoviedb.org/3/movie/upcoming";
     private final static String API_PAGE_TITLE = "page";
     private final static String API_KEY_TITLE = "api_key";
     private final static String API_TOTAL_PAGES_TITLE = "total_pages";
-
     private final static String API_RESULTS_TITLE = "results";
-
     private final static String API_RESULTS_ADULT_TITLE = "adult";
     private final static String API_RESULTS_BACKDROP_PATH_TITLE = "backdrop_path";
     private final static String API_RESULTS_ID_TITLE = "id";
@@ -82,14 +78,9 @@ public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer>
             comingSoonItem.setMovieId(searchMovieContainer.getSearchMovieElementArrayList().get(i).getId());
 
             comingSoonContainer.getSearchResultsItemArrayList().add(comingSoonItem);
+            comingSoonItemAdapter.notifyDataSetChanged();
         }
         this.progressDialog.hide();
-        comingSoonItemAdapter.notifyDataSetChanged();
-
-        for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
-            PosterLoader posterLoader = new PosterLoader(searchMovieContainer, images, comingSoonItemAdapter, comingSoonContainer, i);
-            posterLoader.execute();
-        }
     }
 
     @Override
@@ -113,7 +104,6 @@ public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer>
                 jsonObject = RequestsUtil.getJSONObject(url);
                 parseJSONObject(searchMovieContainer, jsonObject);
             }
-
 
         } catch(JSONException exception) {
             exception.printStackTrace();

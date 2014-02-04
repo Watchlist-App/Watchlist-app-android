@@ -1,24 +1,24 @@
-package com.watchlistapp.themoviedb;
+package com.watchlistapp.movielist;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.watchlistapp.R;
-import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.database.WatchListDatabaseHandler;
 import com.watchlistapp.searchresults.SearchResultsContainer;
 import com.watchlistapp.searchresults.SearchResultsItem;
 import com.watchlistapp.searchresults.SearchResultsItemAdapter;
+import com.watchlistapp.themoviedb.Movie;
+import com.watchlistapp.themoviedb.SearchMovieContainer;
+import com.watchlistapp.themoviedb.SearchMovieElement;
+import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
 import com.watchlistapp.watchlistserver.MovieContainer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by VEINHORN on 25/12/13.
@@ -34,7 +34,6 @@ public class LoadMovie extends AsyncTask<String, Integer, SearchMovieContainer> 
     private String listTitle;
     private SearchResultsItemAdapter searchResultsItemAdapter;
     private SearchResultsContainer searchResultsContainer;
-    private ArrayList<Bitmap> images;
     private ProgressDialog progressDialog;
 
     public LoadMovie(Context context, String listTitle, SearchResultsItemAdapter searchResultsItemAdapter, SearchResultsContainer searchResultsContainer, Activity activity) {
@@ -46,7 +45,6 @@ public class LoadMovie extends AsyncTask<String, Integer, SearchMovieContainer> 
 
         this.activity = activity;
 
-        images = new ArrayList<Bitmap>();
         this.progressDialog = new ProgressDialog(context);
     }
 
@@ -73,12 +71,8 @@ public class LoadMovie extends AsyncTask<String, Integer, SearchMovieContainer> 
             searchResultsItem.setVotes(searchMovieContainer.getSearchMovieElementArrayList().get(i).getVote_count());
             searchResultsItem.setMovieId(searchMovieContainer.getSearchMovieElementArrayList().get(i).getId());
             searchResultsContainer.getSearchResultsItemArrayList().add(searchResultsItem);
-        }
-        searchResultsItemAdapter.notifyDataSetChanged();
 
-        for(int i = 0; i < searchMovieContainer.getSearchMovieElementArrayList().size(); i++) {
-            PosterLoader posterLoader = new PosterLoader(searchMovieContainer, images, searchResultsItemAdapter, searchResultsContainer, i);
-            posterLoader.execute();
+            searchResultsItemAdapter.notifyDataSetChanged(); // this line try to put to loop
         }
     }
 
