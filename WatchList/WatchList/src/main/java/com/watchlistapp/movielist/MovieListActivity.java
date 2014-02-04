@@ -48,7 +48,6 @@ public class MovieListActivity extends ActionBarActivity {
         searchResultsContainer = new SearchResultsContainer();
         searchResultsItemAdapter = new SearchResultsItemAdapter(MovieListActivity.this, searchResultsContainer, MovieListActivity.this, searchResultsListView);
         searchResultsListView.setAdapter(searchResultsItemAdapter);
-
         LoadMovie loadMovie = new LoadMovie(MovieListActivity.this, listTitle, searchResultsItemAdapter, searchResultsContainer, MovieListActivity.this);
         loadMovie.execute();
     }

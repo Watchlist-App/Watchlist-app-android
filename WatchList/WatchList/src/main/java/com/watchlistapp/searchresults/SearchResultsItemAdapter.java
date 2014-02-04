@@ -19,6 +19,7 @@ import com.watchlistapp.addmovietolistdialog.AddMovieToListDialogFragment;
 import com.watchlistapp.authorization.LoggedInUser;
 import com.watchlistapp.authorization.LoggedInUserContainer;
 import com.watchlistapp.database.WatchListDatabaseHandler;
+import com.watchlistapp.fullmoviedescription.NewPosterLoader;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 import com.watchlistapp.utils.DateUtil;
 
@@ -97,6 +98,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         String title = searchResultsContainer.getSearchResultsItemArrayList().get(position).getTitle();
         String rating = searchResultsContainer.getSearchResultsItemArrayList().get(position).getRating() + "/" + "10";
         String votes = searchResultsContainer.getSearchResultsItemArrayList().get(position).getVotes() + " votes";
+        String posterUrl = searchResultsContainer.getSearchResultsItemArrayList().get(position).getPosterLink();
         // themoviedb has 10digits rating so here we convert it to 5digits
         Float ratingBarVote = Float.valueOf(searchResultsContainer.getSearchResultsItemArrayList().get(position).getRating()) / (float)2;
         String releaseDate = searchResultsContainer.getSearchResultsItemArrayList().get(position).getReleaseDate();
@@ -108,13 +110,13 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         }
         // Convert from one time format to another
 
-
         viewHolder.title.setText(title);
         viewHolder.rating.setText(rating);
         viewHolder.releaseDate.setText(releaseDate);
         viewHolder.votes.setText(votes);
         viewHolder.votesRatingBar.setRating(ratingBarVote);
-        viewHolder.poster.setImageBitmap(searchResultsContainer.getSearchResultsItemArrayList().get(position).getPoster());
+        NewPosterLoader newPosterLoader = new NewPosterLoader(context, viewHolder.poster, posterUrl, NewPosterLoader.BIG);
+        newPosterLoader.loadPoster();
         return convertView;
     }
 

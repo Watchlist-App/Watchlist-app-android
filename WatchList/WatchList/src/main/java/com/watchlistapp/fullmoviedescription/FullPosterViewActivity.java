@@ -23,7 +23,7 @@ public class FullPosterViewActivity extends ActionBarActivity {
 
         posterImageView = (ImageView)findViewById(R.id.activity_full_poster_view_photo_view);
         String posterPath = getIntent().getStringExtra("posterUrl");
-        FullPosterLoader fullPosterLoader = new FullPosterLoader(posterImageView, posterPath, PosterLoader.ORIGINAL, photoViewAttacher, FullPosterViewActivity.this);
+        FullPosterLoader fullPosterLoader = new FullPosterLoader(posterImageView, posterPath, FullPosterLoader.ORIGINAL, photoViewAttacher, FullPosterViewActivity.this);
         fullPosterLoader.execute();
     }
 }
