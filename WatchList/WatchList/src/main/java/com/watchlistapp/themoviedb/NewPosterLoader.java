@@ -1,4 +1,4 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.themoviedb;
 
 import android.content.Context;
 import android.widget.ImageView;
