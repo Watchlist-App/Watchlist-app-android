@@ -19,7 +19,7 @@ import com.watchlistapp.addmovietolistdialog.AddMovieToListDialogFragment;
 import com.watchlistapp.authorization.LoggedInUser;
 import com.watchlistapp.authorization.LoggedInUserContainer;
 import com.watchlistapp.database.WatchListDatabaseHandler;
-import com.watchlistapp.fullmoviedescription.NewPosterLoader;
+import com.watchlistapp.themoviedb.NewPosterLoader;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 import com.watchlistapp.utils.DateUtil;
 

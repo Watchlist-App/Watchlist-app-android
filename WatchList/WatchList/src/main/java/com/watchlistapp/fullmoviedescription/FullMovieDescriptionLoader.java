@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.makeramen.RoundedImageView;
 import com.watchlistapp.movielist.GenreMovieListActivity;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
+import com.watchlistapp.themoviedb.NewPosterLoader;
 import com.watchlistapp.utils.DateUtil;
 import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
