@@ -13,7 +13,7 @@ import com.watchlistapp.utils.MD5Util;
 public class GAvatar {
     private final static String BASE_URL = "http://www.gravatar.com/avatar/";
     public final static String SMALL = "?s=64";
-    public final static String MEDIUM = "?s=180";
+    public final static String MEDIUM = "?s=150";
 
     private ImageView userAvatarImageView;
     private Context context;
