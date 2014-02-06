@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.watchlistapp.R;
+import com.watchlistapp.utils.DisplayUtil;
 
 /**
  * Created by VEINHORN on 07/01/14.
@@ -60,8 +61,8 @@ public class ActorItemsListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
+        new NewActorAvatarLoader(context, viewHolder.actorAvatar, actorItemsContainer.getActorItemArrayList().get(position).getProfile_path(), DisplayUtil.getActorAvatarSize(context)).loadPoster();
         viewHolder.name.setText(actorItemsContainer.getActorItemArrayList().get(position).getName());
-        viewHolder.actorAvatar.setImageBitmap(actorItemsContainer.getActorItemArrayList().get(position).getActorAvatar());
         viewHolder.character.setText(actorItemsContainer.getActorItemArrayList().get(position).getCharacter());
 
         return convertView;

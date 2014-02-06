@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.watchlistapp.R;
+import com.watchlistapp.utils.DisplayUtil;
 
 /**
  * Created by VEINHORN on 08/01/14.
@@ -60,9 +61,9 @@ public class CrewItemsListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
+        new NewCrewAvatarLoader(context, viewHolder.crewAvatar, crewItemsContainer.getCrewItemArrayList().get(position).getProfilePath(), DisplayUtil.getCrewAvatarSize(context)).loadPoster();
         viewHolder.name.setText(crewItemsContainer.getCrewItemArrayList().get(position).getName());
         viewHolder.job.setText(crewItemsContainer.getCrewItemArrayList().get(position).getJob());
-        viewHolder.crewAvatar.setImageBitmap(crewItemsContainer.getCrewItemArrayList().get(position).getCrewAvatar());
 
         return convertView;
     }

@@ -17,9 +17,9 @@ public class NewPosterLoader {
     public final static String LARGE = "w500";
     public final static String ORIGINAL = "original";
 
-    private Context context;
-    private ImageView posterImageView;
-    private String url;
+    protected Context context;
+    protected ImageView posterImageView;
+    protected String url;
 
     public NewPosterLoader(Context context, ImageView posterImageView, String posterUrl, String posterSize) {
         this.context = context;
@@ -32,6 +32,7 @@ public class NewPosterLoader {
     }
 
     public void loadPoster() {
+        Picasso.with(context).setDebugging(true);
         Picasso.with(context).load(url).into(posterImageView);
     }
 }

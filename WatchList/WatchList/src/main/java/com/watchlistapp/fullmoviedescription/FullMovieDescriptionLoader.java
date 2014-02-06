@@ -3,9 +3,7 @@ package com.watchlistapp.fullmoviedescription;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -16,6 +14,7 @@ import com.watchlistapp.ratingbar.ColoredRatingBar;
 import com.watchlistapp.themoviedb.NewPosterLoader;
 import com.watchlistapp.utils.DateUtil;
 import com.watchlistapp.utils.DeveloperKeys;
+import com.watchlistapp.utils.DisplayUtil;
 import com.watchlistapp.utils.RequestsUtil;
 
 import org.json.JSONArray;
@@ -100,19 +99,7 @@ public class FullMovieDescriptionLoader extends AsyncTask<String, Integer, Movie
         }
         releaseDateTextView.setText(releaseDate);
 
-        // Get the screen size(height and width)
-        WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = windowManager.getDefaultDisplay();
-        // Here I use old methods
-        int displayWidth = display.getWidth();
-        int displayHeight = display.getHeight();
-
-        NewPosterLoader newPosterLoader = null;
-        if((displayWidth == 480 && displayHeight == 800) || (displayWidth == 540 && displayHeight == 960)) {
-            newPosterLoader = new NewPosterLoader(context, posterImageView, movieDescription.getPosterPath(), NewPosterLoader.BIG);
-        } else {
-            newPosterLoader = new NewPosterLoader(context, posterImageView, movieDescription.getPosterPath(), NewPosterLoader.DOUBLE_BIG);
-        }
+        NewPosterLoader newPosterLoader = new NewPosterLoader(context, posterImageView, movieDescription.getPosterPath(), DisplayUtil.getPosterSize(context));
         newPosterLoader.loadPoster();
 
         GenreItemAdapter genreItemAdapter = new GenreItemAdapter(context, movieDescription.getGenreContainer());
