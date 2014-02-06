@@ -1,4 +1,6 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.fullmoviedescription.genres;
+
+import com.watchlistapp.fullmoviedescription.genres.Genre;
 
 import java.util.ArrayList;
 

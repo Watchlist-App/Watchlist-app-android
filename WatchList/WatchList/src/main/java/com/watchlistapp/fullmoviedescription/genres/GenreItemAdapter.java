@@ -1,4 +1,4 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.fullmoviedescription.genres;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.watchlistapp.R;
+import com.watchlistapp.fullmoviedescription.genres.GenreContainer;
 
 /**
  * Created by VEINHORN on 01/01/14.

@@ -1,4 +1,4 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.fullmoviedescription.actors;
 
 /**
  * Created by VEINHORN on 07/01/14.

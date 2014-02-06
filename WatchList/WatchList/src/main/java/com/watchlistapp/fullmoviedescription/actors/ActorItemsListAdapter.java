@@ -1,4 +1,4 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.fullmoviedescription.actors;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.watchlistapp.R;
+import com.watchlistapp.fullmoviedescription.actors.ActorAvatarLoader;
+import com.watchlistapp.fullmoviedescription.actors.ActorItemsContainer;
 import com.watchlistapp.utils.DisplayUtil;
 
 /**

@@ -1,4 +1,6 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.fullmoviedescription.crew;
+
+import com.watchlistapp.fullmoviedescription.crew.CrewItem;
 
 import java.util.ArrayList;
 

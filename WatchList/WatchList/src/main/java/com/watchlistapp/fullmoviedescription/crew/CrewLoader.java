@@ -1,8 +1,13 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.fullmoviedescription.crew;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.watchlistapp.fullmoviedescription.crew.Crew;
+import com.watchlistapp.fullmoviedescription.crew.CrewContainer;
+import com.watchlistapp.fullmoviedescription.crew.CrewItem;
+import com.watchlistapp.fullmoviedescription.crew.CrewItemsContainer;
+import com.watchlistapp.fullmoviedescription.crew.CrewItemsListAdapter;
 import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
 

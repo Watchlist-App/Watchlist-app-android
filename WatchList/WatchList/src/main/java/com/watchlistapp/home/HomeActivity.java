@@ -1,4 +1,4 @@
-package com.watchlistapp;
+package com.watchlistapp.home;
 
 import android.app.Activity;
 import android.app.SearchManager;
@@ -21,6 +21,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.watchlistapp.PopularActivity;
+import com.watchlistapp.R;
 import com.watchlistapp.authorization.ProfileActivity;
 import com.watchlistapp.comingsoon.ComingSoonActivity;
 import com.watchlistapp.database.WatchListDatabaseHandler;
@@ -79,7 +81,6 @@ public class HomeActivity extends ActionBarActivity
                 return false;
             }
         });
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -91,7 +92,6 @@ public class HomeActivity extends ActionBarActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceHolderFragment.newInstance(position + 1))
                 .commit();
-
     }
 
     public void onSectionAttached(int number) {
@@ -102,8 +102,6 @@ public class HomeActivity extends ActionBarActivity
                 break;
             }
             case 2: {
-                //Toast toast = Toast.makeText(PopularActivity.this, "Test 2", Toast.LENGTH_SHORT);
-                //toast.show();
                 Intent intent = new Intent(HomeActivity.this, ComingSoonActivity.class);
                 startActivity(intent);
                 break;
@@ -116,15 +114,11 @@ public class HomeActivity extends ActionBarActivity
 
             case 4: {
                 WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(HomeActivity.this);
-                MovieListContainer movieListContainer = watchListDatabaseHandler.getAllPlaylists();
-
                 String listTitle = "watchlist";
                 String moviesNumber = Integer.toString(watchListDatabaseHandler.getMovieIdsByListTitle(listTitle).getMovieArrayList().size());
-
                 Intent intent = new Intent(HomeActivity.this, MovieListActivity.class);
                 intent.putExtra("listtitle", listTitle);
                 intent.putExtra("moviesnumber", moviesNumber);
-
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;
@@ -132,15 +126,11 @@ public class HomeActivity extends ActionBarActivity
 
             case 5: {
                 WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(HomeActivity.this);
-                MovieListContainer movieListContainer = watchListDatabaseHandler.getAllPlaylists();
-
                 String listTitle = "favorites";
                 String moviesNumber = Integer.toString(watchListDatabaseHandler.getMovieIdsByListTitle(listTitle).getMovieArrayList().size());
-
                 Intent intent = new Intent(HomeActivity.this, MovieListActivity.class);
                 intent.putExtra("listtitle", listTitle);
                 intent.putExtra("moviesnumber", moviesNumber);
-
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;
@@ -148,15 +138,11 @@ public class HomeActivity extends ActionBarActivity
 
             case 6: {
                 WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(HomeActivity.this);
-                MovieListContainer movieListContainer = watchListDatabaseHandler.getAllPlaylists();
-
                 String listTitle = "watched";
                 String moviesNumber = Integer.toString(watchListDatabaseHandler.getMovieIdsByListTitle(listTitle).getMovieArrayList().size());
-
                 Intent intent = new Intent(HomeActivity.this, MovieListActivity.class);
                 intent.putExtra("listtitle", listTitle);
                 intent.putExtra("moviesnumber", moviesNumber);
-
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;

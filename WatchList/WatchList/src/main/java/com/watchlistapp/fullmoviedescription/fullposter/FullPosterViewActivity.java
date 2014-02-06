@@ -1,4 +1,4 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.fullmoviedescription.fullposter;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;

@@ -1,8 +1,13 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.fullmoviedescription.actors;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.watchlistapp.fullmoviedescription.actors.Actor;
+import com.watchlistapp.fullmoviedescription.actors.ActorContainer;
+import com.watchlistapp.fullmoviedescription.actors.ActorItem;
+import com.watchlistapp.fullmoviedescription.actors.ActorItemsContainer;
+import com.watchlistapp.fullmoviedescription.actors.ActorItemsListAdapter;
 import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.RequestsUtil;
 

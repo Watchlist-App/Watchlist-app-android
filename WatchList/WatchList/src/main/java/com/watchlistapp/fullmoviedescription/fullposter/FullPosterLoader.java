@@ -1,4 +1,4 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.fullmoviedescription.fullposter;
 
 import android.content.Context;
 import android.graphics.Bitmap;

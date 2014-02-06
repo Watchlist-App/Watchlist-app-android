@@ -1,7 +1,9 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.fullmoviedescription.crew;
 
 import android.content.Context;
 import android.widget.ImageView;
+
+import com.watchlistapp.fullmoviedescription.actors.ActorAvatarLoader;
 
 /**
  * Created by VEINHORN on 06/02/14.

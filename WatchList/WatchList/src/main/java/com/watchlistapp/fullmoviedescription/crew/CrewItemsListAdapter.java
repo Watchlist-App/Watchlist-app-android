@@ -1,4 +1,4 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.fullmoviedescription.crew;
 
 import android.content.Context;
 import android.view.LayoutInflater;

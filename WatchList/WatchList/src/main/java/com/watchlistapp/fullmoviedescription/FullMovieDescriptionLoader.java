@@ -9,6 +9,9 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.makeramen.RoundedImageView;
+import com.watchlistapp.fullmoviedescription.genres.Genre;
+import com.watchlistapp.fullmoviedescription.genres.GenreContainer;
+import com.watchlistapp.fullmoviedescription.genres.GenreItemAdapter;
 import com.watchlistapp.movielist.GenreMovieListActivity;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 import com.watchlistapp.themoviedb.PosterLoader;

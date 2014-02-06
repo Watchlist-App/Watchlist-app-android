@@ -1,4 +1,4 @@
-package com.watchlistapp.fullmoviedescription;
+package com.watchlistapp.fullmoviedescription.genres;
 
 /**
  * Created by VEINHORN on 01/01/14.
