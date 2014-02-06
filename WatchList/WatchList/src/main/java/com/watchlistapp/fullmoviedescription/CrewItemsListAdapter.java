@@ -61,7 +61,7 @@ public class CrewItemsListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        new NewCrewAvatarLoader(context, viewHolder.crewAvatar, crewItemsContainer.getCrewItemArrayList().get(position).getProfilePath(), DisplayUtil.getCrewAvatarSize(context)).loadPoster();
+        new CrewAvatarLoader(context, viewHolder.crewAvatar, crewItemsContainer.getCrewItemArrayList().get(position).getProfilePath(), DisplayUtil.getCrewAvatarSize(context)).loadPoster();
         viewHolder.name.setText(crewItemsContainer.getCrewItemArrayList().get(position).getName());
         viewHolder.job.setText(crewItemsContainer.getCrewItemArrayList().get(position).getJob());
 

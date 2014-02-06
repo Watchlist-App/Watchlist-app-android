@@ -8,7 +8,7 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by VEINHORN on 04/02/14.
  */
-public class NewPosterLoader {
+public class PosterLoader {
     private final static String BASE_URL = "http://image.tmdb.org/t/p/";
     public final static String SMALL = "w92";
     public final static String MEDIUM = "w154";
@@ -21,7 +21,7 @@ public class NewPosterLoader {
     protected ImageView posterImageView;
     protected String url;
 
-    public NewPosterLoader(Context context, ImageView posterImageView, String posterUrl, String posterSize) {
+    public PosterLoader(Context context, ImageView posterImageView, String posterUrl, String posterSize) {
         this.context = context;
         this.posterImageView = posterImageView;
         if(posterSize == null) {

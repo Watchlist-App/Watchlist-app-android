@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.makeramen.RoundedImageView;
 import com.watchlistapp.movielist.GenreMovieListActivity;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
-import com.watchlistapp.themoviedb.NewPosterLoader;
+import com.watchlistapp.themoviedb.PosterLoader;
 import com.watchlistapp.utils.DateUtil;
 import com.watchlistapp.utils.DeveloperKeys;
 import com.watchlistapp.utils.DisplayUtil;
@@ -99,8 +99,8 @@ public class FullMovieDescriptionLoader extends AsyncTask<String, Integer, Movie
         }
         releaseDateTextView.setText(releaseDate);
 
-        NewPosterLoader newPosterLoader = new NewPosterLoader(context, posterImageView, movieDescription.getPosterPath(), DisplayUtil.getPosterSize(context));
-        newPosterLoader.loadPoster();
+        PosterLoader posterLoader = new PosterLoader(context, posterImageView, movieDescription.getPosterPath(), DisplayUtil.getPosterSize(context));
+        posterLoader.loadPoster();
 
         GenreItemAdapter genreItemAdapter = new GenreItemAdapter(context, movieDescription.getGenreContainer());
         genresGridView.setAdapter(genreItemAdapter);

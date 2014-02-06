@@ -38,8 +38,7 @@ public class ProfileActivity extends ActionBarActivity {
         LoggedInUserContainer loggedInUserContainer = watchListDatabaseHandler.getAllUsers();
         LoggedInUser loggedInUser = loggedInUserContainer.searchLastLoggedInUser();
 
-        GAvatar gAvatar = new GAvatar(this, userAvatar, GAvatar.MEDIUM);
-        gAvatar.execute();
+        new GAvatar(this, userAvatar, GAvatar.MEDIUM).loadGAvatar();
         userName.setText(loggedInUser.getName());
         userEmail.setText(loggedInUser.getEmail());
     }

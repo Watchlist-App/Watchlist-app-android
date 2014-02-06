@@ -61,7 +61,7 @@ public class ActorItemsListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        new NewActorAvatarLoader(context, viewHolder.actorAvatar, actorItemsContainer.getActorItemArrayList().get(position).getProfile_path(), DisplayUtil.getActorAvatarSize(context)).loadPoster();
+        new ActorAvatarLoader(context, viewHolder.actorAvatar, actorItemsContainer.getActorItemArrayList().get(position).getProfile_path(), DisplayUtil.getActorAvatarSize(context)).loadPoster();
         viewHolder.name.setText(actorItemsContainer.getActorItemArrayList().get(position).getName());
         viewHolder.character.setText(actorItemsContainer.getActorItemArrayList().get(position).getCharacter());
 
