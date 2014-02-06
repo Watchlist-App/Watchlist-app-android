@@ -67,7 +67,7 @@
             android:label="@string/title_activity_full_actor_description" >
         </activity>
         <activity
-            android:name=".authorization.ProfileActivity"
+            android:name=".profile.ProfileActivity"
             android:label="@string/profile_activity_title">
         </activity>
 

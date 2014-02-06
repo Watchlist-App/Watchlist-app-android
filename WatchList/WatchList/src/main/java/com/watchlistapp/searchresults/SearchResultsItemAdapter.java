@@ -27,7 +27,6 @@ import com.watchlistapp.utils.DateUtil;
  * Created by VEINHORN on 02/12/13.
  */
 public class SearchResultsItemAdapter extends BaseAdapter {
-
     private static class ViewHolder {
         public RoundedImageView poster;
         public TextView title;

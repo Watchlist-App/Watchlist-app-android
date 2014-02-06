@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 
 import com.watchlistapp.PopularActivity;
 import com.watchlistapp.R;
-import com.watchlistapp.authorization.ProfileActivity;
+import com.watchlistapp.profile.ProfileActivity;
 import com.watchlistapp.comingsoon.ComingSoonActivity;
 import com.watchlistapp.database.WatchListDatabaseHandler;
 import com.watchlistapp.movielist.MovieListActivity;

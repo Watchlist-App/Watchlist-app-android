@@ -326,7 +326,9 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
         if(cursor.moveToFirst()) {
             do {
                 MovieList movieList = new MovieList();
-                movieList.setTitle(cursor.getString(1));
+                String listTitle = cursor.getString(1);
+                movieList.setTitle(listTitle);
+                movieList.setMovieContainer(getMovieIdsByListTitle(listTitle));
                 movieListContainer.getMovieListArrayList().add(movieList);
             }while(cursor.moveToNext());
         }
