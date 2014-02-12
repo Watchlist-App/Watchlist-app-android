@@ -58,5 +58,7 @@
 
     <!-- Profile Activity -->
     <string name="profile_activity_title">Profile</string>
+    <string name="profile_activity_movies_number_title">movies</string>
+    <string name="profile_activity_lists_number_title">lists</string>
     <!-- End -->
 </resources>

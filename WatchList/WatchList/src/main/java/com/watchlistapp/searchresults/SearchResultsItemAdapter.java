@@ -19,7 +19,7 @@ import com.watchlistapp.addmovietolistdialog.AddMovieToListDialogFragment;
 import com.watchlistapp.authorization.LoggedInUser;
 import com.watchlistapp.authorization.LoggedInUserContainer;
 import com.watchlistapp.database.WatchListDatabaseHandler;
-import com.watchlistapp.fullmoviedescription.NewPosterLoader;
+import com.watchlistapp.themoviedb.PosterLoader;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 import com.watchlistapp.utils.DateUtil;
 
@@ -27,7 +27,6 @@ import com.watchlistapp.utils.DateUtil;
  * Created by VEINHORN on 02/12/13.
  */
 public class SearchResultsItemAdapter extends BaseAdapter {
-
     private static class ViewHolder {
         public RoundedImageView poster;
         public TextView title;
@@ -115,8 +114,8 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         viewHolder.releaseDate.setText(releaseDate);
         viewHolder.votes.setText(votes);
         viewHolder.votesRatingBar.setRating(ratingBarVote);
-        NewPosterLoader newPosterLoader = new NewPosterLoader(context, viewHolder.poster, posterUrl, NewPosterLoader.BIG);
-        newPosterLoader.loadPoster();
+        PosterLoader posterLoader = new PosterLoader(context, viewHolder.poster, posterUrl, PosterLoader.BIG);
+        posterLoader.loadPoster();
         return convertView;
     }
 

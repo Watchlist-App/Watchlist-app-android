@@ -17,9 +17,9 @@
             android:layout_centerHorizontal="true">
             <TextView
                 android:textColor="@color/no_movies_module_text_color"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:textStyle="italic|bold"
-                android:textSize="20sp"
+                android:textSize="35sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No movies"/>

@@ -32,4 +32,11 @@
     <!-- Action Bar colors -->
     <color name="actionbar_background_color">#A4A4A4</color>
     <!-- End -->
+
+    <!-- Profile Activity -->
+    <color name="profile_activity_background_lite">#75000000</color>
+    <color name="profile_activity_background">#95000000</color>
+    <color name="profile_activity_text_color">#BDBDBD</color>
+    <color name="profile_activity_text_color_lite">#95BDBDBD</color>
+    <!-- End -->
 </resources>

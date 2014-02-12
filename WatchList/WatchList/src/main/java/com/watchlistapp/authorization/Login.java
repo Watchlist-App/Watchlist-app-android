@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.watchlistapp.HomeActivity;
+import com.watchlistapp.home.HomeActivity;
 import com.watchlistapp.database.WatchListDatabaseHandler;
 import com.watchlistapp.utils.RequestsUtil;
 import com.watchlistapp.watchlistserver.Movie;
