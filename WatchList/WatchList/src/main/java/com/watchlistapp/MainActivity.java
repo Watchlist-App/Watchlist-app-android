@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.watchlistapp.authorization.LogInActivity;
 import com.watchlistapp.authorization.LoggedInUser;
 import com.watchlistapp.database.WatchListDatabaseHandler;
+import com.watchlistapp.home.HomeActivity;
 
 import java.text.DateFormat;
 import java.text.ParseException;

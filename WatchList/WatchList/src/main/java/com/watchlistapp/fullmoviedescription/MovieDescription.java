@@ -1,5 +1,7 @@
 package com.watchlistapp.fullmoviedescription;
 
+import com.watchlistapp.fullmoviedescription.genres.GenreContainer;
+
 /**
  * Created by VEINHORN on 26/12/13.
  */

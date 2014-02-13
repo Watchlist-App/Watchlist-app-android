@@ -6,8 +6,9 @@
     android:background="#95000000"
     android:layout_height="wrap_content">
     <ImageView
+        android:minHeight="64px"
+        android:minWidth="64px"
         android:layout_margin="5dp"
-        android:src="@drawable/favourite"
         android:id="@+id/navigation_drawer_item_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

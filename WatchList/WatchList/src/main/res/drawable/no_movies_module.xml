@@ -6,5 +6,5 @@
     <solid
         android:color="@color/no_movies_module_background_color"/>
     <corners
-        android:radius="10dp"/>
+        android:radius="5dp"/>
 </shape>
