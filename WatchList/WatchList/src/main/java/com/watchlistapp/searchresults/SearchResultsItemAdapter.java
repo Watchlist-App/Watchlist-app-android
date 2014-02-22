@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +17,12 @@ import android.widget.TextView;
 import com.makeramen.RoundedImageView;
 import com.watchlistapp.R;
 import com.watchlistapp.addmovietolistdialog.AddMovieToListDialogFragment;
+import com.watchlistapp.amazon.AmazonActivity;
 import com.watchlistapp.authorization.LoggedInUser;
 import com.watchlistapp.authorization.LoggedInUserContainer;
 import com.watchlistapp.database.WatchListDatabaseHandler;
-import com.watchlistapp.themoviedb.PosterLoader;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
+import com.watchlistapp.themoviedb.PosterLoader;
 import com.watchlistapp.utils.DateUtil;
 
 /**
@@ -87,7 +89,14 @@ public class SearchResultsItemAdapter extends BaseAdapter {
 
             viewHolder.amazonButton = (ImageButton)convertView.findViewById(R.id.search_results_activity_amazon_button);
             viewHolder.addToListButton = (ImageButton)convertView.findViewById(R.id.search_results_activity_add_to_list_button);
-            //viewHolder.amazonButton.setOnClickListener(amazonButtonListener);
+            viewHolder.amazonButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, AmazonActivity.class);
+                    intent.putExtra("movieTitle", searchResultsContainer.getSearchResultsItemArrayList().get(listView.getPositionForView(v)).getTitle());
+                    context.startActivity(intent);
+                }
+            });
             viewHolder.addToListButton.setOnClickListener(addToListButtonListener);
             convertView.setTag(viewHolder);
         } else {
@@ -118,18 +127,6 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         posterLoader.loadPoster();
         return convertView;
     }
-
-    /*
-    // Amazon button action listener
-    private View.OnClickListener amazonButtonListener = new View.OnClickListener() {
-        @Override
-        public void onClick(final View view) {
-            Intent intent = new Intent(context, AmazonListActivity.class);
-            //final int position =
-            //intent.putExtra("movietitle", );
-            context.startActivity(intent);
-        }
-    };*/
 
     // Add to button listener
     private View.OnClickListener addToListButtonListener = new View.OnClickListener() {

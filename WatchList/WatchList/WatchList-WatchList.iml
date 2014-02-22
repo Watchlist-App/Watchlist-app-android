@@ -72,13 +72,13 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="appcompat-v7-19.0.1" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.2.0" level="project" />
-    <orderEntry type="module" module-name=" HorizontalVariableListViewLibrary" exported="" />
     <orderEntry type="library" exported="" name="YouTubeAndroidPlayerApi" level="project" />
-    <orderEntry type="module" module-name="TextJustifyLibrary" exported="" />
     <orderEntry type="library" exported="" name="support-v4-19.0.1" level="project" />
-    <orderEntry type="module" module-name="RoundedImageViewLibrary" exported="" />
     <orderEntry type="library" exported="" name="volley" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.1" level="project" />
+    <orderEntry type="module" module-name="RoundedImageViewLibrary" exported="" />
+    <orderEntry type="module" module-name="TextJustifyLibrary" exported="" />
+    <orderEntry type="module" module-name=" HorizontalVariableListViewLibrary" exported="" />
   </component>
 </module>
 
