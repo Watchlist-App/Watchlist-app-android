@@ -19,7 +19,7 @@ public class AmazonItemAdapter extends BaseAdapter {
     private static class ViewHolder {
         public TextView title;
         public TextView price;
-        private ImageView poster;
+        public ImageView poster;
     }
 
     private AmazonItemsContainer amazonItemsContainer;

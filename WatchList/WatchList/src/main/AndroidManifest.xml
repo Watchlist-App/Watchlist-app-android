@@ -74,6 +74,7 @@
             android:name=".amazon.AmazonActivity"
             android:label="@string/amazon_activity_title">
         </activity>
+        <activity android:name=".itunes.ITunesActivity"
+            android:label="@string/itunes_activity_title"/>
     </application>
-
 </manifest>

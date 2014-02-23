@@ -21,6 +21,7 @@ import com.watchlistapp.amazon.AmazonActivity;
 import com.watchlistapp.authorization.LoggedInUser;
 import com.watchlistapp.authorization.LoggedInUserContainer;
 import com.watchlistapp.database.WatchListDatabaseHandler;
+import com.watchlistapp.itunes.ITunesActivity;
 import com.watchlistapp.ratingbar.ColoredRatingBar;
 import com.watchlistapp.themoviedb.PosterLoader;
 import com.watchlistapp.utils.DateUtil;
@@ -38,6 +39,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         public ColoredRatingBar votesRatingBar;
         public ImageButton amazonButton;
         public ImageButton addToListButton;
+        public ImageButton iTunesButton;
     }
 
     private SearchResultsContainer searchResultsContainer;
@@ -86,6 +88,16 @@ public class SearchResultsItemAdapter extends BaseAdapter {
             viewHolder.releaseDate = (TextView)convertView.findViewById(R.id.search_results_release_date);
             viewHolder.votes = (TextView)convertView.findViewById(R.id.search_results_votes);
             viewHolder.votesRatingBar = (ColoredRatingBar)convertView.findViewById(R.id.search_results_rating_bar);
+
+            viewHolder.iTunesButton = (ImageButton)convertView.findViewById(R.id.search_results_activity_itunes_button);
+            viewHolder.iTunesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ITunesActivity.class);
+                    intent.putExtra("movieTitle", searchResultsContainer.getSearchResultsItemArrayList().get(listView.getPositionForView(v)).getTitle());
+                    context.startActivity(intent);
+                }
+            });
 
             viewHolder.amazonButton = (ImageButton)convertView.findViewById(R.id.search_results_activity_amazon_button);
             viewHolder.addToListButton = (ImageButton)convertView.findViewById(R.id.search_results_activity_add_to_list_button);

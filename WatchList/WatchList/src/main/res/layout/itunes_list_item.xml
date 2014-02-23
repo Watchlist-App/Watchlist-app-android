@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/itunes_list_activity_poster"
+            android:layout_width="140dp"
+            android:layout_height="190dp"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="Iron Man"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:id="@+id/itunes_list_activity_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/itunes_list_activity_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp" />
+    </RelativeLayout>
+</LinearLayout>

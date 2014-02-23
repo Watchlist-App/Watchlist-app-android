@@ -65,4 +65,8 @@
     <!-- Amazon List Activity -->
     <string name="amazon_activity_title">Amazon List</string>
     <!-- End -->
+
+    <!-- ITunes Activity -->
+    <string name="itunes_activity_title">ITunes List</string>
+    <!-- End -->
 </resources>

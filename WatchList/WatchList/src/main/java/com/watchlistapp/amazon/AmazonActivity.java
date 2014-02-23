@@ -21,19 +21,17 @@ public class AmazonActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amazon_list);
+        String movieTitle = getIntent().getStringExtra("movieTitle");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar_background_color)));
-        actionBar.setTitle(Html.fromHtml("<b><font color=\"#424242\">" + getIntent().getStringExtra("movieTitle") + " on Amazon" + "</font></b>"));
+        actionBar.setTitle(Html.fromHtml("<b><font color=\"#424242\">" + movieTitle + " on Amazon" + "</font></b>"));
 
         listView = (ListView)findViewById(R.id.activity_amazon_list);
-
         amazonItemsContainer = new AmazonItemsContainer();
-
         amazonItemAdapter = new AmazonItemAdapter(this, amazonItemsContainer);
         listView.setAdapter(amazonItemAdapter);
 
-        String movieTitle = getIntent().getStringExtra("movieTitle");
         AmazonLoader amazonLoader = new AmazonLoader(this, movieTitle, amazonItemsContainer, amazonItemAdapter);
         amazonLoader.loadDataFromAmazon();
     }
