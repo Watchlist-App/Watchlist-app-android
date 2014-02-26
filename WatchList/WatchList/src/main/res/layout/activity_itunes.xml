@@ -5,9 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <ListView
-        android:id="@+id/activity_amazon_list"
+        android:id="@+id/activity_itunes_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:dividerHeight="5dp"/>
