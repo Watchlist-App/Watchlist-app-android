@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
         <ImageView
             android:layout_margin="5dp"
-            android:id="@+id/amazon_list_activity_poster"
+            android:id="@+id/itunes_list_activity_poster"
             android:layout_width="140dp"
             android:layout_height="190dp"/>
     </LinearLayout>
@@ -23,11 +23,11 @@
             android:text="Iron Man"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:id="@+id/amazon_list_activity_title"
+            android:id="@+id/itunes_list_activity_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/amazon_list_activity_price"
+            android:id="@+id/itunes_list_activity_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""

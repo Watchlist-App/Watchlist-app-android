@@ -48,7 +48,7 @@
     <!-- End -->
 
 
-    <!-- Amazon Activity -->
+    <!-- AmazonLoader Activity -->
     <string name="amazon_activity_label">Amazon List</string>
     <!-- End -->
     <string name="title_activity_home">Home</string>
@@ -60,5 +60,13 @@
     <string name="profile_activity_title">Profile</string>
     <string name="profile_activity_movies_number_title">movies</string>
     <string name="profile_activity_lists_number_title">lists</string>
+    <!-- End -->
+
+    <!-- Amazon List Activity -->
+    <string name="amazon_activity_title">Amazon List</string>
+    <!-- End -->
+
+    <!-- ITunes Activity -->
+    <string name="itunes_activity_title">ITunes List</string>
     <!-- End -->
 </resources>
