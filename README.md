@@ -1,7 +1,5 @@
 #Watchlist Android App
 ![image](http://i.imgur.com/NkM4laD.png?1)
-###Demo:
-[![ScreenShot](http://i.imgur.com/WA8568g.png)](https://www.youtube.com/watch?v=PQ3ZHxzWHY0)
 
 ###Screenshots:
 
@@ -10,6 +8,8 @@
 ![image](http://i.imgur.com/KhSmopc.png?1)
 ![image](http://i.imgur.com/eyQO6zw.png?1)
 ![image](http://i.imgur.com/a2IqPDr.png?1)
+###Demo:
+[![ScreenShot](http://i.imgur.com/WA8568g.png)](https://www.youtube.com/watch?v=PQ3ZHxzWHY0)
 
 #Libraries used in this project:
 
