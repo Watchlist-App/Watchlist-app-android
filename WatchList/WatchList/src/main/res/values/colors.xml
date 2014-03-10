@@ -39,4 +39,8 @@
     <color name="profile_activity_text_color">#BDBDBD</color>
     <color name="profile_activity_text_color_lite">#95BDBDBD</color>
     <!-- End -->
+
+    <!-- Orders activities-->
+    <color name="orders_background_color">#CBCACA</color>
+    <!-- End -->
 </resources>
