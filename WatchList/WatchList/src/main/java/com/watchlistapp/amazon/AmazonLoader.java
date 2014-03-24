@@ -9,7 +9,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by VEINHORN on 22/02/14.
@@ -45,22 +44,10 @@ public class AmazonLoader {
         int size = jsonArray.length();
         for(int i = 0; i < size; i++) {
             try {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String detailPageUrl = jsonObject.getJSONArray("DetailPageURL").getString(0);
-                String posterUrl = jsonObject.getJSONArray("MediumImage").getJSONObject(0).getJSONArray("URL").getString(0).replace("SL160","SL250");
-
-                JSONArray itemAttributesJSONArray = jsonObject.getJSONArray("ItemAttributes");
-                JSONObject jsonObject1 = itemAttributesJSONArray.getJSONObject(0);
-                String title = jsonObject1.getJSONArray("Title").getString(0);
-
-                JSONArray OfferSummaryJSONArray = jsonObject.getJSONArray("OfferSummary");
-                JSONObject jsonObject2 = OfferSummaryJSONArray.getJSONObject(0);
-                JSONArray LowestNewPriceJSONArray = jsonObject2.getJSONArray("LowestNewPrice");
-                JSONObject jsonObject3 = LowestNewPriceJSONArray.getJSONObject(0);
-                String price = jsonObject3.getJSONArray("FormattedPrice").getString(0);
-
-
-
+                String detailPageUrl = jsonArray.getJSONObject(i).getJSONArray("DetailPageURL").getString(0);
+                String posterUrl = jsonArray.getJSONObject(i).getJSONArray("MediumImage").getJSONObject(0).getJSONArray("URL").getString(0).replace("SL160","SL250");
+                String title = jsonArray.getJSONObject(i).getJSONArray("ItemAttributes").getJSONObject(0).getJSONArray("Title").getString(0);
+                String price  = jsonArray.getJSONObject(i).getJSONArray("OfferSummary").getJSONObject(0).getJSONArray("LowestNewPrice").getJSONObject(0).getJSONArray("FormattedPrice").getString(0);
                 AmazonItem amazonItem = new AmazonItem(title, price, detailPageUrl, posterUrl);
                 amazonItemsContainer.getAmazonItemArrayList().add(amazonItem);
             } catch(JSONException exception) {

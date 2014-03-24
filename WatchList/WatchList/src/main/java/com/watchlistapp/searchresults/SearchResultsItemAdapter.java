@@ -40,6 +40,7 @@ public class SearchResultsItemAdapter extends BaseAdapter {
         public ImageButton amazonButton;
         public ImageButton addToListButton;
         public ImageButton iTunesButton;
+        public ImageButton favouriteButton;
     }
 
     private SearchResultsContainer searchResultsContainer;
@@ -88,6 +89,17 @@ public class SearchResultsItemAdapter extends BaseAdapter {
             viewHolder.releaseDate = (TextView)convertView.findViewById(R.id.search_results_release_date);
             viewHolder.votes = (TextView)convertView.findViewById(R.id.search_results_votes);
             viewHolder.votesRatingBar = (ColoredRatingBar)convertView.findViewById(R.id.search_results_rating_bar);
+
+            viewHolder.favouriteButton = (ImageButton)convertView.findViewById(R.id.search_results_activity_favourite_button);
+            viewHolder.favouriteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /*AddMovieToListHandler addMovieToListHandler = new AddMovieToListHandler(movieId, userId, listTitle);
+                    addMovieToListHandler.execute();
+                    Login login = new Login(activity, activity, userEmail, userPassword, false);
+                    login.execute();*/
+                }
+            });
 
             viewHolder.iTunesButton = (ImageButton)convertView.findViewById(R.id.search_results_activity_itunes_button);
             viewHolder.iTunesButton.setOnClickListener(new View.OnClickListener() {
