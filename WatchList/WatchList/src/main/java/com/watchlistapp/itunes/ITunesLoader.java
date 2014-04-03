@@ -52,7 +52,7 @@ public class ITunesLoader {
                 String detailPageUrl = resultJsonObject.getString("trackViewUrl");
                 String price = "$" + resultJsonObject.getString("trackPrice");
                 String posterUrl = resultJsonObject.getString("artworkUrl100").replace("100x100", "200x200");
-                iTunesItemsContainer.getiTunesItemArrayList().add(new ITunesItem(title, posterUrl, price, detailPageUrl));
+                iTunesItemsContainer.addiTunesItem(new ITunesItem(title, posterUrl, price, detailPageUrl));
             }
         } catch(JSONException exception) {
             exception.printStackTrace();

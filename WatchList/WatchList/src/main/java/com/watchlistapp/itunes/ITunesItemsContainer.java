@@ -12,11 +12,15 @@ public class ITunesItemsContainer {
         iTunesItemArrayList = new ArrayList<ITunesItem>();
     }
 
-    public ArrayList<ITunesItem> getiTunesItemArrayList() {
-        return iTunesItemArrayList;
+    public void addiTunesItem(ITunesItem iTunesItem) {
+        iTunesItemArrayList.add(iTunesItem);
     }
 
-    public void setiTunesItemArrayList(ArrayList<ITunesItem> iTunesItemArrayList) {
-        this.iTunesItemArrayList = iTunesItemArrayList;
+    public ITunesItem getiTunesItem(int position) {
+        return iTunesItemArrayList.get(position);
+    }
+
+    public int size() {
+        return iTunesItemArrayList.size();
     }
 }

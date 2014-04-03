@@ -34,12 +34,12 @@ public class ITunesItemsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return iTunesItemsContainer.getiTunesItemArrayList().size();
+        return iTunesItemsContainer.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return iTunesItemsContainer.getiTunesItemArrayList().get(position);
+        return iTunesItemsContainer.getiTunesItem(position);
     }
 
     @Override
@@ -62,10 +62,10 @@ public class ITunesItemsAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        viewHolder.title.setText(iTunesItemsContainer.getiTunesItemArrayList().get(position).getTitle());
-        viewHolder.price.setText(iTunesItemsContainer.getiTunesItemArrayList().get(position).getPrice());
+        viewHolder.title.setText(iTunesItemsContainer.getiTunesItem(position).getTitle());
+        viewHolder.price.setText(iTunesItemsContainer.getiTunesItem(position).getPrice());
         viewHolder.poster.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_itunes));
-        Picasso.with(context).load(iTunesItemsContainer.getiTunesItemArrayList().get(position).getPosterUrl()).into(viewHolder.poster);
+        Picasso.with(context).load(iTunesItemsContainer.getiTunesItem(position).getPosterUrl()).into(viewHolder.poster);
         return convertView;
     }
 }

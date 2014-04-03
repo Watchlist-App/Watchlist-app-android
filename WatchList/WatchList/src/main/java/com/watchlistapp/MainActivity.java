@@ -21,11 +21,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-        Intent intent = new Intent(MainActivity.this, LogInActivity.class);
-        startActivity(intent);
-        finish();
-        */
         WatchListDatabaseHandler watchListDatabaseHandler = new WatchListDatabaseHandler(MainActivity.this);
         LoggedInUser loggedInUser = watchListDatabaseHandler.getAllUsers().searchLastLoggedInUser();
 
