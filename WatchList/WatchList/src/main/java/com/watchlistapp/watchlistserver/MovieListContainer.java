@@ -8,19 +8,23 @@ import java.util.ArrayList;
 public class MovieListContainer {
     private ArrayList<MovieList> movieListArrayList;
 
-    public MovieListContainer(ArrayList<MovieList> movieListArrayList) {
-        this.movieListArrayList = movieListArrayList;
-    }
-
     public MovieListContainer() {
         movieListArrayList = new ArrayList<MovieList>();
     }
 
-    public ArrayList<MovieList> getMovieListArrayList() {
-        return movieListArrayList;
+    public MovieList getMovieList(int position) {
+        return movieListArrayList.get(position);
     }
 
-    public void setMovieListArrayList(ArrayList<MovieList> movieListArrayList) {
-        this.movieListArrayList = movieListArrayList;
+    public void addMovieList(MovieList movieList) {
+        movieListArrayList.add(movieList);
+    }
+
+    public int size() {
+        return movieListArrayList.size();
+    }
+
+    public ArrayList<MovieList> getMovieListArrayList() {
+        return movieListArrayList;
     }
 }

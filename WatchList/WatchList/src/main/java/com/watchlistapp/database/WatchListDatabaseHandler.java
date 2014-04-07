@@ -307,9 +307,9 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
     public void addPlaylists(LoggedInUser loggedInUser) {
         SQLiteDatabase database = this.getWritableDatabase();
 
-        for(int i = 0; i < loggedInUser.getMovieListContainer().getMovieListArrayList().size(); i++) {
+        for(int i = 0; i < loggedInUser.getMovieListContainer().size(); i++) {
             ContentValues contentValues = new ContentValues();
-            contentValues.put(TABLE_USER_PLAYLISTS_TITLE, loggedInUser.getMovieListContainer().getMovieListArrayList().get(i).getTitle());
+            contentValues.put(TABLE_USER_PLAYLISTS_TITLE, loggedInUser.getMovieListContainer().getMovieList(i).getTitle());
             database.insert(TABLE_USER_PLAYLISTS, null, contentValues);
         }
 
@@ -329,7 +329,7 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
                 String listTitle = cursor.getString(1);
                 movieList.setTitle(listTitle);
                 movieList.setMovieContainer(getMovieIdsByListTitle(listTitle));
-                movieListContainer.getMovieListArrayList().add(movieList);
+                movieListContainer.addMovieList(movieList);
             }while(cursor.moveToNext());
         }
 
@@ -351,7 +351,7 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
     public void addReferencesBetweenUsersAndPlaylists(LoggedInUser loggedInUser) {
         SQLiteDatabase database = this.getWritableDatabase();
 
-        for(int i = 0; i < loggedInUser.getMovieListContainer().getMovieListArrayList().size(); i++) {
+        for(int i = 0; i < loggedInUser.getMovieListContainer().size(); i++) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(TABLE_USER_PLAYLISTS_REFERENCES_EMAIL, loggedInUser.getEmail());
             database.insert(TABLE_USER_PLAYLISTS_REFERENCES, null, contentValues);
@@ -386,7 +386,7 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
                     do {
                         MovieList movieList = new MovieList();
                         movieList.setTitle(playlistsCursor.getString(0));
-                        movieListContainer.getMovieListArrayList().add(movieList);
+                        movieListContainer.addMovieList(movieList);
                     }while(playlistsCursor.moveToNext());
                 }
             }while(cursor.moveToNext());
@@ -435,7 +435,7 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
 
         if(cursor.moveToFirst()) {
             do {
-                movieContainer.getMovieArrayList().add(new Movie(cursor.getString(1)));
+                movieContainer.addMovie(new Movie(cursor.getString(1)));
             }while(cursor.moveToNext());
         }
         cursor.close();
@@ -488,7 +488,7 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
                 Cursor idCursor = database.query(TABLE_MOVIES, new String[] { TABLE_MOVIES_THEMOVIEDB_ID },
                         TABLE_MOVIES_ID + "=?", new String[] { cursor.getString(0) }, null, null, null, null);
                 idCursor.moveToFirst();
-                movieContainer.getMovieArrayList().add(new Movie(idCursor.getString(0)));
+                movieContainer.addMovie(new Movie(idCursor.getString(0)));
             }while(cursor.moveToNext());
         }
         database.close();
