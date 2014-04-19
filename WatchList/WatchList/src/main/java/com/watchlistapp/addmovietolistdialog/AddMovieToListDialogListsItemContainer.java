@@ -1,18 +1,19 @@
 package com.watchlistapp.addmovietolistdialog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 29/12/13.
  */
 public class AddMovieToListDialogListsItemContainer {
-    private ArrayList<AddMovieToListDialogListsItem> addMovieToListDialogListsItemArrayList;
+    private List<AddMovieToListDialogListsItem> addMovieToListDialogListsItemArrayList;
 
     public AddMovieToListDialogListsItemContainer() {
-        addMovieToListDialogListsItemArrayList = new ArrayList<AddMovieToListDialogListsItem>();
+        addMovieToListDialogListsItemArrayList = new ArrayList<>();
     }
 
-    public ArrayList<AddMovieToListDialogListsItem> getAddMovieToListDialogListsItemArrayList() {
+    public List<AddMovieToListDialogListsItem> getAddMovieToListDialogListsItemArrayList() {
         return addMovieToListDialogListsItemArrayList;
     }
 

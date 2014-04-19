@@ -1,20 +1,19 @@
 package com.watchlistapp.fullmoviedescription.crew;
 
-import com.watchlistapp.fullmoviedescription.crew.CrewItem;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 08/01/14.
  */
 public class CrewItemsContainer {
-    private ArrayList<CrewItem> crewItemArrayList;
+    private List<CrewItem> crewItemArrayList;
 
     public CrewItemsContainer() {
-        crewItemArrayList = new ArrayList<CrewItem>();
+        crewItemArrayList = new ArrayList<>();
     }
 
-    public ArrayList<CrewItem> getCrewItemArrayList() {
+    public List<CrewItem> getCrewItemArrayList() {
         return crewItemArrayList;
     }
 

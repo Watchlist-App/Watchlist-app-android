@@ -1,18 +1,19 @@
 package com.watchlistapp.navigationdrawer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 11/12/13.
  */
 public class NavigationDrawerItemContainer {
-    private ArrayList<NavigationDrawerItem> navigationDrawerItemArrayList;
+    private List<NavigationDrawerItem> navigationDrawerItemArrayList;
 
     public NavigationDrawerItemContainer() {
-        navigationDrawerItemArrayList = new ArrayList<NavigationDrawerItem>();
+        navigationDrawerItemArrayList = new ArrayList<>();
     }
 
-    public ArrayList<NavigationDrawerItem> getNavigationDrawerItemArrayList() {
+    public List<NavigationDrawerItem> getNavigationDrawerItemArrayList() {
         return navigationDrawerItemArrayList;
     }
 

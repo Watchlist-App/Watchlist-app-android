@@ -14,6 +14,7 @@ import com.watchlistapp.watchlistserver.MovieList;
 import com.watchlistapp.watchlistserver.MovieListContainer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 20/12/13.
@@ -101,7 +102,7 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
     }
 
     // This method delete user from database including all data that he has
-    public ArrayList<String> deleteUserContent(LoggedInUser loggedInUser) {
+    public List<String> deleteUserContent(LoggedInUser loggedInUser) {
         SQLiteDatabase database = this.getWritableDatabase();
 
         //Select all ids by email for TABLE_LISTS
@@ -109,14 +110,14 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
                 TABLE_USER_PLAYLISTS_REFERENCES_EMAIL + "=?", new String[] { loggedInUser.getEmail() }, null, null, null, null);
 
         // Get playlists titles
-        ArrayList<String> playlistsIds = new ArrayList<String>();
+        List<String> playlistsIds = new ArrayList<>();
         if(listIdsCursor.moveToFirst()) {
             do {
                 playlistsIds.add(listIdsCursor.getString(0));
             }while(listIdsCursor.moveToNext());
         }
 
-        ArrayList<String> playlistsTitles = new ArrayList<String>();
+        List<String> playlistsTitles = new ArrayList<>();
         for(String id : playlistsIds) {
             Cursor plalistTitlesCursor = database.query(TABLE_USER_PLAYLISTS, new String[] { TABLE_USER_PLAYLISTS_TITLE },
                     TABLE_USER_PLAYLISTS_ID + "=?", new String[] { id }, null, null, null, null);
@@ -124,7 +125,7 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
             playlistsTitles.add(plalistTitlesCursor.getString(0));
         }
 
-        ArrayList<String> moviesIdsForDeleting = new ArrayList<String>();
+        List<String> moviesIdsForDeleting = new ArrayList<>();
         for(String id : playlistsTitles) {
             Cursor idsForDeletingCursor = database.query(TABLE_MOVIE_LIST_REFERENCES, new String[] { TABLE_MOVIE_LIST_REFERENCES_ID },
                     TABLE_MOVIE_LIST_REFERENCES_TITLE + "=?", new String[] { id }, null, null, null, null);
@@ -460,8 +461,8 @@ public class WatchListDatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Just for test references between playlists and movies
-    public ArrayList<String> getAllListNamesFromReferencesTable() {
-        ArrayList<String> names = new ArrayList<String>();
+    public List<String> getAllListNamesFromReferencesTable() {
+        List<String> names = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
         String selectAllQuery = "SELECT * FROM " + TABLE_MOVIE_LIST_REFERENCES;
         Cursor cursor = database.rawQuery(selectAllQuery, null);

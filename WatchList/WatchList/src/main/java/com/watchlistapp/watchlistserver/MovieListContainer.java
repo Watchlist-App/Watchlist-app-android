@@ -1,15 +1,16 @@
 package com.watchlistapp.watchlistserver;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 22/12/13.
  */
 public class MovieListContainer {
-    private ArrayList<MovieList> movieListArrayList;
+    private List<MovieList> movieListArrayList;
 
     public MovieListContainer() {
-        movieListArrayList = new ArrayList<MovieList>();
+        movieListArrayList = new ArrayList<>();
     }
 
     public MovieList getMovieList(int position) {
@@ -24,7 +25,7 @@ public class MovieListContainer {
         return movieListArrayList.size();
     }
 
-    public ArrayList<MovieList> getMovieListArrayList() {
+    public List<MovieList> getMovieListArrayList() {
         return movieListArrayList;
     }
 }

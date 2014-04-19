@@ -4,15 +4,16 @@ import com.watchlistapp.themoviedb.SearchMovieContainer;
 import com.watchlistapp.themoviedb.SearchMovieElement;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 02/12/13.
  */
 public class SearchResultsContainer {
-    private ArrayList<SearchResultsItem> searchResultsItemArrayList;
+    private List<SearchResultsItem> searchResultsItemArrayList;
 
     public SearchResultsContainer() {
-        searchResultsItemArrayList = new ArrayList<SearchResultsItem>();
+        searchResultsItemArrayList = new ArrayList<>();
     }
 
     public SearchResultsContainer(SearchMovieContainer searchMovieContainer) {
@@ -30,7 +31,7 @@ public class SearchResultsContainer {
         this.searchResultsItemArrayList = searchResultsItemArrayList;
     }
 
-    public ArrayList<SearchResultsItem> getSearchResultsItemArrayList() {
+    public List<SearchResultsItem> getSearchResultsItemArrayList() {
         return searchResultsItemArrayList;
     }
 

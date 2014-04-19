@@ -1,20 +1,19 @@
 package com.watchlistapp.fullmoviedescription.actors;
 
-import com.watchlistapp.fullmoviedescription.actors.ActorItem;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 07/01/14.
  */
 public class ActorItemsContainer {
-    private ArrayList<ActorItem> actorItemArrayList;
+    private List<ActorItem> actorItemArrayList;
 
     public ActorItemsContainer() {
-        actorItemArrayList = new ArrayList<ActorItem>();
+        actorItemArrayList = new ArrayList<>();
     }
 
-    public ArrayList<ActorItem> getActorItemArrayList() {
+    public List<ActorItem> getActorItemArrayList() {
         return actorItemArrayList;
     }
 

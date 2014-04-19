@@ -1,15 +1,16 @@
 package com.watchlistapp.itunes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 23/02/14.
  */
 public class ITunesItemsContainer {
-    private ArrayList<ITunesItem> iTunesItemArrayList;
+    private List<ITunesItem> iTunesItemArrayList;
 
     public ITunesItemsContainer() {
-        iTunesItemArrayList = new ArrayList<ITunesItem>();
+        iTunesItemArrayList = new ArrayList<>();
     }
 
     public void addiTunesItem(ITunesItem iTunesItem) {
