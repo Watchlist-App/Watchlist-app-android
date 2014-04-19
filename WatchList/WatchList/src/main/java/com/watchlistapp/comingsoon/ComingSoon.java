@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 11/12/13.
@@ -48,7 +49,7 @@ public class ComingSoon extends AsyncTask<String, Integer, SearchMovieContainer>
     private SearchMovieContainer searchMovieContainer;
 
     private ProgressDialog progressDialog;
-    private ArrayList<Bitmap> images;
+    private List<Bitmap> images;
 
     public ComingSoon(Context context, ComingSoonItemAdapter comingSoonItemAdapter, ComingSoonContainer comingSoonContainer) {
         this.context = context;

@@ -1,26 +1,27 @@
 package com.watchlistapp.watchlistserver;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 22/12/13.
  */
 public class MovieContainer {
-    private ArrayList<Movie> movieArrayList;
-
-    public MovieContainer(ArrayList<Movie> movieArrayList) {
-        this.movieArrayList = movieArrayList;
-    }
+    private List<Movie> movieArrayList;
 
     public MovieContainer() {
-        movieArrayList = new ArrayList<Movie>();
+        movieArrayList = new ArrayList<>();
     }
 
-    public ArrayList<Movie> getMovieArrayList() {
+    public void addMovie(Movie movie) {
+        movieArrayList.add(movie);
+    }
+
+    public Movie getMovie(int position) {
+        return movieArrayList.get(position);
+    }
+
+    public List<Movie> getMovieArrayList() {
         return movieArrayList;
-    }
-
-    public void setMovieArrayList(ArrayList<Movie> movieArrayList) {
-        this.movieArrayList = movieArrayList;
     }
 }

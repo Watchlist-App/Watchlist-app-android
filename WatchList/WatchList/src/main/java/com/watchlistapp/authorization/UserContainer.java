@@ -1,22 +1,23 @@
 package com.watchlistapp.authorization;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 25/11/13.
  */
 public class UserContainer {
-    private ArrayList<User> usersArrayList;
+    private List<User> usersArrayList;
 
     public UserContainer() {
-        usersArrayList = new ArrayList<User>();
+        usersArrayList = new ArrayList<>();
     }
 
     public UserContainer(ArrayList<User> usersArrayList) {
         this.usersArrayList = usersArrayList;
     }
 
-    public ArrayList<User> getUsersArrayList() {
+    public List<User> getUsersArrayList() {
         return usersArrayList;
     }
 

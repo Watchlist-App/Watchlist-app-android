@@ -5,19 +5,20 @@ import com.watchlistapp.watchlistserver.MovieList;
 import com.watchlistapp.watchlistserver.MovieListContainer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 06/02/14.
  */
 public class ProfileListViewContainer {
-    private ArrayList<ProfileListViewItem> profileListViewItemArrayList;
+    private List<ProfileListViewItem> profileListViewItemArrayList;
 
     public ProfileListViewContainer() {
-        profileListViewItemArrayList = new ArrayList<ProfileListViewItem>();
+        profileListViewItemArrayList = new ArrayList<>();
     }
 
     public ProfileListViewContainer(MovieListContainer movieListContainer) {
-        profileListViewItemArrayList = new ArrayList<ProfileListViewItem>();
+        profileListViewItemArrayList = new ArrayList<>();
         for(MovieList movieList : movieListContainer.getMovieListArrayList()) {
             if(movieList.getTitle().equals("watchlist")) {
                 profileListViewItemArrayList.add(new ProfileListViewItem(R.drawable.watchlistmenu, movieList.getTitle(), Integer.toString(movieList.getMovieContainer().getMovieArrayList().size())));
@@ -31,7 +32,7 @@ public class ProfileListViewContainer {
         }
     }
 
-    public ArrayList<ProfileListViewItem> getProfileListViewItemArrayList() {
+    public List<ProfileListViewItem> getProfileListViewItemArrayList() {
         return profileListViewItemArrayList;
     }
 

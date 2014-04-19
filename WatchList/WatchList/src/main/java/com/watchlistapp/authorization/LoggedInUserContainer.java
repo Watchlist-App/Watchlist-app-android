@@ -5,22 +5,23 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 22/12/13.
  */
 public class LoggedInUserContainer {
-    private ArrayList<LoggedInUser> loggedInUserArrayList;
+    private List<LoggedInUser> loggedInUserArrayList;
 
     public LoggedInUserContainer() {
-        loggedInUserArrayList = new ArrayList<LoggedInUser>();
+        loggedInUserArrayList = new ArrayList<>();
     }
 
     public LoggedInUserContainer(ArrayList<LoggedInUser> loggedInUserArrayList) {
         this.loggedInUserArrayList = loggedInUserArrayList;
     }
 
-    public ArrayList<LoggedInUser> getLoggedInUserArrayList() {
+    public List<LoggedInUser> getLoggedInUserArrayList() {
         return loggedInUserArrayList;
     }
 

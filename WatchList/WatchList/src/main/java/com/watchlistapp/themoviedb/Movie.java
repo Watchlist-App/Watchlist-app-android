@@ -1,6 +1,7 @@
 package com.watchlistapp.themoviedb;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 25/12/13.
@@ -15,10 +16,10 @@ public class Movie {
     private String posterPath;
     private String releaseDate;
 
-    private ArrayList<String> genres;
+    private List<String> genres;
 
     public Movie() {
-        genres = new ArrayList<String>();
+        genres = new ArrayList<>();
     }
 
     public Movie(String title, String voteAverage, String voteCount, String status, String budget, String posterPath, String releaseDate, ArrayList<String> genres) {
@@ -88,7 +89,7 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    public ArrayList<String> getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 

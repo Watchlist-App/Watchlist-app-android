@@ -1,22 +1,23 @@
 package com.watchlistapp.themoviedb;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by VEINHORN on 02/12/13.
  */
 public class SearchMovieContainer {
-    ArrayList<SearchMovieElement> searchMovieElementArrayList;
+    List<SearchMovieElement> searchMovieElementArrayList;
 
     public SearchMovieContainer() {
-        searchMovieElementArrayList = new ArrayList<SearchMovieElement>();
+        searchMovieElementArrayList = new ArrayList<>();
     }
 
     public SearchMovieContainer(ArrayList<SearchMovieElement> searchMovieElementArrayList) {
         this.searchMovieElementArrayList = searchMovieElementArrayList;
     }
 
-    public ArrayList<SearchMovieElement> getSearchMovieElementArrayList() {
+    public List<SearchMovieElement> getSearchMovieElementArrayList() {
         return searchMovieElementArrayList;
     }
 
